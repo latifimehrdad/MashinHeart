@@ -25,6 +25,10 @@ import com.androidha.mashinheart.views.activitys.MainActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subjects.PublishSubject;
 
 public class FragmentCarEvent extends Fragment {
 
@@ -34,6 +38,8 @@ public class FragmentCarEvent extends Fragment {
     private FragmentManager fm;
     private FragmentCarEventViewModel fragmentCarEventViewModel;
     private FragmentTransaction ft;
+    public PublishSubject<String> MessageType = PublishSubject.create();
+    private View view;
 
     @BindView(R.id.FragmentCarEventConsumables)
     LinearLayout FragmentCarEventConsumables;
@@ -57,10 +63,10 @@ public class FragmentCarEvent extends Fragment {
         FragmentCarEventBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_car_event, container, false);
         fragmentCarEventViewModel = new FragmentCarEventViewModel(context);
         binding.setEvent(fragmentCarEventViewModel);
-        View view = binding.getRoot();
+        view = binding.getRoot();
         ButterKnife.bind(this, view);
         ClickLayout = 0;
-        FragmentClickControler(view);
+        FragmentClickControler();
         return view;
     }//_____________________________________________________________________________________________ End onCreateView
 
@@ -68,11 +74,12 @@ public class FragmentCarEvent extends Fragment {
     public void onStart() {//_______________________________________________________________________ Start onStart
         super.onStart();
         SetAnimation();
+        MessageControler();
         FragmentCarEventFragment.setVisibility(View.INVISIBLE);
     }//_____________________________________________________________________________________________ End onStart
 
 
-    private void FragmentClickControler(View view) {//_____________________________________ Start FragmentCarEvent
+    private void FragmentClickControler() {//_____________________________________ Start FragmentCarEvent
 
         view.setFocusableInTouchMode(true);
         view.requestFocus();
@@ -84,7 +91,7 @@ public class FragmentCarEvent extends Fragment {
                 if (ClickLayout == 0) {
                     MainActivity.FragmentMessage.onNext("CommitAdd");
                 } else if (ClickLayout == 2) {
-                    FrameClose();
+                    MessageType.onNext("close");
                 } else {
                     ClickLayout = 0;
                 }
@@ -98,7 +105,7 @@ public class FragmentCarEvent extends Fragment {
                 ft = null;
                 fm = getFragmentManager();
                 ft = fm.beginTransaction();
-                ft.replace(R.id.FragmentCarEventFragment, new FragmentConsumable(context));
+                ft.replace(R.id.FragmentCarEventFragment, new FragmentConsumable(context, FragmentCarEvent.this));
                 ft.commit();
                 ClickLayout = 2;
                 SetAnimationFrame();
@@ -112,7 +119,7 @@ public class FragmentCarEvent extends Fragment {
                 ft = null;
                 fm = getFragmentManager();
                 ft = fm.beginTransaction();
-                ft.replace(R.id.FragmentCarEventFragment, new FragmentRepair(context));
+                ft.replace(R.id.FragmentCarEventFragment, new FragmentRepair(context,FragmentCarEvent.this));
                 ft.commit();
                 ClickLayout = 2;
                 SetAnimationFrame();
@@ -126,7 +133,7 @@ public class FragmentCarEvent extends Fragment {
                 ft = null;
                 fm = getFragmentManager();
                 ft = fm.beginTransaction();
-                ft.replace(R.id.FragmentCarEventFragment, new FragmentInsurance(context));
+                ft.replace(R.id.FragmentCarEventFragment, new FragmentInsurance(context,FragmentCarEvent.this));
                 ft.commit();
                 ClickLayout = 2;
                 SetAnimationFrame();
@@ -155,6 +162,8 @@ public class FragmentCarEvent extends Fragment {
 
 
     private void FrameClose() {//___________________________________________________________________ Start FrameClose
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
         FragmentCarEventFragment.clearAnimation();
         FragmentCarEventFragment.setVisibility(View.INVISIBLE);
         ClickLayout = 1;
@@ -170,4 +179,38 @@ public class FragmentCarEvent extends Fragment {
         } catch (Exception e) {
         }
     }//_____________________________________________________________________________________________ End onDestroyView
+
+
+
+    private void MessageControler() {//_____________________________________________________________ Start MessageControler
+
+                MessageType
+                .observeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<String>() {
+                    @Override
+                    public void onNext(String s) {
+                        getActivity()
+                                .runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        FrameClose();
+                                    }
+                                });
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
+    }//_____________________________________________________________________________________________ End MessageControler
+
+
 }

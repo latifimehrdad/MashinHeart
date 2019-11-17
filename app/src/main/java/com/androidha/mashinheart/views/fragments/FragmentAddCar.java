@@ -268,7 +268,8 @@ public class FragmentAddCar extends Fragment {
             fragmentAddCarViewModel.setCarTagIran(0);
         }
         fragmentAddCarViewModel.setCarTagLetter(FragmentAddCarPelakAlphabet.getText().toString());
-        fragmentAddCarViewModel.setCarKm(Integer.valueOf(FragmentAddCarKm.getText().toString().replaceAll(",", "")));
+        fragmentAddCarViewModel
+                .setCarKm(Integer.valueOf(FragmentAddCarKm.getText().toString().replaceAll(",", "").replaceAll("٬","")));
         fragmentAddCarViewModel.SaveToDataBase();
     }//_____________________________________________________________________________________________ End SaveToDataBase
 

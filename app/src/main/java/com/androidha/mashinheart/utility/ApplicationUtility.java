@@ -319,21 +319,25 @@ public class ApplicationUtility {
     public TextWatcher SetTextWatcherSplitting(final EditText editText) {
         return new TextWatcher() {
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
             }
 
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                NumberFormat formatter = new DecimalFormat("#,###");
-                String str = "";
-                String n = editText.getText().toString().replaceAll(",", str);
-                if (!n.equalsIgnoreCase(str)) {
-                    editText.removeTextChangedListener(this);
-                    editText.setText(formatter.format(Integer.valueOf(n)));
-                    editText.addTextChangedListener(this);
-                }
+
             }
 
             public void afterTextChanged(Editable editable) {
+                NumberFormat formatter = new DecimalFormat("#,###");
+                String m = editText.getText().toString();
+                m = m.replaceAll(",","");
+                m = m.replaceAll("٬","");
+                if(!m.equalsIgnoreCase("")){
+                    editText.removeTextChangedListener(this);
+                    editText.setText(formatter.format(Integer.valueOf(m)));
+                    editText.addTextChangedListener(this);
+                }
                 editText.setSelection(editText.getText().length());
+
             }
         };
     }

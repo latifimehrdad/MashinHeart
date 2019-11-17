@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
@@ -165,35 +166,37 @@ public class MainActivity extends AppCompatActivity {
         SetAnimationViews();
         ShowFragmentYouCar();
         FragmentObserver();
-        SetAlarmNotification();
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent i = new Intent("ir.MachinHeart.Lunch");
+                sendBroadcast(i);
+            }
+        },1000);
+        //SetAlarmNotification();
+
+
 
 
     }//_____________________________________________________________________________________________ End onCreate
 
 
     private void SetAlarmNotification() {//__________________________________________________________ Start SetAlarmNotification
-//        SharedPreferences prefs = context.getSharedPreferences("ML", 0);
-//        if (prefs == null) {
-//            this.notId = Integer.valueOf(1);
-//        } else {
-//            this.notId = Integer.valueOf(prefs.getInt("noti", 1));
-//        }
 
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 17);
-        calendar.set(Calendar.MINUTE, 30);
+        calendar.set(Calendar.HOUR_OF_DAY, 15);
+        calendar.set(Calendar.MINUTE, 13);
         calendar.set(Calendar.SECOND, 0);
 
         Calendar now = Calendar.getInstance();
-        if (!now.before(calendar)) {
-            Intent intent1 = new Intent(MainActivity.this, AlarmReceiver.class);
-//        PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0,intent1, PendingIntent.FLAG_UPDATE_CURRENT);
-//        AlarmManager am = (AlarmManager) MainActivity.this.getSystemService(MainActivity.this.ALARM_SERVICE);
-//        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+        if (!now.before(calendar))
             calendar.add(Calendar.DATE, 1);
-        }
+        Intent intent1 = new Intent(MainActivity.this, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager am = (AlarmManager) MainActivity.this.getSystemService(MainActivity.this.ALARM_SERVICE);
+        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
 
-//
 
     }//_____________________________________________________________________________________________ End SetAlarmNotification
 

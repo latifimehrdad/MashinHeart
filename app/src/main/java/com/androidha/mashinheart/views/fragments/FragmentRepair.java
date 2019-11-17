@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -54,6 +55,7 @@ public class FragmentRepair extends Fragment {
     public Context context;
     private Integer editable;
     private FragmentRepairViewModel fragmentRepairViewModel;
+    private FragmentCarEvent fragmentCarEvent;
 
     @BindView(R.id.FragmentRepairAddClick)
     LinearLayout FragmentRepairAddClick;
@@ -83,8 +85,9 @@ public class FragmentRepair extends Fragment {
     RecyclerView FragmentRepairs;
 
 
-    public FragmentRepair(Context context2) {//_____________________________________________________ Start FragmentRepair
-        this.context = context2;
+    public FragmentRepair(Context context, FragmentCarEvent fragmentCarEvent) {//_____________________________________________________ Start FragmentRepair
+        this.context = context;
+        this.fragmentCarEvent = fragmentCarEvent;
     }//_____________________________________________________________________________________________ End FragmentRepair
 
 
@@ -94,6 +97,19 @@ public class FragmentRepair extends Fragment {
         binding.setRepair(fragmentRepairViewModel);
         View view = binding.getRoot();
         ButterKnife.bind(this, view);
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
+        view.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
+                if (keyCode != 4) {
+                    return true;
+                }
+                keyCode = 0;
+                keyEvent = null;
+                fragmentCarEvent.MessageType.onNext("close");
+                return true;
+            }
+        });
         return view;
     }//_____________________________________________________________________________________________ End onCreateView
 
@@ -337,9 +353,9 @@ public class FragmentRepair extends Fragment {
         fragmentRepairViewModel.setBrand(FragmentRepairBrand.getText().toString());
         fragmentRepairViewModel.setCarId(MainActivity.CarId);
         fragmentRepairViewModel.setRepairDate(RepairDate);
-        fragmentRepairViewModel.setRepairKm(Integer.valueOf(FragmentRepairKm.getText().toString().replaceAll(",", "")));
-        fragmentRepairViewModel.setRepairWhy(FragmentRepairWhy.getText().toString().replaceAll(",", ""));
-        fragmentRepairViewModel.setMoney(Integer.valueOf(FragmentRepairMoney.getText().toString().replaceAll(",", "")));
+        fragmentRepairViewModel.setRepairKm(Integer.valueOf(FragmentRepairKm.getText().toString().replaceAll(",", "").replaceAll("٬","")));
+        fragmentRepairViewModel.setRepairWhy(FragmentRepairWhy.getText().toString().replaceAll(",", "").replaceAll("٬",""));
+        fragmentRepairViewModel.setMoney(Integer.valueOf(FragmentRepairMoney.getText().toString().replaceAll(",", "").replaceAll("٬","")));
         fragmentRepairViewModel.setTitle(FragmentRepairTitle.getText().toString());
         fragmentRepairViewModel.SaveToDataBase();
     }//_____________________________________________________________________________________________ End SaveToDataBase
@@ -348,9 +364,9 @@ public class FragmentRepair extends Fragment {
     public void EditDataBase() {//__________________________________________________________________ Start EditDataBase
 
         fragmentRepairViewModel.setBrand(FragmentRepairBrand.getText().toString());
-        fragmentRepairViewModel.setRepairKm(Integer.valueOf(FragmentRepairKm.getText().toString().replaceAll(",", "")));
-        fragmentRepairViewModel.setRepairWhy(FragmentRepairWhy.getText().toString().replaceAll(",", ""));
-        fragmentRepairViewModel.setMoney(Integer.valueOf(FragmentRepairMoney.getText().toString().replaceAll(",", "")));
+        fragmentRepairViewModel.setRepairKm(Integer.valueOf(FragmentRepairKm.getText().toString().replaceAll(",", "").replaceAll("٬","")));
+        fragmentRepairViewModel.setRepairWhy(FragmentRepairWhy.getText().toString().replaceAll(",", "").replaceAll("٬",""));
+        fragmentRepairViewModel.setMoney(Integer.valueOf(FragmentRepairMoney.getText().toString().replaceAll(",", "").replaceAll("٬","")));
         fragmentRepairViewModel.setTitle(FragmentRepairTitle.getText().toString());
         fragmentRepairViewModel.setRepairDate(RepairDate);
         fragmentRepairViewModel.EditDataBase(CarRepair.get(editable));

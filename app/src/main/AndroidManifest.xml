@@ -59,6 +59,14 @@
             </intent-filter>
         </receiver>
 
+        <receiver android:name=".jobservice.LunchAlarmReceiver">
+            <intent-filter >
+                <action android:name="android.intent.action.NEW_OUTGOING_CALL"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="ir.MachinHeart.Lunch" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

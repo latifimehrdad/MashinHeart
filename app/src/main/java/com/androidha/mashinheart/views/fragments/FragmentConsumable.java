@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -51,6 +52,7 @@ public class FragmentConsumable extends Fragment {
     public Context context;
     private Integer editable;
     private FragmentConsumablesViewModel fragmentConsumablesViewModel;
+    private FragmentCarEvent fragmentCarEvent;
 
     @BindView(R.id.FragmentConsumableAddClick)
     LinearLayout FragmentConsumableAddClick;
@@ -80,8 +82,9 @@ public class FragmentConsumable extends Fragment {
     RecyclerView FragmentConsumables;
 
 
-    public FragmentConsumable(Context context2) {//_________________________________________________ Start FragmentConsumable
-        this.context = context2;
+    public FragmentConsumable(Context context, FragmentCarEvent fragmentCarEvent) {//_________________________________________________ Start FragmentConsumable
+        this.context = context;
+        this.fragmentCarEvent = fragmentCarEvent;
     }//_____________________________________________________________________________________________ End FragmentConsumable
 
 
@@ -92,6 +95,21 @@ public class FragmentConsumable extends Fragment {
         binding.setConsumables(fragmentConsumablesViewModel);
         View view = binding.getRoot();
         ButterKnife.bind(this, view);
+
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
+        view.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
+                if (keyCode != 4) {
+                    return true;
+                }
+                keyCode = 0;
+                keyEvent = null;
+                fragmentCarEvent.MessageType.onNext("close");
+                return true;
+            }
+        });
+
         return view;
     }//_____________________________________________________________________________________________ End onCreateView
 
@@ -206,6 +224,8 @@ public class FragmentConsumable extends Fragment {
 
     private void SetClick() {//_____________________________________________________________________ Start SetClick
 
+
+
         FragmentConsumableLayout.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
             }
@@ -292,7 +312,7 @@ public class FragmentConsumable extends Fragment {
             ShowToast(this.context.getString(R.string.EmptyChangeNext));
             return false;
         } else {
-            if (Integer.valueOf(this.FragmentConsumableKm.getText().toString().replaceAll(",", "")).intValue() > Integer.valueOf(this.FragmentConsumableNextKm.getText().toString().replaceAll(",", "")).intValue()) {
+            if (Integer.valueOf(this.FragmentConsumableKm.getText().toString().replaceAll(",", "").replaceAll("٬","")).intValue() > Integer.valueOf(this.FragmentConsumableNextKm.getText().toString().replaceAll(",", "").replaceAll("٬","")).intValue()) {
                 ShowToast(this.context.getString(R.string.EmptyChangeNextError));
                 return false;
             } else if (FragmentConsumableMoney.getText().toString().trim().length() == 0) {
@@ -323,9 +343,9 @@ public class FragmentConsumable extends Fragment {
         fragmentConsumablesViewModel.setBrand(FragmentConsumableBrand.getText().toString());
         fragmentConsumablesViewModel.setCarId(MainActivity.CarId);
         fragmentConsumablesViewModel.setChangeDate(ChangeDate);
-        fragmentConsumablesViewModel.setChangeKm(Integer.valueOf(FragmentConsumableKm.getText().toString().replaceAll(",", "")));
-        fragmentConsumablesViewModel.setChangeNextKm(Integer.valueOf(FragmentConsumableNextKm.getText().toString().replaceAll(",", "")));
-        fragmentConsumablesViewModel.setMoney(Integer.valueOf(FragmentConsumableMoney.getText().toString().replaceAll(",", "")));
+        fragmentConsumablesViewModel.setChangeKm(Integer.valueOf(FragmentConsumableKm.getText().toString().replaceAll(",", "").replaceAll("٬","")));
+        fragmentConsumablesViewModel.setChangeNextKm(Integer.valueOf(FragmentConsumableNextKm.getText().toString().replaceAll(",", "").replaceAll("٬","")));
+        fragmentConsumablesViewModel.setMoney(Integer.valueOf(FragmentConsumableMoney.getText().toString().replaceAll(",", "").replaceAll("٬","")));
         fragmentConsumablesViewModel.setTitle(FragmentConsumableTitle.getText().toString());
         fragmentConsumablesViewModel.SaveToDataBase();
     }//_____________________________________________________________________________________________ End SaveToDataBase
@@ -335,9 +355,9 @@ public class FragmentConsumable extends Fragment {
 
     public void EditDataBase() {//__________________________________________________________________ Start EditDataBase
         fragmentConsumablesViewModel.setBrand(FragmentConsumableBrand.getText().toString());
-        fragmentConsumablesViewModel.setChangeKm(Integer.valueOf(FragmentConsumableKm.getText().toString().replaceAll(",", "")));
-        fragmentConsumablesViewModel.setChangeNextKm(Integer.valueOf(FragmentConsumableNextKm.getText().toString().replaceAll(",", "")));
-        fragmentConsumablesViewModel.setMoney(Integer.valueOf(FragmentConsumableMoney.getText().toString().replaceAll(",", "")));
+        fragmentConsumablesViewModel.setChangeKm(Integer.valueOf(FragmentConsumableKm.getText().toString().replaceAll(",", "").replaceAll("٬","")));
+        fragmentConsumablesViewModel.setChangeNextKm(Integer.valueOf(FragmentConsumableNextKm.getText().toString().replaceAll(",", "").replaceAll("٬","")));
+        fragmentConsumablesViewModel.setMoney(Integer.valueOf(FragmentConsumableMoney.getText().toString().replaceAll(",", "").replaceAll("٬","")));
         fragmentConsumablesViewModel.setTitle(FragmentConsumableTitle.getText().toString());
         fragmentConsumablesViewModel.setChangeDate(ChangeDate);
         fragmentConsumablesViewModel.EditDataBase((DataBaseConsumable) this.CarConsumable.get(this.editable.intValue()));

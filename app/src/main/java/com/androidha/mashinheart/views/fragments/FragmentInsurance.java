@@ -3,6 +3,7 @@ package com.androidha.mashinheart.views.fragments;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -49,6 +50,7 @@ public class FragmentInsurance extends Fragment {
     public Context context;
     private Integer editable;
     private FragmentInsuranceViewModel fragmentInsuranceViewModel;
+    private FragmentCarEvent fragmentCarEvent;
 
 
     @BindView(R.id.FragmentInsuranceAddClick)
@@ -73,8 +75,9 @@ public class FragmentInsurance extends Fragment {
     RecyclerView FragmentInsurances;
 
 
-    public FragmentInsurance(Context context2) {//__________________________________________________ Star FragmentInsurance
-        this.context = context2;
+    public FragmentInsurance(Context context, FragmentCarEvent fragmentCarEvent) {//__________________________________________________ Star FragmentInsurance
+        this.context = context;
+        this.fragmentCarEvent = fragmentCarEvent;
     }//_____________________________________________________________________________________________ End FragmentInsurance
 
 
@@ -86,6 +89,19 @@ public class FragmentInsurance extends Fragment {
         binding.setInsurance(fragmentInsuranceViewModel);
         View view = binding.getRoot();
         ButterKnife.bind( this, view);
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
+        view.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
+                if (keyCode != 4) {
+                    return true;
+                }
+                keyCode = 0;
+                keyEvent = null;
+                fragmentCarEvent.MessageType.onNext("close");
+                return true;
+            }
+        });
         return view;
     }//_____________________________________________________________________________________________ End onCreateView
 
@@ -258,7 +274,7 @@ public class FragmentInsurance extends Fragment {
         fragmentInsuranceViewModel.setTitle(FragmentInsuranceBrand.getText().toString());
         fragmentInsuranceViewModel.setCarId(MainActivity.CarId);
         fragmentInsuranceViewModel.setInsuranceDate(InsuranceDate);
-        fragmentInsuranceViewModel.setMoney(Integer.valueOf(FragmentInsuranceMoney.getText().toString().replaceAll(",", "")));
+        fragmentInsuranceViewModel.setMoney(Integer.valueOf(FragmentInsuranceMoney.getText().toString().replaceAll(",", "").replaceAll("٬","")));
         fragmentInsuranceViewModel.setInsuranceType(InsuranceType);
         fragmentInsuranceViewModel.SaveToDataBase();
     }//_____________________________________________________________________________________________ End SaveToDataBase
@@ -269,7 +285,7 @@ public class FragmentInsurance extends Fragment {
         fragmentInsuranceViewModel.setTitle(FragmentInsuranceBrand.getText().toString());
         fragmentInsuranceViewModel.setCarId(MainActivity.CarId);
         fragmentInsuranceViewModel.setInsuranceDate(InsuranceDate);
-        fragmentInsuranceViewModel.setMoney(Integer.valueOf(FragmentInsuranceMoney.getText().toString().replaceAll(",", "")));
+        fragmentInsuranceViewModel.setMoney(Integer.valueOf(FragmentInsuranceMoney.getText().toString().replaceAll(",", "").replaceAll("٬","")));
         fragmentInsuranceViewModel.setInsuranceType(InsuranceType);
         fragmentInsuranceViewModel.EditDataBase(CarInsurance.get(editable));
     }//_____________________________________________________________________________________________ End EditDataBase

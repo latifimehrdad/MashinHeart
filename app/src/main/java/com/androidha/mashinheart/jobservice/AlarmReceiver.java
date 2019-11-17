@@ -33,7 +33,8 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         this.context = context;
         notifis = "";
-        CheckItems();
+        //CheckItems();
+        ShowNotification(notifis);
 
     }//_____________________________________________________________________________________________ End onReceive
 
@@ -95,7 +96,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                     .getMachinHeartApplication(context)
                     .getApplicationUtilityComponent()
                     .getApplicationUtility()
-                    .JalaliReduceDay(null,Integer.valueOf(CurrentDate),365);
+                    .JalaliReduceDay(null, Integer.valueOf(CurrentDate), 365);
 
             if (CurrentDate != null)
                 CurrentDate = CurrentDate.replaceAll("/", "");
@@ -161,6 +162,7 @@ public class AlarmReceiver extends BroadcastReceiver {
             this.notId = Integer.valueOf(prefs.getInt("noti", 1));
         }
 
+        Text = "Notification : " + notId;
         long when = System.currentTimeMillis();
         NotificationManager notificationManager = (NotificationManager) context
                 .getSystemService(Context.NOTIFICATION_SERVICE);
