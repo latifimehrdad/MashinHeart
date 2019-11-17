@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="Insurance"
+            type="com.androidha.mashinheart.viewmodels.FragmentInsuranceViewModel" />
+    </data>
+
+    <LinearLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/FragmentInsuranceLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/MainFragment"
+        android:orientation="vertical"
+        android:tag="layout/fragment_insurance_0">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/FragmentInsuranceAddClick"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:src="@drawable/ic_add_circle_outline_black_24dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:text="@string/CarEventInsurance"
+                        android:textColor="@color/MainYellow"
+                        android:textSize="@dimen/_10sdp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:text="@string/NewEvent"
+                        android:textColor="@color/MainYellow"
+                        android:textSize="@dimen/_10sdp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <net.cachapa.expandablelayout.ExpandableLayout
+                android:id="@+id/FragmentInsuranceExpandable"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                app:el_duration="1000"
+                app:el_expanded="true"
+                app:el_parallax="0.5">
+
+                <ScrollView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:orientation="vertical"
+                        android:paddingLeft="@dimen/_10sdp"
+                        android:paddingRight="@dimen/_10sdp">
+
+                        <Spinner
+                            android:id="@+id/FragmentInsuranceType"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/_5sdp"
+                            android:entries="@array/InsuranceType"
+                            android:gravity="right"
+                            android:paddingRight="@dimen/_10sdp"
+                            android:popupBackground="@color/MainShadowDown"
+                            android:prompt="@string/Insurance_Prompt"
+                            android:textSize="@dimen/_11sdp"
+                            android:theme="@style/mySpinnerItemStyle" />
+
+                        <EditText
+                            android:id="@+id/FragmentInsuranceBrand"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/FragmentInsuranceType"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:background="@color/MainWhite"
+                            android:hint="@string/InsuranceName"
+                            android:inputType="textPersonName"
+                            android:padding="@dimen/_2sdp"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <EditText
+                            android:id="@+id/FragmentInsuranceMoney"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/FragmentInsuranceBrand"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:background="@color/MainWhite"
+                            android:hint="@string/NewEventChangeMoney"
+                            android:inputType="phone"
+                            android:maxLength="10"
+                            android:padding="@dimen/_2sdp"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <Button
+                            android:id="@+id/FragmentInsuranceDate"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/FragmentInsuranceMoney"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:background="@color/MainWhite"
+                            android:gravity="center"
+                            android:hint="@string/InsuranceDate"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/FragmentInsuranceDate"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/FragmentInsuranceIgnor"
+                                android:layout_width="0.0dip"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:background="@drawable/layoutborderblack"
+                                android:text="@string/Ignor"
+                                android:textColor="@color/MainShadowDown"
+                                android:textSize="@dimen/_13sdp" />
+
+                            <Button
+                                android:id="@+id/FragmentInsuranceSave"
+                                android:layout_width="0.0dip"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_10sdp"
+                                android:layout_weight="1.0"
+                                android:background="@drawable/save_info_button"
+                                android:text="@string/SaveInfo"
+                                android:textColor="@color/MainYellow"
+                                android:textSize="@dimen/_13sdp" />
+                        </LinearLayout>
+                    </RelativeLayout>
+                </ScrollView>
+            </net.cachapa.expandablelayout.ExpandableLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="1.0dip"
+            android:layout_margin="@dimen/_5sdp"
+            android:background="@color/MainYellow" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/FragmentInsurances"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+    </LinearLayout>
+
+
+</layout>

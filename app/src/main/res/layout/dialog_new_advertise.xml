@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="NewAdvertise"
+            type="com.androidha.mashinheart.viewmodels.DialogNewAdvertiseViewModel" />
+    </data>
+
+    <LinearLayout
+        xmlns:custom="http://schemas.android.com/apk/res-auto"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/MainYellow"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="@dimen/_10sdp"
+        android:tag="layout/dialog_progress_0">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <ImageView
+                android:id="@+id/DialogNewAdvertiseImage"
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="@dimen/_70sdp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/layoutborderwhite"
+                android:src="@drawable/logo"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/DialogNewAdvertiseImage"
+                android:text="@string/ChosseImage"
+                android:textSize="@dimen/_9sdp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/_5sdp"
+                />
+
+
+        </RelativeLayout>
+
+
+        <Spinner
+            android:id="@+id/FragmentDialogCity"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:paddingRight="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:popupBackground="@color/MainWhite"
+            android:prompt="@string/AdvertisePrompt"
+            android:textSize="@dimen/_11sdp"
+            android:theme="@style/CitySpinnerItemStyle" />
+
+
+        <EditText
+            android:id="@+id/DialogNewAdvertiseTitle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:hint="@string/Title"
+            android:inputType="textPersonName"
+            android:padding="@dimen/_5sdp"
+            android:lines="1"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/_12sdp"
+            />
+
+        <EditText
+            android:id="@+id/DialogNewAdvertiseTel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:hint="@string/Tel"
+            android:inputType="number"
+            android:lines="1"
+            android:padding="@dimen/_5sdp"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/_12sdp"
+            />
+
+        <EditText
+            android:id="@+id/DialogNewAdvertiseAddress"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:hint="@string/Address"
+            android:lines="3"
+            android:padding="@dimen/_5sdp"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/_12sdp"
+            />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/FragmentConsumableDate"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/DialogNewAdvertiseIgnor"
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:background="@drawable/layoutborderblack"
+                android:text="@string/Ignor"
+                android:textColor="@color/MainShadowDown"
+                android:textSize="@dimen/_13sdp" />
+
+            <Button
+                android:id="@+id/DialogNewAdvertiseSend"
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_weight="1.0"
+                android:background="@drawable/save_info_button"
+                android:text="@string/SaveInfo"
+                android:textColor="@color/MainYellow"
+                android:textSize="@dimen/_13sdp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</layout>

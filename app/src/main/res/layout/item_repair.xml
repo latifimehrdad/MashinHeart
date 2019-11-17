@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="Repair"
+            type="com.androidha.mashinheart.databases.DataBaseRepair" />
+    </data>
+
+    <LinearLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/MainFragment"
+        android:orientation="vertical"
+        android:padding="@dimen/_5sdp"
+        android:tag="layout/item_repair_0">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:maxLines="2"
+            android:tag="repairDate"
+            android:textColor="@color/MainYellow"
+            android:textSize="@dimen/_9sdp"
+            app:ValueRepair="@{Repair.repairDate}"
+            />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:maxLines="2"
+            android:tag="title"
+            android:textColor="@color/MainWhite"
+            android:textSize="@dimen/_9sdp"
+            app:TextRepair="@{Repair.title}"
+            />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:maxLines="2"
+            android:tag="repairKm"
+            android:textColor="@color/MainWhite"
+            android:textSize="@dimen/_9sdp"
+            app:ValueRepair="@{Repair.repairKm}"
+            />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:maxLines="2"
+            android:tag="repairWhy"
+            android:textColor="@color/MainWhite"
+            android:textSize="@dimen/_9sdp"
+            app:TextRepair="@{Repair.repairWhy}"
+            />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:maxLines="2"
+            android:tag="money"
+            android:textColor="@color/MainWhite"
+            android:textSize="@dimen/_9sdp"
+            app:ValueRepair="@{Repair.money}"
+            />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:maxLines="2"
+            android:tag="brand"
+            android:textColor="@color/MainWhite"
+            android:textSize="@dimen/_9sdp"
+            app:TextRepair="@{Repair.brand}"
+            />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@id/ItemRepairEdit"
+                android:layout_width="@dimen/_17sdp"
+                android:layout_height="@dimen/_17sdp"
+                android:src="@drawable/ic_edit_black_24dp" />
+
+            <ImageView
+                android:id="@id/ItemRepairDelete"
+                android:layout_width="@dimen/_17sdp"
+                android:layout_height="@dimen/_17sdp"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:src="@drawable/ic_delete_forever_black_24dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="1.0dip"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@color/MainShadowUp" />
+    </LinearLayout>
+
+</layout>

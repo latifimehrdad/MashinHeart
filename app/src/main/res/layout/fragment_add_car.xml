@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="Addcar"
+            type="com.androidha.mashinheart.viewmodels.FragmentAddCarViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/MainFragment"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/_10sdp"
+        android:paddingRight="@dimen/_10sdp"
+        android:tag="layout/fragment_add_car_0">
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/AddCar"
+                    android:textColor="@color/MainYellow"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/FragmentAddCarBerand"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:entries="@array/CarBrand"
+                        android:gravity="right"
+                        android:paddingRight="@dimen/_10sdp"
+                        android:popupBackground="@color/MainShadowDown"
+                        android:prompt="@string/Brand_Prompt"
+                        android:textSize="@dimen/_11sdp"
+                        android:theme="@style/mySpinnerItemStyle" />
+                </RelativeLayout>
+
+                <EditText
+                    android:id="@+id/FragmentAddCarName"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@color/MainWhite"
+                    android:hint="@string/CarName"
+                    android:inputType="textPersonName"
+                    android:padding="@dimen/_2sdp"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_12sdp"
+                    />
+
+                <EditText
+                    android:id="@+id/FragmentAddCarYear"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@color/MainWhite"
+                    android:hint="@string/CarCreatedYear"
+                    android:inputType="phone"
+                    android:maxLength="4"
+                    android:padding="@dimen/_2sdp"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_12sdp" />
+
+                <EditText
+                    android:id="@+id/FragmentAddCarKm"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@color/MainWhite"
+                    android:hint="@string/CarCreatedKM"
+                    android:inputType="phone"
+                    android:maxLength="10"
+                    android:padding="@dimen/_2sdp"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_12sdp" />
+
+                <EditText
+                    android:id="@+id/FragmentAddCarAverage"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@color/MainWhite"
+                    android:hint="@string/CarUsedAverage"
+                    android:inputType="phone"
+                    android:maxLength="3"
+                    android:padding="@dimen/_2sdp"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:visibility="gone" />
+
+                <EditText
+                    android:id="@+id/FragmentAddCarColor"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@color/MainWhite"
+                    android:hint="@string/CarColor"
+                    android:inputType="textPersonName"
+                    android:padding="@dimen/_2sdp"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_12sdp" />
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/FragmentAddCarPersonCheck"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="@string/CarPersonInsurance"
+                    android:textColor="@color/MainWhite"
+                    android:textSize="@dimen/_11sdp"
+                    android:theme="@style/WhiteCheck"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/FragmentAddCarPerson"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_30sdp"
+                    android:layout_marginTop="@dimen/_1sdp"
+                    android:layout_marginRight="@dimen/_30sdp"
+                    android:background="@color/MainWhite"
+                    android:gravity="center"
+                    android:hint="@string/ChooseDate"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:visibility="gone" />
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/FragmentAddCarBodyCheck"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="@string/CarBodyInsurance"
+                    android:textColor="@color/MainWhite"
+                    android:textSize="@dimen/_11sdp"
+                    android:theme="@style/WhiteCheck"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/FragmentAddCarBody"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_30sdp"
+                    android:layout_marginTop="@dimen/_1sdp"
+                    android:layout_marginRight="@dimen/_30sdp"
+                    android:background="@color/MainWhite"
+                    android:gravity="center"
+                    android:hint="@string/ChooseDate"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="@string/CarGearBox"
+                    android:textColor="@color/MainWhite"
+                    android:textSize="@dimen/_10sdp" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatCheckBox
+                        android:id="@+id/FragmentAddCarAuto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/CarGearBoxAuto"
+                        android:textColor="@color/MainWhite"
+                        android:textSize="@dimen/_11sdp"
+                        android:theme="@style/WhiteCheck" />
+
+                    <androidx.appcompat.widget.AppCompatCheckBox
+                        android:id="@+id/FragmentAddCarHandly"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_15sdp"
+                        android:text="@string/CarGearBoxHandly"
+                        android:textColor="@color/MainWhite"
+                        android:textSize="@dimen/_11sdp"
+                        android:theme="@style/WhiteCheck" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@drawable/layoutborderwhite"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_5sdp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/CarOptionalInfo"
+                        android:textColor="@color/MainYellow"
+                        android:textSize="@dimen/_9sdp" />
+
+                    <EditText
+                        android:id="@+id/FragmentAddCarChassis"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:background="@color/MainWhite"
+                        android:hint="@string/CarChassisNumber"
+                        android:padding="@dimen/_2sdp"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/_12sdp" />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="@drawable/layoutborderblack"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_1sdp">
+
+                        <ImageView
+                            android:layout_width="@dimen/_18sdp"
+                            android:layout_height="@dimen/_45sdp"
+                            android:layout_marginLeft="@dimen/_2sdp"
+                            android:layout_marginTop="@dimen/_1sdp"
+                            android:layout_marginBottom="@dimen/_1sdp"
+                            android:src="@drawable/pelak" />
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_marginRight="@dimen/_1sdp"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/FragmentAddCarPelakLeft"
+                                android:layout_width="0.0dip"
+                                android:layout_height="fill_parent"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:layout_weight="1.0"
+                                android:background="@color/MainWhite"
+                                android:gravity="center"
+                                android:hint="12"
+                                android:inputType="phone"
+                                android:maxLength="2"
+                                android:padding="@dimen/_2sdp"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/_13sdp" />
+
+                            <EditText
+                                android:id="@+id/FragmentAddCarPelakAlphabet"
+                                android:layout_width="0.0dip"
+                                android:layout_height="fill_parent"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:layout_weight="0.5"
+                                android:background="@color/MainWhite"
+                                android:gravity="center"
+                                android:hint="ب"
+                                android:inputType="textPersonName"
+                                android:maxLength="1"
+                                android:padding="@dimen/_2sdp"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/_13sdp" />
+
+                            <EditText
+                                android:id="@+id/FragmentAddCarPelakRight"
+                                android:layout_width="0.0dip"
+                                android:layout_height="fill_parent"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:layout_weight="1.5"
+                                android:background="@color/MainWhite"
+                                android:gravity="center"
+                                android:hint="345"
+                                android:inputType="phone"
+                                android:maxLength="3"
+                                android:padding="@dimen/_2sdp"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/_13sdp" />
+
+                            <LinearLayout
+                                android:layout_width="@dimen/_1sdp"
+                                android:layout_height="fill_parent"
+                                android:background="@android:color/black" />
+
+                            <LinearLayout
+                                android:layout_width="0.0dip"
+                                android:layout_height="fill_parent"
+                                android:layout_marginRight="@dimen/_2sdp"
+                                android:layout_marginBottom="@dimen/_1sdp"
+                                android:layout_weight="1.0"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="@string/Iran"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="@dimen/_9sdp" />
+
+                                <EditText
+                                    android:id="@+id/FragmentAddCarPelakIran"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent"
+                                    android:background="@color/MainWhite"
+                                    android:gravity="center"
+                                    android:hint="67"
+                                    android:inputType="phone"
+                                    android:maxLength="2"
+                                    android:padding="@dimen/_2sdp"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="@dimen/_13sdp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+                //shomare shasi
+
+                <Button
+                    android:id="@+id/FragmentAddCarSave"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_15sdp"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:background="@drawable/save_info_button"
+                    android:text="@string/SaveInfo"
+                    android:textColor="@color/MainYellow"
+                    android:textSize="@dimen/_13sdp" />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+
+</layout>

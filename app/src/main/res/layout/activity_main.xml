@@ -1,0 +1,826 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="Main"
+            type="com.androidha.mashinheart.viewmodels.ActivityMainViewModel" />
+    </data>
+
+    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:tag="layout/activity_main_0">//header
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/_70sdp">
+
+            <RelativeLayout
+                android:id="@+id/mainheaderright"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="fill_parent"
+                android:layout_alignParentRight="true"
+                android:background="@color/MainRight">
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:background="@color/MainYellow" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@id/mainheaderright"
+                android:background="@color/MainFragment">
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:background="@color/MainYellow" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/MainProfile"
+                android:layout_width="@dimen/_46sdp"
+                android:layout_height="@dimen/_46sdp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/_67sdp"
+                android:background="@drawable/maincircleprofile">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/MainImgProfile"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_margin="@dimen/_4sdp"
+                    android:src="@drawable/logo" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/_33sdp"
+                android:layout_alignLeft="@id/MainProfile"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/_46sdp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:src="@drawable/editprofile" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="center"
+                    android:text="@string/EditProfile"
+                    android:textColor="@color/MainWhite"
+                    android:textSize="@dimen/_8sdp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_toLeftOf="@id/MainProfile"
+                android:gravity="center|right"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|right"
+                    android:text="@string/ProfileName"
+                    android:textColor="@color/MainWhite"
+                    android:textSize="@dimen/_10sdp" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|right"
+                    android:text="@string/ProfilePhone"
+                    android:textColor="@color/MainWhite"
+                    android:textSize="@dimen/_8sdp" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|right"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/_12sdp"
+                        android:layout_height="@dimen/_12sdp"
+                        android:layout_marginRight="@dimen/_3sdp"
+                        android:src="@drawable/ic_done_all_black_24dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center|right"
+                        android:text="@string/SignUpSystem"
+                        android:textColor="@color/MainWhite"
+                        android:textSize="@dimen/_7sdp" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </RelativeLayout>
+        //header
+
+
+        //main
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">//right
+
+            <RelativeLayout
+                android:id="@+id/mainmainright"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="fill_parent"
+                android:layout_alignParentRight="true"
+                android:background="@color/MainRight"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_alignParentBottom="true"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:background="@color/MainYellow" />
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:gravity="center"
+                        android:text="@string/app_name"
+                        android:textColor="@color/MainWhite"
+                        android:textSize="@dimen/_12sdp" />
+                </LinearLayout>
+
+                <ScrollView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginRight="@dimen/_3sdp"
+                    android:layout_marginBottom="@dimen/_35sdp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        //You car
+
+                        <LinearLayout
+                            android:id="@+id/MainYouCar"
+                            android:layout_width="fill_parent"
+                            android:layout_height="@dimen/_75sdp"
+                            android:background="@color/MainFragment"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:id="@+id/MainYouCarLeft"
+                                android:layout_width="@dimen/_3sdp"
+                                android:layout_height="fill_parent"
+                                android:background="@color/MainShadowDown"
+                                android:orientation="vertical"
+                                android:visibility="gone" />
+
+                            <LinearLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:id="@+id/MainYouCarUpShadow"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="@dimen/_5sdp"
+                                    android:background="@color/MainShadowUp"
+                                    android:orientation="vertical" />
+
+                                <ImageView
+                                    android:id="@+id/MainYouCarImg"
+                                    android:layout_width="@dimen/_35sdp"
+                                    android:layout_height="@dimen/_35sdp"
+                                    android:layout_marginTop="@dimen/_10sdp" />
+
+                                <TextView
+                                    android:id="@+id/MainYouCarText"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent"
+                                    android:layout_marginBottom="@dimen/_3sdp"
+                                    android:gravity="center"
+                                    android:textColor="@color/MainWhite"
+                                    android:textSize="@dimen/_10sdp" />
+
+                                <LinearLayout
+                                    android:id="@+id/MainYouCarDownShadow"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="@dimen/_5sdp"
+                                    android:background="@color/MainShadowDown"
+                                    android:orientation="vertical" />
+
+                                <LinearLayout
+                                    android:id="@+id/MainYouCarLine"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="1.0dip"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:layout_marginRight="@dimen/_5sdp"
+                                    android:background="@color/MainWhite"
+                                    android:orientation="vertical"
+                                    android:visibility="gone" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        //Add car
+
+                        <LinearLayout
+                            android:id="@+id/MainAddCar"
+                            android:layout_width="fill_parent"
+                            android:layout_height="@dimen/_75sdp"
+                            android:background="@color/MainRight"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:id="@+id/MainAddCarLeft"
+                                android:layout_width="@dimen/_3sdp"
+                                android:layout_height="fill_parent"
+                                android:background="@color/MainShadowDown"
+                                android:orientation="vertical" />
+
+                            <LinearLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:id="@+id/MainAddCarUpShadow"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="@dimen/_5sdp"
+                                    android:background="@color/MainShadowUp"
+                                    android:orientation="vertical"
+                                    android:visibility="gone" />
+
+                                <ImageView
+                                    android:layout_width="@dimen/_35sdp"
+                                    android:layout_height="@dimen/_35sdp"
+                                    android:layout_marginTop="@dimen/_10sdp"
+                                    android:src="@drawable/add_car" />
+
+                                <TextView
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent"
+                                    android:layout_marginBottom="@dimen/_3sdp"
+                                    android:gravity="center"
+                                    android:text="@string/AddCar"
+                                    android:textColor="@color/MainWhite"
+                                    android:textSize="@dimen/_10sdp" />
+
+                                <LinearLayout
+                                    android:id="@+id/MainAddCarDownShadow"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="@dimen/_5sdp"
+                                    android:background="@color/MainShadowDown"
+                                    android:orientation="vertical"
+                                    android:visibility="gone" />
+
+                                <LinearLayout
+                                    android:id="@+id/MainAddCarLine"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="1.0dip"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:layout_marginRight="@dimen/_5sdp"
+                                    android:background="@color/MainWhite"
+                                    android:orientation="vertical"
+                                    android:visibility="visible" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        //Police fine
+
+                        <LinearLayout
+                            android:id="@+id/MainPoliceFine"
+                            android:layout_width="fill_parent"
+                            android:layout_height="@dimen/_75sdp"
+                            android:background="@color/MainRight"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:id="@+id/MainPoliceFineLeft"
+                                android:layout_width="@dimen/_3sdp"
+                                android:layout_height="fill_parent"
+                                android:background="@color/MainShadowDown"
+                                android:orientation="vertical" />
+
+                            <LinearLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:id="@+id/MainPoliceFineUpShadow"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="@dimen/_5sdp"
+                                    android:background="@color/MainShadowUp"
+                                    android:orientation="vertical"
+                                    android:visibility="gone" />
+
+                                <ImageView
+                                    android:layout_width="@dimen/_35sdp"
+                                    android:layout_height="@dimen/_35sdp"
+                                    android:layout_marginTop="@dimen/_10sdp"
+                                    android:src="@drawable/police_fine" />
+
+                                <TextView
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent"
+                                    android:layout_marginBottom="@dimen/_3sdp"
+                                    android:gravity="center"
+                                    android:text="@string/PoliceFine"
+                                    android:textColor="@color/MainWhite"
+                                    android:textSize="@dimen/_10sdp" />
+
+                                <LinearLayout
+                                    android:id="@+id/MainPoliceFineDownShadow"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="@dimen/_5sdp"
+                                    android:background="@color/MainShadowDown"
+                                    android:orientation="vertical"
+                                    android:visibility="gone" />
+
+                                <LinearLayout
+                                    android:id="@+id/MainPoliceFineLine"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="1.0dip"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:layout_marginRight="@dimen/_5sdp"
+                                    android:background="@color/MainWhite"
+                                    android:orientation="vertical"
+                                    android:visibility="visible" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        //NegativeGrade
+
+                        <LinearLayout
+                            android:id="@+id/MainNegativeGrade"
+                            android:layout_width="fill_parent"
+                            android:layout_height="@dimen/_75sdp"
+                            android:background="@color/MainRight"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:id="@+id/MainNegativeGradeLeft"
+                                android:layout_width="@dimen/_3sdp"
+                                android:layout_height="fill_parent"
+                                android:background="@color/MainShadowDown"
+                                android:orientation="vertical" />
+
+                            <LinearLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:id="@+id/MainNegativeGradeUpShadow"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="@dimen/_5sdp"
+                                    android:background="@color/MainShadowUp"
+                                    android:orientation="vertical"
+                                    android:visibility="gone" />
+
+                                <ImageView
+                                    android:layout_width="@dimen/_35sdp"
+                                    android:layout_height="@dimen/_35sdp"
+                                    android:layout_marginTop="@dimen/_10sdp"
+                                    android:src="@drawable/negativegrade" />
+
+                                <TextView
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent"
+                                    android:layout_marginBottom="@dimen/_3sdp"
+                                    android:gravity="center"
+                                    android:text="@string/NegativeGrade"
+                                    android:textColor="@color/MainWhite"
+                                    android:textSize="@dimen/_9sdp" />
+
+                                <LinearLayout
+                                    android:id="@+id/MainNegativeGradeDownShadow"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="@dimen/_5sdp"
+                                    android:background="@color/MainShadowDown"
+                                    android:orientation="vertical"
+                                    android:visibility="gone" />
+
+                                <LinearLayout
+                                    android:id="@+id/MainNegativeGradeLine"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="1.0dip"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:layout_marginRight="@dimen/_5sdp"
+                                    android:background="@color/MainWhite"
+                                    android:orientation="vertical"
+                                    android:visibility="visible" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        //Other car
+
+                        <LinearLayout
+                            android:id="@+id/MainOtherCar"
+                            android:layout_width="fill_parent"
+                            android:layout_height="@dimen/_75sdp"
+                            android:background="@color/MainRight"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:id="@+id/MainOtherCarLeft"
+                                android:layout_width="@dimen/_3sdp"
+                                android:layout_height="fill_parent"
+                                android:background="@color/MainShadowDown"
+                                android:orientation="vertical" />
+
+                            <LinearLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:id="@+id/MainOtherCarUpShadow"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="@dimen/_5sdp"
+                                    android:background="@color/MainShadowUp"
+                                    android:orientation="vertical"
+                                    android:visibility="gone" />
+
+                                <ImageView
+                                    android:layout_width="@dimen/_35sdp"
+                                    android:layout_height="@dimen/_35sdp"
+                                    android:layout_marginTop="@dimen/_10sdp"
+                                    android:src="@drawable/other_car" />
+
+                                <TextView
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent"
+                                    android:layout_marginBottom="@dimen/_3sdp"
+                                    android:gravity="center"
+                                    android:text="@string/OtherCar"
+                                    android:textColor="@color/MainWhite"
+                                    android:textSize="@dimen/_9sdp" />
+
+                                <LinearLayout
+                                    android:id="@+id/MainOtherCarDownShadow"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="@dimen/_5sdp"
+                                    android:background="@color/MainShadowDown"
+                                    android:orientation="vertical"
+                                    android:visibility="gone" />
+
+                                <LinearLayout
+                                    android:id="@+id/MainOtherCarLine"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="1.0dip"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:layout_marginRight="@dimen/_5sdp"
+                                    android:background="@color/MainWhite"
+                                    android:orientation="vertical"
+                                    android:visibility="visible" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        //Change car
+
+                        <LinearLayout
+                            android:id="@+id/MainChangeCar"
+                            android:layout_width="fill_parent"
+                            android:layout_height="@dimen/_75sdp"
+                            android:background="@color/MainRight"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:id="@+id/MainChangeCarLeft"
+                                android:layout_width="@dimen/_3sdp"
+                                android:layout_height="fill_parent"
+                                android:background="@color/MainShadowDown"
+                                android:orientation="vertical" />
+
+                            <LinearLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:id="@+id/MainChangeCarUpShadow"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="@dimen/_5sdp"
+                                    android:background="@color/MainShadowUp"
+                                    android:orientation="vertical"
+                                    android:visibility="gone" />
+
+                                <ImageView
+                                    android:layout_width="@dimen/_35sdp"
+                                    android:layout_height="@dimen/_35sdp"
+                                    android:layout_marginTop="@dimen/_10sdp"
+                                    android:src="@drawable/change_car" />
+
+                                <TextView
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent"
+                                    android:layout_marginBottom="@dimen/_3sdp"
+                                    android:gravity="center"
+                                    android:text="@string/ChangeCar"
+                                    android:textColor="@color/MainWhite"
+                                    android:textSize="@dimen/_9sdp" />
+
+                                <LinearLayout
+                                    android:id="@+id/MainChangeCarDownShadow"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="@dimen/_5sdp"
+                                    android:background="@color/MainShadowDown"
+                                    android:orientation="vertical"
+                                    android:visibility="gone" />
+
+                                <LinearLayout
+                                    android:id="@+id/MainChangeCarLine"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="1.0dip"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:layout_marginRight="@dimen/_5sdp"
+                                    android:background="@color/MainWhite"
+                                    android:orientation="vertical"
+                                    android:visibility="visible" />
+                            </LinearLayout>
+                        </LinearLayout>
+                        //Car Sale
+
+                        <LinearLayout
+                            android:id="@+id/MainCarSale"
+                            android:layout_width="fill_parent"
+                            android:layout_height="@dimen/_75sdp"
+                            android:background="@color/MainRight"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:id="@+id/MainCarSaleLeft"
+                                android:layout_width="@dimen/_3sdp"
+                                android:layout_height="fill_parent"
+                                android:background="@color/MainShadowDown"
+                                android:orientation="vertical" />
+
+                            <LinearLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:id="@+id/MainCarSaleUpShadow"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="@dimen/_5sdp"
+                                    android:background="@color/MainShadowUp"
+                                    android:orientation="vertical"
+                                    android:visibility="gone" />
+
+                                <ImageView
+                                    android:layout_width="@dimen/_35sdp"
+                                    android:layout_height="@dimen/_35sdp"
+                                    android:layout_marginTop="@dimen/_10sdp"
+                                    android:src="@drawable/car_for_sale" />
+
+                                <TextView
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent"
+                                    android:layout_marginBottom="@dimen/_3sdp"
+                                    android:gravity="center"
+                                    android:text="@string/CarForSale"
+                                    android:textColor="@color/MainWhite"
+                                    android:textSize="@dimen/_10sdp" />
+
+                                <LinearLayout
+                                    android:id="@+id/MainCarSaleDownShadow"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="@dimen/_5sdp"
+                                    android:background="@color/MainShadowDown"
+                                    android:orientation="vertical"
+                                    android:visibility="gone" />
+
+                                <LinearLayout
+                                    android:id="@+id/MainCarSaleLine"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="1.0dip"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:layout_marginRight="@dimen/_5sdp"
+                                    android:background="@color/MainWhite"
+                                    android:orientation="vertical"
+                                    android:visibility="visible" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        //Update information
+
+                        <LinearLayout
+                            android:id="@+id/MainUpdateInfo"
+                            android:layout_width="fill_parent"
+                            android:layout_height="@dimen/_75sdp"
+                            android:background="@color/MainRight"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:id="@+id/MainUpdateInfoLeft"
+                                android:layout_width="@dimen/_3sdp"
+                                android:layout_height="fill_parent"
+                                android:background="@color/MainShadowDown"
+                                android:orientation="vertical" />
+
+                            <LinearLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:id="@+id/MainUpdateInfoUpShadow"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="@dimen/_5sdp"
+                                    android:background="@color/MainShadowUp"
+                                    android:orientation="vertical"
+                                    android:visibility="gone" />
+
+                                <ImageView
+                                    android:layout_width="@dimen/_35sdp"
+                                    android:layout_height="@dimen/_35sdp"
+                                    android:layout_marginTop="@dimen/_10sdp"
+                                    android:src="@drawable/maincircleprofile" />
+
+                                <TextView
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent"
+                                    android:layout_marginBottom="@dimen/_3sdp"
+                                    android:gravity="center"
+                                    android:text="@string/Update_Information"
+                                    android:textColor="@color/MainWhite"
+                                    android:textSize="@dimen/_8sdp" />
+
+                                <LinearLayout
+                                    android:id="@+id/MainUpdateInfoDownShadow"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="@dimen/_5sdp"
+                                    android:background="@color/MainShadowDown"
+                                    android:orientation="vertical"
+                                    android:visibility="gone" />
+
+                                <LinearLayout
+                                    android:id="@+id/MainUpdateInfoLine"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="1.0dip"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:layout_marginRight="@dimen/_5sdp"
+                                    android:background="@color/MainWhite"
+                                    android:orientation="vertical"
+                                    android:visibility="visible" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        //Agaring
+
+                        <LinearLayout
+                            android:id="@+id/MainAgaring"
+                            android:layout_width="fill_parent"
+                            android:layout_height="@dimen/_95sdp"
+                            android:background="@color/MainRight"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:id="@+id/MainAgaringLeft"
+                                android:layout_width="@dimen/_3sdp"
+                                android:layout_height="fill_parent"
+                                android:background="@color/MainShadowDown"
+                                android:orientation="vertical" />
+
+                            <LinearLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:id="@+id/MainAgaringUpShadow"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="@dimen/_3sdp"
+                                    android:background="@color/MainShadowUp"
+                                    android:orientation="vertical"
+                                    android:visibility="gone" />
+
+                                <ImageView
+                                    android:layout_width="@dimen/_50sdp"
+                                    android:layout_height="@dimen/_50sdp"
+                                    android:layout_marginTop="@dimen/_10sdp"
+                                    android:src="@drawable/logo" />
+
+                                <TextView
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent"
+                                    android:layout_marginBottom="@dimen/_3sdp"
+                                    android:gravity="center"
+                                    android:text="@string/agaring"
+                                    android:textColor="@color/MainWhite"
+                                    android:textSize="@dimen/_9sdp"
+                                    android:visibility="invisible" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </ScrollView>
+            </RelativeLayout>
+            //right
+
+
+            //fragment
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@id/mainmainright"
+                android:background="@color/MainFragment">
+
+                <FrameLayout
+                    android:id="@+id/MainFragment"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginBottom="@dimen/_65sdp"
+                    android:padding="@dimen/_5sdp" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/MainRight" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:src="@color/MainFragment"
+                    app:civ_border_color="@color/MainFragment"
+                    app:civ_border_width="@dimen/_5sdp" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/MainImgCircleAdvertise"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:src="@color/MainYellow"
+                    app:civ_border_color="@color/MainFragment"
+                    app:civ_border_width="@dimen/_5sdp" />
+            </RelativeLayout>
+            //fragment
+        </RelativeLayout>
+        //main
+    </LinearLayout>
+
+</layout>
+

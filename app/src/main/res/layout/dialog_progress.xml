@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="PoliceFine"
+            type="com.androidha.mashinheart.viewmodels.FragmentPoliceFineViewModel" />
+
+        <variable
+            name="NegativeGrade"
+            type="com.androidha.mashinheart.viewmodels.FragmentNegativeGradeViewModel" />
+        <variable
+            name="Advertise"
+            type="com.androidha.mashinheart.viewmodels.FragmentAdvertiseViewModel" />
+    </data>
+
+    <LinearLayout
+        xmlns:custom="http://schemas.android.com/apk/res-auto"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/MainYellow"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="@dimen/_10sdp"
+        android:tag="layout/dialog_progress_0">
+
+        <TextView
+            android:id="@+id/DialogProgressTitle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:maxLines="2"
+            android:textColor="@color/MainRight"
+            android:textSize="@dimen/_9sdp" />
+
+        <com.cunoraz.gifview.library.GifView
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            custom:gif="@drawable/progrees_gif" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:gravity="center"
+            android:maxLines="2"
+            android:text="@string/PleaseWait"
+            android:textColor="@color/MainRight"
+            android:textSize="@dimen/_9sdp" />
+
+        <Button
+            android:id="@+id/DialogProgressIgnor"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/layoutborderblack"
+            android:text="@string/Ignor"
+            android:textColor="@color/MainShadowDown"
+            android:textSize="@dimen/_9sdp" />
+    </LinearLayout>
+
+</layout>

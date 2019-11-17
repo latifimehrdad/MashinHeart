@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="PoliceFines"
+            type="com.androidha.mashinheart.models.ModelPoliceFine" />
+    </data>
+
+    <LinearLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_3sdp"
+        android:background="@color/MainFragment"
+        android:orientation="vertical"
+        android:tag="layout/item_police_fine_0">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:maxLines="2"
+            android:tag="date"
+            android:textColor="@color/MainYellow"
+            android:textSize="@dimen/_9sdp"
+            app:TextFine="@{PoliceFines.date}"
+            />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:gravity="right"
+            android:maxLines="2"
+            android:tag="price"
+            android:textColor="@color/MainWhite"
+            android:textSize="@dimen/_9sdp"
+            app:IntFine="@{PoliceFines.price}"
+            />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:gravity="right"
+            android:maxLines="2"
+            android:tag="type"
+            android:textColor="@color/MainWhite"
+            android:textSize="@dimen/_9sdp"
+            app:TextFine="@{PoliceFines.type}"
+            />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:gravity="right"
+            android:maxLines="2"
+            android:tag="description"
+            android:textColor="@color/MainWhite"
+            android:textSize="@dimen/_9sdp"
+            app:TextFine="@{PoliceFines.discription}"
+            />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:gravity="right"
+            android:maxLines="2"
+            android:tag="code"
+            android:textColor="@color/MainWhite"
+            android:textSize="@dimen/_9sdp"
+            app:TextFine="@{PoliceFines.code}"
+            />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:gravity="right"
+            android:maxLines="2"
+            android:tag="location"
+            android:textColor="@color/MainWhite"
+            android:textSize="@dimen/_9sdp"
+            app:TextFine="@{PoliceFines.location}"
+            />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:gravity="right"
+            android:maxLines="2"
+            android:tag="city"
+            android:textColor="@color/MainWhite"
+            android:textSize="@dimen/_9sdp"
+            app:TextFine="@{PoliceFines.city}"
+            />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:gravity="right"
+            android:maxLines="2"
+            android:tag="serial"
+            android:textColor="@color/MainWhite"
+            android:textSize="@dimen/_9sdp"
+            app:TextFine="@{PoliceFines.serial}"
+            />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:gravity="right"
+            android:maxLines="2"
+            android:tag="pay"
+            android:textColor="@color/MainWhite"
+            android:textSize="@dimen/_9sdp"
+            app:TextFine="@{PoliceFines.pay}"
+            />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:gravity="right"
+            android:maxLines="2"
+            android:tag="bill"
+            android:textColor="@color/MainWhite"
+            android:textSize="@dimen/_9sdp"
+            app:TextFine="@{PoliceFines.bill}"
+            />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="1.0dip"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@color/MainShadowUp" />
+    </LinearLayout>
+
+
+</layout>

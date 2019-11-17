@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="Cars"
+            type="com.androidha.mashinheart.databases.DataBaseCars" />
+    </data>
+
+    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:background="@color/MainFragment"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:tag="layout/items_you_car_0">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:src="@drawable/ic_keyboard_return_black_24dp" />
+
+            <LinearLayout
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:layout_weight="1.0"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:tag="binding_1"
+                    android:textColor="@color/MainWhite"
+                    android:textSize="@dimen/_10sdp"
+                    app:CarBrand="@{Cars.carBrand}"
+                    app:CarType="@{Cars.CarType}"
+                    app:CarColor="@{Cars.CarColor}"
+                    />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:gravity="right"
+                    android:text="@string/LastDateInsertInfo"
+                    android:textColor="@color/MainWhite"
+                    android:textSize="@dimen/_7sdp" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:tag="binding_2"
+                    android:textColor="@color/MainWhite"
+                    android:textSize="@dimen/_7sdp"
+                    app:ChangeDate="@{Cars.lastChangeDate}"
+                    />
+
+            </LinearLayout>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_45sdp"
+                android:background="@drawable/maincircleprofile"
+                android:padding="@dimen/_5sdp"
+                app:CarBrand="@{Cars.carBrand}"
+                android:tag="binding_3" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="1.0dip"
+            android:layout_marginLeft="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginRight="@dimen/_30sdp"
+            android:background="@color/MainWhite" />
+    </LinearLayout>
+
+</layout>

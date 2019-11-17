@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="MainDatePicker">#f1f0f0</color>
+    <color name="MainFragment">#2f267f</color>
+    <color name="MainFragmentCarEvent">#271e77</color>
+    <color name="MainRight">#0b0349</color>
+    <color name="MainShadowDown">#05002e</color>
+    <color name="MainShadowUp">#5047a5</color>
+    <color name="MainWhite">#ffffff</color>
+    <color name="MainYellow">#ffdd00</color>
+
+
+</resources>

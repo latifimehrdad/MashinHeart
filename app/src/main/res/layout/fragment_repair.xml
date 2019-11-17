@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="Repair"
+            type="com.androidha.mashinheart.viewmodels.FragmentRepairViewModel" />
+    </data>
+
+    <LinearLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/FragmentRepairLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/MainFragment"
+        android:orientation="vertical"
+        android:tag="layout/fragment_repair_0">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/FragmentRepairAddClick"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:src="@drawable/ic_add_circle_outline_black_24dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:text="@string/CarEventRepair"
+                        android:textColor="@color/MainYellow"
+                        android:textSize="@dimen/_10sdp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:text="@string/NewEvent"
+                        android:textColor="@color/MainYellow"
+                        android:textSize="@dimen/_10sdp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <net.cachapa.expandablelayout.ExpandableLayout
+                android:id="@+id/FragmentRepairExpandable"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                app:el_duration="1000"
+                app:el_expanded="true"
+                app:el_parallax="0.5">
+
+                <ScrollView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:orientation="vertical"
+                        android:paddingLeft="@dimen/_10sdp"
+                        android:paddingRight="@dimen/_10sdp">
+
+                        <EditText
+                            android:id="@+id/FragmentRepairTitle"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:background="@color/MainWhite"
+                            android:hint="@string/NewEventRepairTitle"
+                            android:inputType="textPersonName"
+                            android:padding="@dimen/_2sdp"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <EditText
+                            android:id="@+id/FragmentRepairKm"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/FragmentRepairTitle"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:background="@color/MainWhite"
+                            android:hint="@string/NewEventRepairKM"
+                            android:inputType="phone"
+                            android:maxLength="9"
+                            android:padding="@dimen/_2sdp"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <EditText
+                            android:id="@+id/FragmentRepairWhy"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/FragmentRepairKm"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:background="@color/MainWhite"
+                            android:hint="@string/NewEventRepairWhy"
+                            android:inputType="textPersonName"
+                            android:padding="@dimen/_2sdp"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <EditText
+                            android:id="@+id/FragmentRepairBrand"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/FragmentRepairWhy"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:background="@color/MainWhite"
+                            android:hint="@string/NewEventChangeBrand"
+                            android:inputType="textPersonName"
+                            android:padding="@dimen/_2sdp"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <EditText
+                            android:id="@+id/FragmentRepairMoney"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/FragmentRepairBrand"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:background="@color/MainWhite"
+                            android:hint="@string/NewEventChangeMoney"
+                            android:inputType="phone"
+                            android:maxLength="10"
+                            android:padding="@dimen/_2sdp"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <Button
+                            android:id="@+id/FragmentRepairDate"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/FragmentRepairMoney"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:background="@color/MainWhite"
+                            android:gravity="center"
+                            android:hint="@string/NewEventChangeDate"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/FragmentRepairDate"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/FragmentRepairIgnor"
+                                android:layout_width="0.0dip"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:background="@drawable/layoutborderblack"
+                                android:text="@string/Ignor"
+                                android:textColor="@color/MainShadowDown"
+                                android:textSize="@dimen/_13sdp" />
+
+                            <Button
+                                android:id="@+id/FragmentRepairSave"
+                                android:layout_width="0.0dip"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_10sdp"
+                                android:layout_weight="1.0"
+                                android:background="@drawable/save_info_button"
+                                android:text="@string/SaveInfo"
+                                android:textColor="@color/MainYellow"
+                                android:textSize="@dimen/_13sdp" />
+                        </LinearLayout>
+
+                        <ListView
+                            android:id="@+id/FragmentRepairSuggestion"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_above="@id/FragmentRepairDate"
+                            android:layout_below="@id/FragmentRepairTitle"
+                            android:layout_marginTop="@dimen/_1sdp"
+                            android:background="@color/MainWhite"
+                            android:visibility="gone" />
+                    </RelativeLayout>
+                </ScrollView>
+            </net.cachapa.expandablelayout.ExpandableLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="1.0dip"
+            android:layout_margin="@dimen/_5sdp"
+            android:background="@color/MainYellow" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/FragmentRepairs"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+    </LinearLayout>
+
+</layout>

@@ -1,0 +1,271 @@
+<resources>
+
+
+   <string-array name="CarBrand">
+      <item>@string/Brand_Prompt</item>
+      <item>آلفارومئو</item>
+      <item>آئودی</item>
+      <item>ام جی</item>
+      <item>ام وی ام</item>
+      <item>آمیکو</item>
+      <item>ایسوزو</item>
+      <item>ب ام و</item>
+      <item>بایک</item>
+      <item>برلیانس</item>
+      <item>بسترن</item>
+      <item>بنز</item>
+      <item>بی وای دی</item>
+      <item>پراید</item>
+      <item>پروتون</item>
+      <item>پژو</item>
+      <item>پورشه</item>
+      <item>پیکان</item>
+      <item>تویوتا</item>
+      <item>تیبا</item>
+      <item>جک</item>
+      <item>جیلی</item>
+      <item>چانگان</item>
+      <item>چری</item>
+      <item>دانگ فنگ</item>
+      <item>دنا</item>
+      <item>دوو</item>
+      <item>رانا</item>
+      <item>رنو</item>
+      <item>زوتی</item>
+      <item>سانگ یانگ</item>
+      <item>ساینا</item>
+      <item>سمند</item>
+      <item>سوزوکی</item>
+      <item>سیتروئن</item>
+      <item>فولکس</item>
+      <item>کاپرا</item>
+      <item>کوییک</item>
+      <item>کیا</item>
+      <item>گریت وال</item>
+      <item>لکسوس</item>
+      <item>لیفان</item>
+      <item>مازراتی</item>
+      <item>مزدا</item>
+      <item>میتسوبیشی</item>
+      <item>نیسان</item>
+      <item>ولوو</item>
+      <item>ون</item>
+      <item>هاوال</item>
+      <item>هایما</item>
+      <item>هوندا</item>
+      <item>هیوندای</item>
+      <item>سایر</item>
+   </string-array>
+
+   <array name="CarLogo">
+      <item>0</item>
+      <item>@drawable/logoalpharomeo</item>
+      <item>@drawable/logoaudi</item>
+      <item>@drawable/logomg</item>
+      <item>@drawable/logomvm</item>
+      <item>@drawable/logoamico</item>
+      <item>@drawable/logoisuzu</item>
+      <item>@drawable/logobmw</item>
+      <item>@drawable/logobaic</item>
+      <item>@drawable/logobrilliance</item>
+      <item>@drawable/logofaw</item>
+      <item>@drawable/logobenz</item>
+      <item>@drawable/logobyd</item>
+      <item>@drawable/logopride</item>
+      <item>@drawable/logoproton</item>
+      <item>@drawable/logopeugeot</item>
+      <item>@drawable/logoporsche</item>
+      <item>@drawable/logopeykan</item>
+      <item>@drawable/logotoyota</item>
+      <item>@drawable/logopride</item>
+      <item>@drawable/logojac</item>
+      <item>@drawable/logogeely</item>
+      <item>@drawable/logochangan</item>
+      <item>@drawable/logochery</item>
+      <item>@drawable/logodongfeng</item>
+      <item>@drawable/logoikco</item>
+      <item>@drawable/logodaewoo</item>
+      <item>@drawable/logoikco</item>
+      <item>@drawable/logorenault</item>
+      <item>@drawable/logozotye</item>
+      <item>@drawable/logossangyong</item>
+      <item>@drawable/logopride</item>
+      <item>@drawable/logoikco</item>
+      <item>@drawable/logosuzuki</item>
+      <item>@drawable/logocitroen</item>
+      <item>@drawable/logovw</item>
+      <item>@drawable/logocapra</item>
+      <item>@drawable/logopride</item>
+      <item>@drawable/logokia</item>
+      <item>@drawable/logogreatwall</item>
+      <item>@drawable/logolexus</item>
+      <item>@drawable/logolifan</item>
+      <item>@drawable/logomazerati</item>
+      <item>@drawable/logomazda</item>
+      <item>@drawable/logomitsubishi</item>
+      <item>@drawable/logonissan</item>
+      <item>@drawable/logovolvo</item>
+      <item>@drawable/logofaw</item>
+      <item>@drawable/logohaval</item>
+      <item>@drawable/logohaima</item>
+      <item>@drawable/logohonda</item>
+      <item>@drawable/logohyundai</item>
+      <item>@drawable/logo</item>
+   </array>
+
+   <string-array name="InsuranceType">
+      <item>انتخاب نوع</item>
+      <item>بیمه بدنه</item>
+      <item>بیمه ثالث</item>
+      <item>معاینه فنی</item>
+   </string-array>
+
+
+     <string name="agaring">"درخواست آنلاین n\ لوازم یدکی"</string>
+    <string name="app_name">قلب ماشین</string>
+
+    <string name="AddCar">اضافه کردن خودرو</string>
+    <string name="AreYouSure">آیا برای حذف این مورد مطمئن هستید؟</string>
+    <string name="Brand_Prompt">برند انتخابی</string>
+    <string name="CarBodyInsurance">آیا بیمه بدنه دارید؟</string>
+    <string name="CarBrand">برند خودرو</string>
+    <string name="CarChassisNumber">شماره شاسی خودرو</string>
+    <string name="CarColor">رنگ خودرو</string>
+    <string name="CarCreatedKM">کیلومتر خودرو</string>
+    <string name="CarCreatedYear">سال تولید خودرو</string>
+    <string name="CarEventConsumables">تعویض لوازم مصرفی</string>
+    <string name="CarEventInsurance">بیمـه و معاینه فنی</string>
+    <string name="CarEventRepair">تعمیر اساسی خودرو</string>
+    <string name="CarEventSale">آگهی کردن فروش خودرو</string>
+    <string name="CarForSale">خودروهای فروشی</string>
+    <string name="CarGearBox">نوع گیربکس خودرو</string>
+    <string name="CarGearBoxAuto">اتوماتیک</string>
+    <string name="CarGearBoxHandly">دستی</string>
+    <string name="CarName">مدل خودرو</string>
+    <string name="CarOptionalInfo">اطلاعات اختیاری، جهت بازیابی خودرو، درصورت حذف شدن برنامه یا تغییر تلفن همراه</string>
+    <string name="CarPersonInsurance">آیا بیمه شخص ثالث دارید؟</string>
+    <string name="CarUsedAverage">میانگین استفاده روزانه به کیلومتر</string>
+    <string name="ChangeCar">انتقال خودرو به دیگری</string>
+    <string name="ChooseDate">انتخاب تاریخ</string>
+    <string name="ConnetToPolice">درحال برقراری ارتباط با پلیس راهور</string>
+    <string name="ConsumableChange">تعوض نموده اید</string>
+    <string name="DatePickerCancle">بیخیال</string>
+    <string name="DatePickerChoose">انتخاب</string>
+    <string name="DatePickerToday">امروز</string>
+    <string name="DeleteCommit">حذف با موفقیت انجام شد</string>
+    <string name="EditCommit">ویرایش با موفقیت انجام شد</string>
+    <string name="EditProfile">ویرایش پروفایل</string>
+    <string name="EmptyCahngeTitle">لطفا عنوان مورد تعویضی را وارد نمایید</string>
+    <string name="EmptyCar">شما هیچ خودرویی را در برنامه ثبت نکرده اید، جهت اضافه کردن یک خودروی جدید از منوی اضافه کردن خودرو استفاده کنید</string>
+    <string name="EmptyCarAverage">لطفا میانگین استفاده روزانه از خودرو را وارد نمایید</string>
+    <string name="EmptyCarBody">لطفا تاریخ دریافت بیمه بدنه را انتخاب نمایید</string>
+    <string name="EmptyCarBrand">لطفا برند را انتخاب نمایید</string>
+    <string name="EmptyCarChassis">لطفا شماره شاسی خودرو را وارد نمایید</string>
+    <string name="EmptyCarColor">لطفا رنگ خودرو را وارد نمایید</string>
+    <string name="EmptyCarGearBox">لطفا نوع گیربکس خودرو را انتخاب نمایید</string>
+    <string name="EmptyCarKM">لطفا کیلومتر خودرو را وارد نمایید</string>
+    <string name="EmptyCarName">لطفا مدل خودرو را وارد کنید</string>
+    <string name="EmptyCarPelak">لطفا پلاک خودرو را کامل وارد نمایید</string>
+    <string name="EmptyCarPerson">لطفا تاریخ دریافت بیمه ثالث را انتخاب نمایید</string>
+    <string name="EmptyCarYear">لطفا سال تولید خودرو را وارد نمایید</string>
+    <string name="EmptyChangeBrand">لطفا برند جنس را وارد نمایید</string>
+    <string name="EmptyChangeDate">لطفا تاریخ را انتخاب نمایید</string>
+    <string name="EmptyChangeKM">لطفا کیلومتر خودرو زمان تعویض را وارد نمایید</string>
+    <string name="EmptyChangeMoney">لطفا مبلغ پرداختی را وارد نمایید</string>
+    <string name="EmptyChangeNext">لطفا کیلومتر بعدی جهت تعویض را وارد نمایید</string>
+    <string name="EmptyChangeNextError">میزان کیلومتر بعدی جهت تعویض صحیح نمیباشد</string>
+    <string name="EmptyInsuranceBrand">لطفا نام نمایندگی را وارد نمایید</string>
+    <string name="EmptyInsuranceType">لطفا نوع را انتخاب نمایید</string>
+    <string name="EmptyNegativeGradeBarcode">لطفا شماره سریال را وارد نمایید</string>
+    <string name="EmptyPoliceFineBarcode">لطفا بارکد را وارد نمایید</string>
+    <string name="EmptyPoliceFineCaptcha">لطفا متن امنیتی را وارد نمایید</string>
+    <string name="EmptyRepairKM">لطفا کیلومتر خودرو زمان تعمیر را وارد نمایید</string>
+    <string name="EmptyRepairTitle">لطفا عنوان مورد تعمیری را وارد نمایید</string>
+    <string name="ErrorConnectToPolice">ارتباط با پلیس راهور برقرار نشد</string>
+    <string name="ErrorDeleteWhenEdit">خطا! عملیات ویرایش تکمیل نشده</string>
+    <string name="ErrorGetNegativeGrade">اطلاعاتی از این گواهینامه در دسترس نمیباشد</string>
+    <string name="ErrorGetPoliceFine">اطلاعاتی از این خودرو در دسترس نمیباشد</string>
+    <string name="GetCaptchaError">متن امنیتی را اشتباه وارد کرده اید</string>
+    <string name="GetCaptchaOk">CaptchaOk</string>
+    <string name="Ignor">بیخیال</string>
+    <string name="InfringementBill">شناسه قبض</string>
+    <string name="InfringementCity">شهر تخلف</string>
+    <string name="InfringementCode">کد تخلف</string>
+    <string name="InfringementDate">تاریخ</string>
+    <string name="InfringementDiscription">شرح تخلف</string>
+    <string name="InfringementLocation">محل تخلف</string>
+    <string name="InfringementPay">شناسه پرداخت</string>
+    <string name="InfringementPrice">مبلغ</string>
+    <string name="InfringementSerial">سریال</string>
+    <string name="InfringementType">نوع تخلف</string>
+    <string name="InsuranceDate">تاریخ دریافت</string>
+    <string name="InsuranceGet">دریافت کرده اید</string>
+    <string name="InsuranceName">نام نمایندگی</string>
+    <string name="InsuranceType">نوع مورد</string>
+    <string name="Insurance_Prompt">انتخاب نوع</string>
+    <string name="AdvertisePrompt">انتخاب استان</string>
+    <string name="Iran">ایران</string>
+    <string name="IsEmpty">وارد نشده</string>
+    <string name="LastDateInsertInfo">آخرین تاریخ ثبت اطلاعات</string>
+    <string name="NegativeGrade">نمره منفی گواهینامه</string>
+    <string name="NegativeGradeBarcode">سریال روی گواهینامه</string>
+    <string name="NegativeGradeGet">گرفتن نمره منفی</string>
+    <string name="NegativeGradeNew">گرفتن نمره منفی جدید</string>
+    <string name="NewEvent">اضافه کردن مورد جدید</string>
+    <string name="NewEventChangeBrand">برند جنس</string>
+    <string name="NewEventChangeDate">تاریخ تعویض</string>
+    <string name="NewEventChangeKM">کیلومتر در زمان تعویض</string>
+    <string name="NewEventChangeMoney">مبلغ پرداختی(تومان)</string>
+    <string name="NewEventChangeNextKM">کیلومتر بعدی جهت تعویض</string>
+    <string name="NewEventChangeTitle">عنوان مورد تعویضی</string>
+    <string name="NewEventRepairDate">تاریخ تعمیر</string>
+    <string name="NewEventRepairKM">کیلومتر در زمان تعمیر</string>
+    <string name="NewEventRepairTitle">عنوان مورد تعمیری</string>
+    <string name="NewEventRepairWhy">دلیل تعمیر</string>
+    <string name="No">خیر</string>
+    <string name="NotSaveEnything">هیچ موردی ثبت نشده</string>
+    <string name="OtherCar">اطلاعات سایر خودروها</string>
+    <string name="PleaseWait">شکیبا باشید ...</string>
+    <string name="PliceFineGet">دریافت خلافی</string>
+    <string name="PoliceFine">دریافت خلافی</string>
+    <string name="PoliceFineBarcode">بارکد پشت کارت ماشین</string>
+    <string name="PoliceFineBarcodeNew">کارت جدید</string>
+    <string name="PoliceFineBarcodeOld">کارت قدیم</string>
+    <string name="PoliceFineEnterCaptcha">متن امنیتی تصویر را وارد کنید</string>
+    <string name="PoliceFineNew">گرفتن خلافی جدید</string>
+    <string name="PoliceFineOk">PoliceFineOk</string>
+    <string name="ProfileName">نام شما</string>
+    <string name="ProfilePhone">09121234567</string>
+    <string name="RepairChange">تعمیر نموده اید</string>
+    <string name="Rial">ریال</string>
+    <string name="SaveCommit">ثبت با موفقیت انجام شد</string>
+    <string name="SaveException">خطلا در ثبت اطلاعات</string>
+    <string name="SaveInfo">ثبت اطلاعات</string>
+    <string name="SignUpSystem">ثبت نام در سامانه جامع :</string>
+    <string name="TotalPoliceFine">مجموع تخلفات :</string>
+    <string name="Update_Information">بروزرسانی اطلاعات سرور</string>
+    <string name="Yes">بله</string>
+    <string name="YouCar">خودروهای شما</string>
+    <string name="Search">جستجو</string>
+    <string name="SearchText">متن جهت جستجو</string>
+    <string name="RequestAdvertise">ارسال آگهی جدید</string>
+    <string name="ChosseImage">انتخاب تصویر</string>
+    <string name="Title">عنوان</string>
+    <string name="Tel">تلفن</string>
+    <string name="Address">آدرس</string>
+    <string name="AdvertiseImageEmpty">یک تصویر برای آگهی انتخاب کنید</string>
+    <string name="AdvertiseTitleEmpty">عنوان آگهی را وارد کنید</string>
+    <string name="AdvertiseTelEmpty">تلفن آگهی را وارد کنید</string>
+    <string name="AdvertiseCityEmpty">استان آگهی را انتخاب کنید</string>
+    <string name="AdvertiseAddressEmpty">آدرس آگهی را وارد کنید</string>
+    <string name="ChooseFromCamera">دوربین</string>
+    <string name="ChooseFromGallery">گالری</string>
+    <string name="Change">تعویض</string>
+    <string name="Get">دریافت</string>
+    <string name="GetDataProgress">درحال دریافت اطلاعات</string>
+    <string name="GetOk">GetOk</string>
+    <string name="GetError">اطلاعاتی دریافت نشد</string>
+    <string name="AgaringUser">عضو سامانه آگارینگ : </string>
+    <string name="Store">فروشگاه</string>
+
+</resources>

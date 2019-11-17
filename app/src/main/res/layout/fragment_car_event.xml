@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="Event"
+            type="com.androidha.mashinheart.viewmodels.FragmentCarEventViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:tag="layout/fragment_car_event_0">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/MainFragment"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/FragmentCarEventConsumables"
+                android:layout_width="fill_parent"
+                android:layout_height="0.0dip"
+                android:layout_weight="1.0"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/_2sdp"
+                    android:background="@color/MainShadowUp" />
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="0.0dip"
+                    android:layout_weight="1.0">
+
+                    <TextView
+                        android:id="@+id/consumables"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:text="@string/CarEventConsumables"
+                        android:textColor="@color/MainWhite"
+                        android:textSize="@dimen/_11sdp" />
+
+                    <ImageView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_above="@id/consumables"
+                        android:layout_alignLeft="@id/consumables"
+                        android:layout_alignRight="@id/consumables"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:src="@drawable/consumables" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/_2sdp"
+                    android:background="@color/MainShadowDown" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/FragmentCarEventRepair"
+                android:layout_width="fill_parent"
+                android:layout_height="0.0dip"
+                android:layout_weight="1.0"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="0.0dip"
+                    android:layout_weight="1.0"
+                    android:background="@color/MainFragmentCarEvent">
+
+                    <TextView
+                        android:id="@+id/repair"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:text="@string/CarEventRepair"
+                        android:textColor="@color/MainWhite"
+                        android:textSize="@dimen/_11sdp" />
+
+                    <ImageView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_above="@id/repair"
+                        android:layout_alignLeft="@id/repair"
+                        android:layout_alignRight="@id/repair"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:src="@drawable/repair" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/_2sdp"
+                    android:background="@color/MainShadowUp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/FragmentCarEventInsurance"
+                android:layout_width="fill_parent"
+                android:layout_height="0.0dip"
+                android:layout_weight="1.0"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="0.0dip"
+                    android:layout_weight="1.0">
+
+                    <TextView
+                        android:id="@+id/sale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:text="@string/CarEventInsurance"
+                        android:textColor="@color/MainWhite"
+                        android:textSize="@dimen/_11sdp" />
+
+                    <ImageView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_above="@id/sale"
+                        android:layout_alignLeft="@id/sale"
+                        android:layout_alignRight="@id/sale"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:src="@drawable/insurance" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/_2sdp"
+                    android:background="@color/MainShadowDown" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/FragmentCarEventSale"
+                android:layout_width="fill_parent"
+                android:layout_height="0.0dip"
+                android:layout_weight="1.0"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="0.0dip"
+                    android:layout_weight="1.0"
+                    android:background="@color/MainFragmentCarEvent">
+
+                    <TextView
+                        android:id="@+id/Insurance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:text="@string/CarEventSale"
+                        android:textColor="@color/MainWhite"
+                        android:textSize="@dimen/_11sdp"
+                        android:visibility="invisible" />
+
+                    <ImageView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_above="@id/Insurance"
+                        android:layout_alignLeft="@id/Insurance"
+                        android:layout_alignRight="@id/Insurance"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:src="@drawable/sale" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/_2sdp"
+                    android:background="@color/MainShadowUp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/_15sdp" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/FragmentCarEventFragment"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+    </RelativeLayout>
+
+
+</layout>
