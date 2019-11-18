@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="advertise"
+            type="com.androidha.mashinheart.models.ModelAdvertiseList" />
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/MainFragment"
+        android:paddingTop="@dimen/_5sdp"
+        android:paddingBottom="@dimen/_5sdp"
+        >
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_150sdp"
+                    android:src="@drawable/logo"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right|center_vertical"
+                    android:textColor="@color/MainYellow"
+                    android:textSize="@dimen/_9sdp"
+                    android:padding="@dimen/_7sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:text="@{advertise.title}"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:gravity="right|center_vertical"
+                    android:textColor="@color/MainWhite"
+                    android:padding="@dimen/_7sdp"
+                    android:textSize="@dimen/_10sdp"
+                    android:background="@color/MainShadowUp"
+                    android:text="@{advertise.txt2}"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:gravity="right|center_vertical"
+                    android:textColor="@color/MainWhite"
+                    android:textSize="@dimen/_9sdp"
+                    android:padding="@dimen/_7sdp"
+                    android:tag="address"
+                    app:AdvertiseAddress="@{advertise.address}"
+                    app:StoreAddress="@{advertise.appStore}"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:gravity="right|center_vertical"
+                    android:textColor="@color/MainWhite"
+                    android:textSize="@dimen/_9sdp"
+                    android:padding="@dimen/_7sdp"
+                    android:tag="tel"
+                    app:AdvertiseAddress="@{advertise.mobileNumber}"
+                    app:StoreAddress="@{advertise.appStore}"
+                    />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/FragmentConsumableDate"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/DialogDetailIgnor"
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/layoutborderblack"
+                        android:text="@string/Ignor"
+                        android:textColor="@color/MainShadowDown"
+                        android:textSize="@dimen/_13sdp" />
+
+                    <Button
+                        android:id="@+id/DialogDetailCall"
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_weight="1.0"
+                        android:background="@drawable/save_info_button"
+                        android:text="@string/Call"
+                        android:textColor="@color/MainYellow"
+                        android:textSize="@dimen/_13sdp" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</layout>
+
+

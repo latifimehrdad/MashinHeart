@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.androidha.mashinheart.R;
 import com.androidha.mashinheart.databinding.ItemAdvertiseBinding;
 import com.androidha.mashinheart.models.ModelAdvertiseList;
+import com.androidha.mashinheart.views.fragments.FragmentAdvertise;
 
 import java.util.ArrayList;
 
@@ -20,10 +21,14 @@ public class AdabterAdvertise extends RecyclerView.Adapter<AdabterAdvertise.Cust
     private Context context;
     private ArrayList<ModelAdvertiseList> modelAdvertiseLists;
     private LayoutInflater layoutInflater;
+    private FragmentAdvertise fragmentAdvertise;
 
-    public AdabterAdvertise(Context context, ArrayList<ModelAdvertiseList> modelAdvertiseLists) {
+    public AdabterAdvertise(Context context,
+                            ArrayList<ModelAdvertiseList> modelAdvertiseLists,
+                            FragmentAdvertise fragmentAdvertise) {
         this.context = context;
         this.modelAdvertiseLists = modelAdvertiseLists;
+        this.fragmentAdvertise = fragmentAdvertise;
     }
 
     @NonNull
@@ -40,7 +45,7 @@ public class AdabterAdvertise extends RecyclerView.Adapter<AdabterAdvertise.Cust
 
     @Override
     public void onBindViewHolder(@NonNull CustomHolder holder, int position) {
-        holder.bind(modelAdvertiseLists.get(position));
+        holder.bind(modelAdvertiseLists.get(position), position);
     }
 
     @Override
@@ -56,8 +61,14 @@ public class AdabterAdvertise extends RecyclerView.Adapter<AdabterAdvertise.Cust
             this.itemAdvertiseBinding = itemAdvertiseBinding;
         }
 
-        public void bind(ModelAdvertiseList list){
+        public void bind(ModelAdvertiseList list, int position){
             itemAdvertiseBinding.setAdvertise(list);
+            itemAdvertiseBinding.getRoot().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    fragmentAdvertise.ItemClick(position);
+                }
+            });
             itemAdvertiseBinding.executePendingBindings();
         }
     }

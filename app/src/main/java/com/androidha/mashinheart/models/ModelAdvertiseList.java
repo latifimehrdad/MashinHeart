@@ -46,11 +46,18 @@ public class ModelAdvertiseList {
     @BindingAdapter(value = {"AdvertiseAddress", "StoreAddress"})
     public static void SetAdvertiseText(TextView textView, String AdvertiseAddress, ModelAppStore StoreAddress) {
         if (AdvertiseAddress != null) {
-            textView.setText(AdvertiseAddress);
+            String tag = textView.getTag().toString();
+            if (tag.equalsIgnoreCase("address"))
+                textView.setText(textView.getContext().getResources().getString(R.string.Address) + " : " + AdvertiseAddress);
+            else
+                textView.setText(textView.getContext().getResources().getString(R.string.Tel) + " : " + AdvertiseAddress);
         } else {
             String tag = textView.getTag().toString();
             if (tag.equalsIgnoreCase("address"))
-                textView.setText(StoreAddress.getAddress());
+                textView.setText(textView.getContext().getResources().getString(R.string.Address) + " : " + StoreAddress.getAddress());
+            else if (tag.equalsIgnoreCase("tel")){
+                textView.setText(textView.getContext().getResources().getString(R.string.Tel) + " : " + StoreAddress.getMobileNumber());
+            }
             else {
                 textView.setVisibility(View.VISIBLE);
                 if (StoreAddress != null)

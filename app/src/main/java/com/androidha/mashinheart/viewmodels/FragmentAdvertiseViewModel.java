@@ -1,8 +1,6 @@
 package com.androidha.mashinheart.viewmodels;
 
 import android.content.Context;
-import android.database.Observable;
-import android.util.Log;
 
 import com.androidha.mashinheart.R;
 import com.androidha.mashinheart.dagger.retrofit.RetrofitComponent;
@@ -12,6 +10,10 @@ import com.androidha.mashinheart.views.application.MachinHeartApplication;
 
 import java.util.ArrayList;
 
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Predicate;
+import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -45,7 +47,8 @@ public class FragmentAdvertiseViewModel {
                             return;
                         if(response.body().getStatue() == 1) {
                             setModelAdvertiseLists(response.body().getAdvertiseList());
-                            MessageType.onNext(context.getResources().getString(R.string.GetOk));
+                            SetSearchFilter(Text);
+
                         }
                         else{
                             MessageType.onNext(response.body().getMessage());
@@ -64,6 +67,28 @@ public class FragmentAdvertiseViewModel {
 
 
     }//_____________________________________________________________________________________________ End GetAdvertise
+
+
+
+
+    private void SetSearchFilter(String Text){//____________________________________________________ Start SetSearchFilter
+
+
+//        Observable<ArrayList<ModelAdvertiseList>> observable = Observable.just(getModelAdvertiseLists());
+//        observable
+//                .subscribeOn(AndroidSchedulers.mainThread())
+//                .observeOn(Schedulers.io())
+//                .filter(new Predicate<ArrayList<ModelAdvertiseList>>() {
+//                    @Override
+//                    public boolean test(ArrayList<ModelAdvertiseList> modelAdvertiseLists) throws Exception {
+//                        modelAdvertiseLists.
+//                        return false;
+//                    }
+//                })
+//                .subscribe();
+
+        MessageType.onNext(context.getResources().getString(R.string.GetOk));
+    }//_____________________________________________________________________________________________ End SetSearchFilter
 
 
 

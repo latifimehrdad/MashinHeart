@@ -248,6 +248,7 @@
     <string name="YouCar">خودروهای شما</string>
     <string name="Search">جستجو</string>
     <string name="SearchText">متن جهت جستجو</string>
+    <string name="SearchEmpty">متن جهت جستجو را وارد نمایید</string>
     <string name="RequestAdvertise">ارسال آگهی جدید</string>
     <string name="ChosseImage">انتخاب تصویر</string>
     <string name="Title">عنوان</string>
@@ -267,5 +268,6 @@
     <string name="GetError">اطلاعاتی دریافت نشد</string>
     <string name="AgaringUser">عضو سامانه آگارینگ : </string>
     <string name="Store">فروشگاه</string>
+    <string name="Call">برقراری تماس</string>
 
 </resources>

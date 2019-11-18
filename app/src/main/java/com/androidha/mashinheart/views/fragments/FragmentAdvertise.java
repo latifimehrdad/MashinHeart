@@ -26,8 +26,10 @@ import com.androidha.mashinheart.R;
 import com.androidha.mashinheart.databinding.FragmentAdvertiseBinding;
 import com.androidha.mashinheart.models.ModelAdvertiseList;
 import com.androidha.mashinheart.viewmodels.FragmentAdvertiseViewModel;
+import com.androidha.mashinheart.views.activitys.MainActivity;
 import com.androidha.mashinheart.views.adabters.AdabterAdvertise;
 import com.androidha.mashinheart.views.application.MachinHeartApplication;
+import com.androidha.mashinheart.views.dialogs.DialogAdvertiseDetail;
 import com.androidha.mashinheart.views.dialogs.DialogNewAdvertise;
 import com.androidha.mashinheart.views.dialogs.DialogProgress;
 
@@ -153,6 +155,10 @@ public class FragmentAdvertise extends Fragment {
             @Override
             public void onClick(View v) {
 
+                if(FragmentAdvertiseText.getText().length() < 3){
+                    ShowToast(context.getResources().getString(R.string.SearchEmpty));
+                    return;
+                }
                 double[] latlong = MachinHeartApplication
                         .getMachinHeartApplication(context)
                         .getApplicationUtilityComponent()
@@ -219,6 +225,8 @@ public class FragmentAdvertise extends Fragment {
                                                 if (progress != null) {
                                                     progress.dismiss();
                                                 }
+                                                FragmentAdvertiseExpandable.collapse();
+                                                FragmentAdvertiseCity.setSelection(0);
                                                 SetAdabter();
                                                 break;
                                             case "CancelByUser":
@@ -254,7 +262,7 @@ public class FragmentAdvertise extends Fragment {
 
     private void SetAdabter(){//____________________________________________________________________ Start SetAdabter
         modelAdvertiseLists = fragmentAdvertiseViewModel.getModelAdvertiseLists();
-        adabterAdvertise = new AdabterAdvertise(context, modelAdvertiseLists);
+        adabterAdvertise = new AdabterAdvertise(context, modelAdvertiseLists, FragmentAdvertise.this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context,RecyclerView.VERTICAL,false);
         FragmentAdvertises.setLayoutManager(layoutManager);
         FragmentAdvertises.setAdapter(adabterAdvertise);
@@ -269,5 +277,18 @@ public class FragmentAdvertise extends Fragment {
         fragmentAdvertiseViewModel.setCancel(true);
 
     }//_____________________________________________________________________________________________ End onDestroy
+
+
+
+
+    public void ItemClick(int position) {//_________________________________________________________ Start ItemClick
+        DialogAdvertiseDetail dialogAdvertiseDetail = new DialogAdvertiseDetail(
+                context,
+                fragmentAdvertiseViewModel.getModelAdvertiseLists().get(position)
+        );
+        dialogAdvertiseDetail.show(getFragmentManager(),"DialogAdvertiseDetail");
+
+    }//_____________________________________________________________________________________________ End ItemClick
+
 
 }

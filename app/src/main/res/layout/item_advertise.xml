@@ -93,8 +93,11 @@
             </LinearLayout>
 
             <ImageView
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="@dimen/_50sdp" />
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_45sdp"
+                android:src="@drawable/logo"
+                android:layout_marginLeft="@dimen/_5sdp"
+                />
 
         </LinearLayout>
 
