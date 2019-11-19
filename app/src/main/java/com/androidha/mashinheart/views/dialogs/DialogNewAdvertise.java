@@ -23,8 +23,10 @@ import android.widget.Spinner;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog.Builder;
+import androidx.core.app.NotificationCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.androidha.mashinheart.R;
 import com.androidha.mashinheart.databinding.DialogNewAdvertiseBinding;
@@ -77,6 +79,7 @@ public class DialogNewAdvertise extends DialogFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {//___________________________________ Start onCreate
         super.onCreate(savedInstanceState);
+
     }//_____________________________________________________________________________________________ End onCreate
 
 

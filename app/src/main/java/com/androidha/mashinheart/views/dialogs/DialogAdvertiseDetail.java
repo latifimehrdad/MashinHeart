@@ -19,14 +19,6 @@ import androidx.fragment.app.DialogFragment;
 import com.androidha.mashinheart.R;
 import com.androidha.mashinheart.databinding.DialogDetailAdvertiseBinding;
 import com.androidha.mashinheart.models.ModelAdvertiseList;
-import com.androidha.mashinheart.views.application.MachinHeartApplication;
-import com.karumi.dexter.Dexter;
-import com.karumi.dexter.MultiplePermissionsReport;
-import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

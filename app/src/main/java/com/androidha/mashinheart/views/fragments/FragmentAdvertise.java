@@ -47,14 +47,10 @@ public class FragmentAdvertise extends Fragment {
 
     private Context context;
     private FragmentAdvertiseViewModel fragmentAdvertiseViewModel;
-    private DialogNewAdvertise dialogNewAdvertise;
     private int CityId;
     private DialogProgress progress;
     private AdabterAdvertise adabterAdvertise;
     private ArrayList<ModelAdvertiseList> modelAdvertiseLists;
-
-    @BindView(R.id.DialogNewAdvertise)
-    Button DialogNewAdvertise;
 
     @BindView(R.id.FragmentAdvertiseCity)
     Spinner FragmentAdvertiseCity;
@@ -118,12 +114,6 @@ public class FragmentAdvertise extends Fragment {
 
     private void SetClick() {//_____________________________________________________________________ Start SetClick
 
-        DialogNewAdvertise.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ShowDialogNew();
-            }
-        });
 
         FragmentAdvertiseSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,11 +167,6 @@ public class FragmentAdvertise extends Fragment {
 
     }//_____________________________________________________________________________________________ End SetClick
 
-
-    private void ShowDialogNew() {//________________________________________________________________ Start ShowDialogNew
-        dialogNewAdvertise = new DialogNewAdvertise(context);
-        dialogNewAdvertise.show(getFragmentManager(), NotificationCompat.CATEGORY_PROGRESS);
-    }//_____________________________________________________________________________________________ End ShowDialogNew
 
 
     public void ShowToast(String Message) {//_______________________________________________________ Start ShowToast

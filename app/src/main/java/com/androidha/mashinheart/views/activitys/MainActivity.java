@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -30,6 +31,7 @@ import com.androidha.mashinheart.databinding.ActivityMainBinding;
 import com.androidha.mashinheart.jobservice.AlarmReceiver;
 import com.androidha.mashinheart.viewmodels.ActivityMainViewModel;
 import com.androidha.mashinheart.views.application.MachinHeartApplication;
+import com.androidha.mashinheart.views.dialogs.DialogNewAdvertise;
 import com.androidha.mashinheart.views.fragments.FragmentAddCar;
 import com.androidha.mashinheart.views.fragments.FragmentAdvertise;
 import com.androidha.mashinheart.views.fragments.FragmentCarEvent;
@@ -54,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
     public static PublishSubject<Integer> ChooseCar = null;
     public static PublishSubject<String> FragmentMessage = null;
     public static final String workTag = "notificationWork";
+    private DialogNewAdvertise dialogNewAdvertise;
 
     @BindView(R.id.MainAddCar)
     LinearLayout MainAddCar;
@@ -103,16 +106,16 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout MainNegativeGradeLine;
     @BindView(R.id.MainNegativeGradeUpShadow)
     LinearLayout MainNegativeGradeUpShadow;
-    @BindView(R.id.MainOtherCar)
-    LinearLayout MainOtherCar;
-    @BindView(R.id.MainOtherCarDownShadow)
-    LinearLayout MainOtherCarDownShadow;
-    @BindView(R.id.MainOtherCarLeft)
-    LinearLayout MainOtherCarLeft;
-    @BindView(R.id.MainOtherCarLine)
-    LinearLayout MainOtherCarLine;
-    @BindView(R.id.MainOtherCarUpShadow)
-    LinearLayout MainOtherCarUpShadow;
+    @BindView(R.id.MainAdvertise)
+    LinearLayout MainAdvertise;
+    @BindView(R.id.MainAdvertiseDownShadow)
+    LinearLayout MainAdvertiseDownShadow;
+    @BindView(R.id.MainAdvertiseLeft)
+    LinearLayout MainAdvertiseLeft;
+    @BindView(R.id.MainAdvertiseLine)
+    LinearLayout MainAdvertiseLine;
+    @BindView(R.id.MainAdvertiseUpShadow)
+    LinearLayout MainAdvertiseUpShadow;
     @BindView(R.id.MainPoliceFine)
     LinearLayout MainPoliceFine;
     @BindView(R.id.MainPoliceFineDownShadow)
@@ -147,6 +150,10 @@ public class MainActivity extends AppCompatActivity {
     TextView MainYouCarText;
     @BindView(R.id.MainYouCarUpShadow)
     LinearLayout MainYouCarUpShadow;
+    @BindView(R.id.MainProfileName)
+    TextView MainProfileName;
+    @BindView(R.id.MainProfileTel)
+    TextView MainProfileTel;
 
     FragmentManager fm;
     FragmentTransaction ft;
@@ -166,6 +173,7 @@ public class MainActivity extends AppCompatActivity {
         SetAnimationViews();
         ShowFragmentYouCar();
         FragmentObserver();
+        SetProfile();
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -173,13 +181,22 @@ public class MainActivity extends AppCompatActivity {
                 Intent i = new Intent("ir.MachinHeart.Lunch");
                 sendBroadcast(i);
             }
-        },1000);
+        }, 1000);
         //SetAlarmNotification();
 
 
-
-
     }//_____________________________________________________________________________________________ End onCreate
+
+
+
+
+    private void SetProfile(){//____________________________________________________________________ Start SetProfile
+        SharedPreferences prefs = getSharedPreferences("ML", 0);
+        if (prefs != null) {
+            MainProfileName.setText(prefs.getString("profname",this.getResources().getString(R.string.ProfileName)));
+            MainProfileTel.setText(prefs.getString("proftel",this.getResources().getString(R.string.ProfilePhone)));
+        }
+    }//_____________________________________________________________________________________________ End SetProfile
 
 
     private void SetAlarmNotification() {//__________________________________________________________ Start SetAlarmNotification
@@ -265,15 +282,22 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        MainOtherCar.setOnClickListener(new OnClickListener() {
+        MainAdvertise.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
                 ResetRightMenu();
-                MainOtherCar.setBackgroundColor(MainActivity.this.getResources().getColor(R.color.MainFragment));
-                MainOtherCarLeft.setVisibility(View.GONE);
-                MainOtherCarUpShadow.setVisibility(View.VISIBLE);
-                MainOtherCarDownShadow.setVisibility(View.VISIBLE);
-                MainOtherCarLine.setVisibility(View.GONE);
+                MainAdvertise.setBackgroundColor(MainActivity.this.getResources().getColor(R.color.MainFragment));
+                MainAdvertiseLeft.setVisibility(View.GONE);
+                MainAdvertiseUpShadow.setVisibility(View.VISIBLE);
+                MainAdvertiseDownShadow.setVisibility(View.VISIBLE);
+                MainAdvertiseLine.setVisibility(View.GONE);
                 MainNegativeGradeLine.setVisibility(View.GONE);
+                fm = null;
+                ft = null;
+                fm = getSupportFragmentManager();
+                ft = fm.beginTransaction();
+                ft.replace(R.id.MainFragment, new FragmentAdvertise(MainActivity.this));
+                ft.commit();
+
             }
         });
 
@@ -286,7 +310,7 @@ public class MainActivity extends AppCompatActivity {
                 MainChangeCarUpShadow.setVisibility(View.VISIBLE);
                 MainChangeCarDownShadow.setVisibility(View.VISIBLE);
                 MainChangeCarLine.setVisibility(View.GONE);
-                MainOtherCarLine.setVisibility(View.GONE);
+                MainAdvertiseLine.setVisibility(View.GONE);
             }
         });
 
@@ -328,14 +352,7 @@ public class MainActivity extends AppCompatActivity {
         MainImgCircleAdvertise.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                ResetRightMenu();
-                fm = null;
-                ft = null;
-                fm = getSupportFragmentManager();
-                ft = fm.beginTransaction();
-                ft.replace(R.id.MainFragment, new FragmentAdvertise(MainActivity.this));
-                ft.commit();
-                SetAnimationFrame();
+                ShowDialogNew();
             }
         });
 
@@ -366,11 +383,11 @@ public class MainActivity extends AppCompatActivity {
         MainNegativeGradeUpShadow.setVisibility(View.GONE);
         MainNegativeGradeDownShadow.setVisibility(View.GONE);
         MainNegativeGradeLine.setVisibility(View.VISIBLE);
-        MainOtherCar.setBackgroundColor(getApplicationContext().getResources().getColor(R.color.MainRight));
-        MainOtherCarLeft.setVisibility(View.VISIBLE);
-        MainOtherCarUpShadow.setVisibility(View.GONE);
-        MainOtherCarDownShadow.setVisibility(View.GONE);
-        MainOtherCarLine.setVisibility(View.VISIBLE);
+        MainAdvertise.setBackgroundColor(getApplicationContext().getResources().getColor(R.color.MainRight));
+        MainAdvertiseLeft.setVisibility(View.VISIBLE);
+        MainAdvertiseUpShadow.setVisibility(View.GONE);
+        MainAdvertiseDownShadow.setVisibility(View.GONE);
+        MainAdvertiseLine.setVisibility(View.VISIBLE);
         MainChangeCar.setBackgroundColor(getApplicationContext().getResources().getColor(R.color.MainRight));
         MainChangeCarLeft.setVisibility(View.VISIBLE);
         MainChangeCarUpShadow.setVisibility(View.GONE);
@@ -508,4 +525,13 @@ public class MainActivity extends AppCompatActivity {
         MainYouCarImg.setAnimation(LefttoRight);
         MainYouCarText.setAnimation(LefttoRight);
     }//_____________________________________________________________________________________________ End SetAnimationYouCar
+
+
+
+    private void ShowDialogNew() {//________________________________________________________________ Start ShowDialogNew
+        dialogNewAdvertise = new DialogNewAdvertise(this);
+        dialogNewAdvertise.show(getSupportFragmentManager(),NotificationCompat.CATEGORY_PROGRESS);
+    }//_____________________________________________________________________________________________ End ShowDialogNew
+
+
 }

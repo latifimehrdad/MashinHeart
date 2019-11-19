@@ -225,6 +225,7 @@
     <string name="No">خیر</string>
     <string name="NotSaveEnything">هیچ موردی ثبت نشده</string>
     <string name="OtherCar">اطلاعات سایر خودروها</string>
+    <string name="Advertise">مراکز و آگهی ها</string>
     <string name="PleaseWait">شکیبا باشید ...</string>
     <string name="PliceFineGet">دریافت خلافی</string>
     <string name="PoliceFine">دریافت خلافی</string>
@@ -235,7 +236,7 @@
     <string name="PoliceFineNew">گرفتن خلافی جدید</string>
     <string name="PoliceFineOk">PoliceFineOk</string>
     <string name="ProfileName">نام شما</string>
-    <string name="ProfilePhone">09121234567</string>
+    <string name="ProfilePhone">09123456789</string>
     <string name="RepairChange">تعمیر نموده اید</string>
     <string name="Rial">ریال</string>
     <string name="SaveCommit">ثبت با موفقیت انجام شد</string>
