@@ -246,9 +246,11 @@ public class FragmentInsurance extends Fragment {
             return false;
         } else if (FragmentInsuranceBrand.getText().toString().trim().length() == 0) {
             ShowToast(this.context.getString(R.string.EmptyInsuranceBrand));
+            FragmentInsuranceBrand.requestFocus();
             return false;
         } else if (FragmentInsuranceMoney.getText().toString().trim().length() == 0) {
             ShowToast(this.context.getString(R.string.EmptyChangeMoney));
+            FragmentInsuranceMoney.requestFocus();
             return false;
         } else if (FragmentInsuranceDate.getText().toString().trim().length() != 0) {
             return true;

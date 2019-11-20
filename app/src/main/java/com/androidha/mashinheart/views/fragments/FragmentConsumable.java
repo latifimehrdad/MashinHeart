@@ -304,19 +304,24 @@ public class FragmentConsumable extends Fragment {
 
         if (FragmentConsumableTitle.getText().toString().trim().length() == 0) {
             ShowToast(this.context.getString(R.string.EmptyCahngeTitle));
+            FragmentConsumableTitle.requestFocus();
             return false;
         } else if (FragmentConsumableKm.getText().toString().trim().length() == 0) {
             ShowToast(this.context.getString(R.string.EmptyChangeKM));
+            FragmentConsumableKm.requestFocus();
             return false;
         } else if (FragmentConsumableNextKm.getText().toString().trim().length() == 0) {
             ShowToast(this.context.getString(R.string.EmptyChangeNext));
+            FragmentConsumableNextKm.requestFocus();
             return false;
         } else {
             if (Integer.valueOf(this.FragmentConsumableKm.getText().toString().replaceAll(",", "").replaceAll("٬","")).intValue() > Integer.valueOf(this.FragmentConsumableNextKm.getText().toString().replaceAll(",", "").replaceAll("٬","")).intValue()) {
                 ShowToast(this.context.getString(R.string.EmptyChangeNextError));
+                FragmentConsumableNextKm.requestFocus();
                 return false;
             } else if (FragmentConsumableMoney.getText().toString().trim().length() == 0) {
                 ShowToast(this.context.getString(R.string.EmptyChangeMoney));
+                FragmentConsumableMoney.requestFocus();
                 return false;
             } else if (FragmentConsumableDate.getText().toString().trim().length() != 0) {
                 return true;

@@ -26,7 +26,7 @@ public class DataBaseCars extends RealmObject {
     private String CarTagLetter;
     private int CarTagRight;
     private String CarType;
-    private int CarUseAverage = 25;
+    private int CarUseAverage;
     private int CarYearCreated;
     private Boolean Gearbox;
     @PrimaryKey
@@ -41,6 +41,7 @@ public class DataBaseCars extends RealmObject {
         setCarTagRight(modelAddCar.getCarTagRight());
         setCarTagIran(modelAddCar.getCarTagIran());
         setGearbox(modelAddCar.getGearbox());
+        setCarUseAverage(modelAddCar.getCarUseAverage());
         setCarType(modelAddCar.getCarType());
         setCarColor(modelAddCar.getCarColor());
         setCarPersonInsurance(modelAddCar.getCarPersonInsurance());

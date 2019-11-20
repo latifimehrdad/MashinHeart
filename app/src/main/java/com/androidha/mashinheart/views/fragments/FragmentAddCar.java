@@ -270,6 +270,7 @@ public class FragmentAddCar extends Fragment {
         fragmentAddCarViewModel.setCarTagLetter(FragmentAddCarPelakAlphabet.getText().toString());
         fragmentAddCarViewModel
                 .setCarKm(Integer.valueOf(FragmentAddCarKm.getText().toString().replaceAll(",", "").replaceAll("٬","")));
+        fragmentAddCarViewModel.setCarUseAverage(Integer.valueOf(FragmentAddCarAverage.getText().toString().replaceAll(",", "").replaceAll("٬","")));
         fragmentAddCarViewModel.SaveToDataBase();
     }//_____________________________________________________________________________________________ End SaveToDataBase
 
@@ -277,20 +278,37 @@ public class FragmentAddCar extends Fragment {
 
     private Boolean CheckEmptyItems() {//_______________________________________________________________ Start CheckEmptyItems
 
+        try{
+            int i = Integer.valueOf(FragmentAddCarAverage.getText().toString().replaceAll(",", "").replaceAll("٬",""));
+        }
+        catch (Exception ex){
+            ShowToast(this.context.getString(R.string.JustNumber));
+            FragmentAddCarAverage.requestFocus();
+            FragmentAddCarAverage.setText("");
+            return false;
+        }
         if (BrandSelected == 0) {
             ShowToast(this.context.getString(R.string.EmptyCarBrand));
             return false;
         } else if (FragmentAddCarName.getText().toString().trim().length() == 0) {
             ShowToast(this.context.getString(R.string.EmptyCarName));
+            FragmentAddCarName.requestFocus();
             return false;
         } else if (FragmentAddCarYear.getText().toString().trim().length() == 0) {
             ShowToast(this.context.getString(R.string.EmptyCarYear));
+            FragmentAddCarYear.requestFocus();
             return false;
         } else if (FragmentAddCarKm.getText().toString().trim().length() == 0) {
             ShowToast(this.context.getString(R.string.EmptyCarKM));
+            FragmentAddCarKm.requestFocus();
+            return false;
+        }
+        else if (FragmentAddCarAverage.getText().toString().trim().length() == 0){
+            ShowToast(this.context.getString(R.string.EmptyCarAverage));
             return false;
         } else if (FragmentAddCarColor.getText().toString().trim().length() == 0) {
             ShowToast(this.context.getString(R.string.EmptyCarColor));
+            FragmentAddCarColor.requestFocus();
             return false;
         } else if (FragmentAddCarPersonCheck.isChecked() && FragmentAddCarPerson.getText().toString().trim().length() == 0) {
             ShowToast(this.context.getString(R.string.EmptyCarPerson));

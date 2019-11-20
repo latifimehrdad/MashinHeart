@@ -25,7 +25,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -101,12 +102,10 @@
                     android:layout_marginTop="@dimen/_5sdp"
                     android:background="@color/MainWhite"
                     android:hint="@string/CarUsedAverage"
-                    android:inputType="phone"
                     android:maxLength="3"
                     android:padding="@dimen/_2sdp"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/_12sdp"
-                    android:visibility="gone" />
+                    android:textSize="@dimen/_10sdp" />
 
                 <EditText
                     android:id="@+id/FragmentAddCarColor"

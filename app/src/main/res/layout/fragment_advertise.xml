@@ -86,6 +86,7 @@
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/_12sdp"
                     android:layout_marginLeft="@dimen/_10sdp"
+                    android:visibility="gone"
                     />
 
 

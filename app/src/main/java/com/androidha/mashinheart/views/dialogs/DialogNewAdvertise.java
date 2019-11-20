@@ -3,8 +3,10 @@ package com.androidha.mashinheart.views.dialogs;
 import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
@@ -18,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
@@ -32,6 +35,7 @@ import com.androidha.mashinheart.R;
 import com.androidha.mashinheart.databinding.DialogNewAdvertiseBinding;
 import com.androidha.mashinheart.viewmodels.DialogNewAdvertiseViewModel;
 import com.androidha.mashinheart.views.activitys.ImagePickerActivity;
+import com.androidha.mashinheart.views.activitys.MainActivity;
 import com.androidha.mashinheart.views.application.MachinHeartApplication;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
@@ -69,6 +73,15 @@ public class DialogNewAdvertise extends DialogFragment {
     ImageView DialogNewAdvertiseImage;
     @BindView(R.id.FragmentDialogCity)
     Spinner FragmentDialogCity;
+
+    @BindView(R.id.DialogNewTelegram)
+    LinearLayout DialogNewTelegram;
+
+    @BindView(R.id.DialogNewInstagram)
+    LinearLayout DialogNewInstagram;
+
+    @BindView(R.id.DialogNewWhatsApp)
+    LinearLayout DialogNewWhatsApp;
 
 
     public DialogNewAdvertise(Context context) {//__________________________________________________ Start DialogNewAdvertise
@@ -114,6 +127,28 @@ public class DialogNewAdvertise extends DialogFragment {
 
     private void SEtClick() {//_____________________________________________________________________ Start SEtClick
 
+
+        DialogNewTelegram.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OpenTelegram();
+            }
+        });
+
+        DialogNewInstagram.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OpenInstagram();
+            }
+        });
+
+        DialogNewWhatsApp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OpenWhatsApp();
+            }
+        });
+
         FragmentDialogCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 City = i;
@@ -129,7 +164,6 @@ public class DialogNewAdvertise extends DialogFragment {
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
-
 
 
         DialogNewAdvertiseIgnor.setOnClickListener(new View.OnClickListener() {
@@ -175,6 +209,53 @@ public class DialogNewAdvertise extends DialogFragment {
 
 
     }//_____________________________________________________________________________________________ End SEtClick
+
+
+    private void OpenTelegram() {//__________________________________________________________________ Start OpenTelegram
+        final String appName = "org.telegram.messenger";
+        if (isAppAvailable(getContext(), appName)) {
+            Intent telegram = new Intent(Intent.ACTION_VIEW);
+            telegram.setData(Uri.parse("https://telegram.me/iranlandcruiser"));
+            telegram.setPackage("org.telegram.messenger");
+            startActivity(Intent.createChooser(telegram, ""));
+        } else {
+            MachinHeartApplication
+                    .getMachinHeartApplication(getContext())
+                    .getApplicationUtilityComponent()
+                    .getApplicationUtility()
+                    .CustomToastShow(getContext(), getResources().getString(R.string.NotInstallTelegram));
+        }
+    }//_____________________________________________________________________________________________ End OpenTelegram
+
+
+    private void OpenInstagram() {//_________________________________________________________________ Start OpenInstagram
+        Uri uri = Uri.parse("http://instagram.com/_u/iranlandcruiser");
+        Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
+        likeIng.setPackage("com.instagram.android");
+        try {
+            startActivity(likeIng);
+        } catch (ActivityNotFoundException e) {
+            startActivity(new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("http://instagram.com/iranlandcruiser")));
+
+        }
+    }//_____________________________________________________________________________________________ End OpenInstagram
+
+
+    private void OpenWhatsApp() {//__________________________________________________________________ Start OpenWhatsApp
+
+    }//_____________________________________________________________________________________________ End OpenWhatsApp
+
+
+    public static boolean isAppAvailable(Context context, String appName) {//_______________________ Start isAppAvailable
+        PackageManager pm = context.getPackageManager();
+        try {
+            pm.getPackageInfo(appName, PackageManager.GET_ACTIVITIES);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
+    }//_____________________________________________________________________________________________ End isAppAvailable
 
 
     private void showImagePickerOptions() {//_______________________________________________________ Start showImagePickerOptions
@@ -238,7 +319,7 @@ public class DialogNewAdvertise extends DialogFragment {
             return false;
         }
 
-        if(City == 0){
+        if (City == 0) {
             ShowToast(context.getResources().getString(R.string.AdvertiseCityEmpty));
             return false;
         }
@@ -265,8 +346,6 @@ public class DialogNewAdvertise extends DialogFragment {
 
         return true;
     }//_____________________________________________________________________________________________ End CheckEmpty
-
-
 
 
     @Override

@@ -1,6 +1,10 @@
 package com.androidha.mashinheart.viewmodels;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 import com.androidha.mashinheart.R;
 import com.androidha.mashinheart.dagger.retrofit.RetrofitComponent;
@@ -9,10 +13,11 @@ import com.androidha.mashinheart.models.ModelAdvertiseList;
 import com.androidha.mashinheart.views.application.MachinHeartApplication;
 
 import java.util.ArrayList;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
 import retrofit2.Call;
@@ -47,7 +52,8 @@ public class FragmentAdvertiseViewModel {
                             return;
                         if(response.body().getStatue() == 1) {
                             setModelAdvertiseLists(response.body().getAdvertiseList());
-                            SetSearchFilter(Text);
+                            MessageType.onNext(context.getResources().getString(R.string.GetOk));
+                            //SetSearchFilter(Text);
 
                         }
                         else{
@@ -73,7 +79,29 @@ public class FragmentAdvertiseViewModel {
 
     private void SetSearchFilter(String Text){//____________________________________________________ Start SetSearchFilter
 
+        ArrayList<ModelAdvertiseList> temp = new ArrayList<>();
+        for (int i = 0; i < modelAdvertiseLists.size() ; i++) {
+            ModelAdvertiseList item = modelAdvertiseLists.get(i);
+                Boolean ret = false;
+                if((item.getTitle() != null) && (!item.getTitle().equalsIgnoreCase("")))
+                    ret = item.getTitle().contains(Text);
+            if((item.getTxt2() != null) && (!item.getTxt2().equalsIgnoreCase("")))
+                if(!ret)
+                    ret = item.getTxt2().contains(Text);
+                if(ret)
+                    temp.add(modelAdvertiseLists.get(i));
+        }
 
+
+//        modelAdvertiseLists.removeIf(new Predicate<ModelAdvertiseList>() {
+//            @Override
+//            public boolean test(ModelAdvertiseList list) {
+//                Boolean ret = list.getTitle().contains(Text);
+//                if(!ret)
+//                    ret = list.getTxt2().contains(Text);
+//                return ret;
+//            }
+//        });
 //        Observable<ArrayList<ModelAdvertiseList>> observable = Observable.just(getModelAdvertiseLists());
 //        observable
 //                .subscribeOn(AndroidSchedulers.mainThread())
@@ -87,6 +115,7 @@ public class FragmentAdvertiseViewModel {
 //                })
 //                .subscribe();
 
+        modelAdvertiseLists = temp;
         MessageType.onNext(context.getResources().getString(R.string.GetOk));
     }//_____________________________________________________________________________________________ End SetSearchFilter
 

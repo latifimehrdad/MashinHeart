@@ -235,11 +235,13 @@ public class FragmentNegativeGrade extends Fragment {
     private Boolean CheckEmptyItems() {//____________________________________________________________ Start CheckEmptyItems
         if (FragmentNegativeGradeBarcode.getText().toString().trim().length() < 11) {
             ShowToast(this.context.getString(R.string.EmptyNegativeGradeBarcode));
+            FragmentNegativeGradeBarcode.requestFocus();
             return false;
         } else if (FragmentNegativeGradeCaptchaTxt.getText().toString().trim().length() != 0) {
             return true;
         } else {
             ShowToast(this.context.getString(R.string.EmptyPoliceFineCaptcha));
+            FragmentNegativeGradeCaptchaTxt.requestFocus();
             return false;
         }
     }//_____________________________________________________________________________________________ End CheckEmptyItems

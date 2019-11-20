@@ -145,10 +145,10 @@ public class FragmentAdvertise extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if(FragmentAdvertiseText.getText().length() < 3){
-                    ShowToast(context.getResources().getString(R.string.SearchEmpty));
-                    return;
-                }
+//                if(FragmentAdvertiseText.getText().length() < 3){
+//                    ShowToast(context.getResources().getString(R.string.SearchEmpty));
+//                    return;
+//                }
                 double[] latlong = MachinHeartApplication
                         .getMachinHeartApplication(context)
                         .getApplicationUtilityComponent()

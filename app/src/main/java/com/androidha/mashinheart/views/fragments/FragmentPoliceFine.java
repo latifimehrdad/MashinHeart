@@ -258,11 +258,13 @@ public class FragmentPoliceFine extends Fragment {
 
         if (FragmentPoliceFineBarcode.getText().toString().trim().length() < 8) {
             ShowToast(this.context.getString(R.string.EmptyPoliceFineBarcode));
+            FragmentPoliceFineBarcode.requestFocus();
             return false;
         } else if (FragmentPoliceFineCaptchaTxt.getText().toString().trim().length() != 0) {
             return true;
         } else {
             ShowToast(this.context.getString(R.string.EmptyPoliceFineCaptcha));
+            FragmentPoliceFineCaptchaTxt.requestFocus();
             return false;
         }
     }//_____________________________________________________________________________________________ End CheckEmptyItems

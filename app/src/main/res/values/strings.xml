@@ -144,7 +144,7 @@
     <string name="CarName">مدل خودرو</string>
     <string name="CarOptionalInfo">اطلاعات اختیاری، جهت بازیابی خودرو، درصورت حذف شدن برنامه یا تغییر تلفن همراه</string>
     <string name="CarPersonInsurance">آیا بیمه شخص ثالث دارید؟</string>
-    <string name="CarUsedAverage">میانگین استفاده روزانه به کیلومتر</string>
+    <string name="CarUsedAverage">در یک روز چند کیلومتر از خودرو استفاده میکنید؟(فقط عدد)</string>
     <string name="ChangeCar">انتقال خودرو به دیگری</string>
     <string name="ChooseDate">انتخاب تاریخ</string>
     <string name="ConnetToPolice">درحال برقراری ارتباط با پلیس راهور</string>
@@ -157,7 +157,8 @@
     <string name="EditProfile">ویرایش پروفایل</string>
     <string name="EmptyCahngeTitle">لطفا عنوان مورد تعویضی را وارد نمایید</string>
     <string name="EmptyCar">شما هیچ خودرویی را در برنامه ثبت نکرده اید، جهت اضافه کردن یک خودروی جدید از منوی اضافه کردن خودرو استفاده کنید</string>
-    <string name="EmptyCarAverage">لطفا میانگین استفاده روزانه از خودرو را وارد نمایید</string>
+    <string name="EmptyCarAverage">روزانه چند کیلومتر از خودرو استفاده میکنید؟</string>
+    <string name="JustNumber">فقط عدد وارد نمایید</string>
     <string name="EmptyCarBody">لطفا تاریخ دریافت بیمه بدنه را انتخاب نمایید</string>
     <string name="EmptyCarBrand">لطفا برند را انتخاب نمایید</string>
     <string name="EmptyCarChassis">لطفا شماره شاسی خودرو را وارد نمایید</string>
@@ -270,5 +271,10 @@
     <string name="AgaringUser">عضو سامانه آگارینگ : </string>
     <string name="Store">فروشگاه</string>
     <string name="Call">برقراری تماس</string>
+    <string name="NewAdvertise">جهت ثبت آگهی، درخواست خودرا بوسیله یکی از روش های زیر برای ما ارسال نمایید</string>
+    <string name="SendTelegram">ارسال پیام به تلگرام ما</string>
+    <string name="SendInstagram">ارسال پیام به اینستاگرام ما</string>
+    <string name="SendWhatsapp">ارسال پیام به واتس اپ ما</string>
+    <string name="NotInstallTelegram">نرم افزار تلگرام روی دستگاه نصب نیست</string>
 
 </resources>

@@ -322,12 +322,15 @@ public class FragmentRepair extends Fragment {
 
         if (FragmentRepairTitle.getText().toString().trim().length() == 0) {
             ShowToast(this.context.getString(R.string.EmptyRepairTitle));
+            FragmentRepairTitle.requestFocus();
             return false;
         } else if (FragmentRepairKm.getText().toString().trim().length() == 0) {
             ShowToast(this.context.getString(R.string.EmptyRepairKM));
+            FragmentRepairKm.requestFocus();
             return false;
         } else if (FragmentRepairMoney.getText().toString().trim().length() == 0) {
             ShowToast(this.context.getString(R.string.EmptyChangeMoney));
+            FragmentRepairMoney.requestFocus();
             return false;
         } else if (FragmentRepairDate.getText().toString().trim().length() != 0) {
             return true;
