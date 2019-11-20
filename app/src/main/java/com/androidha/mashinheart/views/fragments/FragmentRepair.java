@@ -56,6 +56,7 @@ public class FragmentRepair extends Fragment {
     private Integer editable;
     private FragmentRepairViewModel fragmentRepairViewModel;
     private FragmentCarEvent fragmentCarEvent;
+    private View view;
 
     @BindView(R.id.FragmentRepairAddClick)
     LinearLayout FragmentRepairAddClick;
@@ -95,21 +96,8 @@ public class FragmentRepair extends Fragment {
         FragmentRepairBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_repair, container, false);
         fragmentRepairViewModel = new FragmentRepairViewModel(context);
         binding.setRepair(fragmentRepairViewModel);
-        View view = binding.getRoot();
+        view = binding.getRoot();
         ButterKnife.bind(this, view);
-        view.setFocusableInTouchMode(true);
-        view.requestFocus();
-        view.setOnKeyListener(new View.OnKeyListener() {
-            public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
-                if (keyCode != 4) {
-                    return true;
-                }
-                keyCode = 0;
-                keyEvent = null;
-                fragmentCarEvent.MessageType.onNext("close");
-                return true;
-            }
-        });
         return view;
     }//_____________________________________________________________________________________________ End onCreateView
 
@@ -117,6 +105,7 @@ public class FragmentRepair extends Fragment {
     public void onStart() {//_____________________________________________________ Start FragmentRepair
         super.onStart();
         SetClick();
+        BackClick();
         SetTextChange();
         FragmentRepairExpandable.collapse();
         FragmentRepairSuggestion.setVisibility(View.GONE);
@@ -124,6 +113,46 @@ public class FragmentRepair extends Fragment {
         MessageControler();
         GetCarRepairFromDB();
     }//_____________________________________________________________________________________________ End onCreateView
+
+
+
+
+    private void BackClick() {//____________________________________________________________________ Start BackClick
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
+
+        view.setOnKeyListener(SetKey(view));
+        FragmentRepairSave.setOnKeyListener(SetKey(FragmentRepairSave));
+        FragmentRepairAddClick.setOnKeyListener(SetKey(FragmentRepairAddClick));
+        FragmentRepairTitle.setOnKeyListener(SetKey(FragmentRepairTitle));
+        FragmentRepairKm.setOnKeyListener(SetKey(FragmentRepairKm));
+        FragmentRepairWhy.setOnKeyListener(SetKey(FragmentRepairWhy));
+        FragmentRepairBrand.setOnKeyListener(SetKey(FragmentRepairBrand));
+        FragmentRepairMoney.setOnKeyListener(SetKey(FragmentRepairMoney));
+        FragmentRepairDate.setOnKeyListener(SetKey(FragmentRepairDate));
+        FragmentRepairIgnor.setOnKeyListener(SetKey(FragmentRepairIgnor));
+    }//_____________________________________________________________________________________________ End BackClick
+
+
+
+
+    private View.OnKeyListener SetKey(View view){//_________________________________________________ Start SetKey
+        return new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode != 4) {
+                    return true;
+                }
+                keyCode = 0;
+                event = null;
+                fragmentCarEvent.MessageType.onNext("close");
+                return true;
+            }
+        };
+    }//_____________________________________________________________________________________________ End SetKey
+
+
+
 
 
     private void SetClick() {//_____________________________________________________________________ Start FragmentRepair

@@ -278,15 +278,7 @@ public class FragmentAddCar extends Fragment {
 
     private Boolean CheckEmptyItems() {//_______________________________________________________________ Start CheckEmptyItems
 
-        try{
-            int i = Integer.valueOf(FragmentAddCarAverage.getText().toString().replaceAll(",", "").replaceAll("٬",""));
-        }
-        catch (Exception ex){
-            ShowToast(this.context.getString(R.string.JustNumber));
-            FragmentAddCarAverage.requestFocus();
-            FragmentAddCarAverage.setText("");
-            return false;
-        }
+
         if (BrandSelected == 0) {
             ShowToast(this.context.getString(R.string.EmptyCarBrand));
             return false;
@@ -306,7 +298,20 @@ public class FragmentAddCar extends Fragment {
         else if (FragmentAddCarAverage.getText().toString().trim().length() == 0){
             ShowToast(this.context.getString(R.string.EmptyCarAverage));
             return false;
-        } else if (FragmentAddCarColor.getText().toString().trim().length() == 0) {
+        }
+        else{
+            try{
+                int i = Integer.valueOf(FragmentAddCarAverage.getText().toString().replaceAll(",", "").replaceAll("٬",""));
+            }
+            catch (Exception ex){
+                ShowToast(this.context.getString(R.string.JustNumber));
+                FragmentAddCarAverage.requestFocus();
+                FragmentAddCarAverage.setText("");
+                return false;
+            }
+        }
+
+        if (FragmentAddCarColor.getText().toString().trim().length() == 0) {
             ShowToast(this.context.getString(R.string.EmptyCarColor));
             FragmentAddCarColor.requestFocus();
             return false;

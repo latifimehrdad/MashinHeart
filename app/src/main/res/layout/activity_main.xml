@@ -202,7 +202,7 @@
                         <LinearLayout
                             android:id="@+id/MainYouCar"
                             android:layout_width="fill_parent"
-                            android:layout_height="@dimen/_75sdp"
+                            android:layout_height="@dimen/_80sdp"
                             android:background="@color/MainFragment"
                             android:gravity="center"
                             android:orientation="horizontal">
@@ -267,7 +267,7 @@
                         <LinearLayout
                             android:id="@+id/MainAddCar"
                             android:layout_width="fill_parent"
-                            android:layout_height="@dimen/_75sdp"
+                            android:layout_height="@dimen/_80sdp"
                             android:background="@color/MainRight"
                             android:gravity="center"
                             android:orientation="horizontal">
@@ -333,7 +333,7 @@
                         <LinearLayout
                             android:id="@+id/MainPoliceFine"
                             android:layout_width="fill_parent"
-                            android:layout_height="@dimen/_75sdp"
+                            android:layout_height="@dimen/_80sdp"
                             android:background="@color/MainRight"
                             android:gravity="center"
                             android:orientation="horizontal">
@@ -399,7 +399,7 @@
                         <LinearLayout
                             android:id="@+id/MainNegativeGrade"
                             android:layout_width="fill_parent"
-                            android:layout_height="@dimen/_75sdp"
+                            android:layout_height="@dimen/_80sdp"
                             android:background="@color/MainRight"
                             android:gravity="center"
                             android:orientation="horizontal">
@@ -465,7 +465,7 @@
                         <LinearLayout
                             android:id="@+id/MainAdvertise"
                             android:layout_width="fill_parent"
-                            android:layout_height="@dimen/_75sdp"
+                            android:layout_height="@dimen/_80sdp"
                             android:background="@color/MainRight"
                             android:gravity="center"
                             android:orientation="horizontal">
@@ -531,7 +531,7 @@
                         <LinearLayout
                             android:id="@+id/MainChangeCar"
                             android:layout_width="fill_parent"
-                            android:layout_height="@dimen/_75sdp"
+                            android:layout_height="@dimen/_80sdp"
                             android:background="@color/MainRight"
                             android:gravity="center"
                             android:orientation="horizontal">
@@ -596,7 +596,7 @@
                         <LinearLayout
                             android:id="@+id/MainCarSale"
                             android:layout_width="fill_parent"
-                            android:layout_height="@dimen/_75sdp"
+                            android:layout_height="@dimen/_80sdp"
                             android:background="@color/MainRight"
                             android:gravity="center"
                             android:orientation="horizontal">
@@ -662,7 +662,7 @@
                         <LinearLayout
                             android:id="@+id/MainUpdateInfo"
                             android:layout_width="fill_parent"
-                            android:layout_height="@dimen/_75sdp"
+                            android:layout_height="@dimen/_80sdp"
                             android:background="@color/MainRight"
                             android:gravity="center"
                             android:orientation="horizontal">

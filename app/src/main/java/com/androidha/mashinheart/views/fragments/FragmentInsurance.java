@@ -51,6 +51,7 @@ public class FragmentInsurance extends Fragment {
     private Integer editable;
     private FragmentInsuranceViewModel fragmentInsuranceViewModel;
     private FragmentCarEvent fragmentCarEvent;
+    private View view;
 
 
     @BindView(R.id.FragmentInsuranceAddClick)
@@ -87,21 +88,8 @@ public class FragmentInsurance extends Fragment {
         FragmentInsuranceBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_insurance, container, false);
         fragmentInsuranceViewModel = new FragmentInsuranceViewModel(context);
         binding.setInsurance(fragmentInsuranceViewModel);
-        View view = binding.getRoot();
+        view = binding.getRoot();
         ButterKnife.bind( this, view);
-        view.setFocusableInTouchMode(true);
-        view.requestFocus();
-        view.setOnKeyListener(new View.OnKeyListener() {
-            public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
-                if (keyCode != 4) {
-                    return true;
-                }
-                keyCode = 0;
-                keyEvent = null;
-                fragmentCarEvent.MessageType.onNext("close");
-                return true;
-            }
-        });
         return view;
     }//_____________________________________________________________________________________________ End onCreateView
 
@@ -110,6 +98,7 @@ public class FragmentInsurance extends Fragment {
     public void onStart() {//________________________________________________________________________ Star onStart
         super.onStart();
         SetClick();
+        BackClick();
         SetTextChange();
         FragmentInsuranceExpandable.collapse();
         SetCurrentDate();
@@ -117,6 +106,40 @@ public class FragmentInsurance extends Fragment {
         GetCarInsuranceFromDB();
     }//_____________________________________________________________________________________________ End onStart
 
+
+
+
+    private void BackClick() {//____________________________________________________________________ Start BackClick
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
+
+        view.setOnKeyListener(SetKey(view));
+        FragmentInsuranceSave.setOnKeyListener(SetKey(FragmentInsuranceSave));
+        FragmentInsuranceAddClick.setOnKeyListener(SetKey(FragmentInsuranceAddClick));
+        FragmentInsuranceType.setOnKeyListener(SetKey(FragmentInsuranceType));
+        FragmentInsuranceBrand.setOnKeyListener(SetKey(FragmentInsuranceBrand));
+        FragmentInsuranceMoney.setOnKeyListener(SetKey(FragmentInsuranceMoney));
+        FragmentInsuranceDate.setOnKeyListener(SetKey(FragmentInsuranceDate));
+        FragmentInsuranceIgnor.setOnKeyListener(SetKey(FragmentInsuranceIgnor));
+    }//_____________________________________________________________________________________________ End BackClick
+
+
+
+
+    private View.OnKeyListener SetKey(View view){//_________________________________________________ Start SetKey
+        return new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode != 4) {
+                    return true;
+                }
+                keyCode = 0;
+                event = null;
+                fragmentCarEvent.MessageType.onNext("close");
+                return true;
+            }
+        };
+    }//_____________________________________________________________________________________________ End SetKey
 
 
 

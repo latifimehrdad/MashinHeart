@@ -42,6 +42,8 @@ import ir.hamsaa.persiandatepicker.Listener;
 import ir.hamsaa.persiandatepicker.PersianDatePickerDialog;
 import ir.hamsaa.persiandatepicker.util.PersianCalendar;
 import java.util.ArrayList;
+import java.util.Set;
+
 import net.cachapa.expandablelayout.ExpandableLayout;
 
 public class FragmentConsumable extends Fragment {
@@ -53,6 +55,7 @@ public class FragmentConsumable extends Fragment {
     private Integer editable;
     private FragmentConsumablesViewModel fragmentConsumablesViewModel;
     private FragmentCarEvent fragmentCarEvent;
+    private View view;
 
     @BindView(R.id.FragmentConsumableAddClick)
     LinearLayout FragmentConsumableAddClick;
@@ -93,23 +96,8 @@ public class FragmentConsumable extends Fragment {
         FragmentConsumablesBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_consumables, container, false);
         fragmentConsumablesViewModel = new FragmentConsumablesViewModel(context);
         binding.setConsumables(fragmentConsumablesViewModel);
-        View view = binding.getRoot();
+        view = binding.getRoot();
         ButterKnife.bind(this, view);
-
-        view.setFocusableInTouchMode(true);
-        view.requestFocus();
-        view.setOnKeyListener(new View.OnKeyListener() {
-            public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
-                if (keyCode != 4) {
-                    return true;
-                }
-                keyCode = 0;
-                keyEvent = null;
-                fragmentCarEvent.MessageType.onNext("close");
-                return true;
-            }
-        });
-
         return view;
     }//_____________________________________________________________________________________________ End onCreateView
 
@@ -118,6 +106,7 @@ public class FragmentConsumable extends Fragment {
     public void onStart() {//_______________________________________________________________________ Start onStart
         super.onStart();
         SetClick();
+        BackClick();
         SetTextChange();
         FragmentConsumableexpandable.collapse();
         FragmentConsumableSuggestion.setVisibility(View.GONE);
@@ -127,6 +116,39 @@ public class FragmentConsumable extends Fragment {
     }//_____________________________________________________________________________________________ End onStart
 
 
+
+    private void BackClick() {//____________________________________________________________________ Start BackClick
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
+
+        view.setOnKeyListener(SetKey(view));
+        FragmentConsumableSave.setOnKeyListener(SetKey(FragmentConsumableSave));
+        FragmentConsumableAddClick.setOnKeyListener(SetKey(FragmentConsumableAddClick));
+        FragmentConsumableTitle.setOnKeyListener(SetKey(FragmentConsumableTitle));
+        FragmentConsumableKm.setOnKeyListener(SetKey(FragmentConsumableKm));
+        FragmentConsumableNextKm.setOnKeyListener(SetKey(FragmentConsumableNextKm));
+        FragmentConsumableBrand.setOnKeyListener(SetKey(FragmentConsumableBrand));
+        FragmentConsumableMoney.setOnKeyListener(SetKey(FragmentConsumableMoney));
+        FragmentConsumableDate.setOnKeyListener(SetKey(FragmentConsumableDate));
+        FragmentConsumableIgnor.setOnKeyListener(SetKey(FragmentConsumableIgnor));
+    }//_____________________________________________________________________________________________ End BackClick
+
+
+
+    private View.OnKeyListener SetKey(View view){//_________________________________________________ Start SetKey
+        return new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode != 4) {
+                    return true;
+                }
+                keyCode = 0;
+                event = null;
+                fragmentCarEvent.MessageType.onNext("close");
+                return true;
+            }
+        };
+    }//_____________________________________________________________________________________________ End SetKey
 
 
     private void SetCurrentDate() {//_______________________________________________________________ Start SetCurrentDate
@@ -223,7 +245,6 @@ public class FragmentConsumable extends Fragment {
 
 
     private void SetClick() {//_____________________________________________________________________ Start SetClick
-
 
 
         FragmentConsumableLayout.setOnClickListener(new OnClickListener() {
