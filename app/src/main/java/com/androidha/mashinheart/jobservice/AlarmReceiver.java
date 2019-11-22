@@ -155,11 +155,11 @@ public class AlarmReceiver extends BroadcastReceiver {
 
 
     private void ShowNotification(String Text) {//______________________________________________________________ Start ShowNotification
-        SharedPreferences prefs = context.getSharedPreferences("ML", 0);
+        SharedPreferences prefs = context.getSharedPreferences("mehrdad", 0);
         if (prefs == null) {
-            this.notId = Integer.valueOf(1);
+            notId = Integer.valueOf(1);
         } else {
-            this.notId = Integer.valueOf(prefs.getInt("noti", 1));
+            notId = Integer.valueOf(prefs.getInt("noti", 1));
         }
 
         Text = "Notification : " + notId;
@@ -179,9 +179,10 @@ public class AlarmReceiver extends BroadcastReceiver {
         notificationManager.notify(notId, mNotifyBuilder.build());
 
         notId++;
-        SharedPreferences.Editor editor = context.getSharedPreferences("noti", 0).edit();
+        SharedPreferences.Editor editor = context.getApplicationContext().getSharedPreferences("mehrdad", 0).edit();
         editor.putInt("noti", notId);
         editor.apply();
+
     }//_____________________________________________________________________________________________ End ShowNotification
 
 

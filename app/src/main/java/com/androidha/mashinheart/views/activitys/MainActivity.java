@@ -24,6 +24,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import android.content.SharedPreferences.Editor;
 
 import com.androidha.mashinheart.R;
 import com.androidha.mashinheart.dagger.persianpicker.PersianPickerModul;
@@ -173,6 +174,20 @@ public class MainActivity extends AppCompatActivity {
         SetAnimationViews();
         ShowFragmentYouCar();
         FragmentObserver();
+
+//        Integer notId = 0;
+//        SharedPreferences prefs = getSharedPreferences("mehrdad", 0);
+//        if (prefs == null) {
+//            notId = Integer.valueOf(1);
+//        } else {
+//            notId = Integer.valueOf(prefs.getInt("noti", 1));
+//        }
+//
+//        notId++;
+//        Editor editor = getApplicationContext().getSharedPreferences("mehrdad", 0).edit();
+//        editor.putInt("noti", notId);
+//        editor.apply();
+
         SetProfile();
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -191,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void SetProfile(){//____________________________________________________________________ Start SetProfile
-        SharedPreferences prefs = getSharedPreferences("ML", 0);
+        SharedPreferences prefs = getSharedPreferences("mehrdad", 0);
         if (prefs != null) {
             MainProfileName.setText(prefs.getString("profname",this.getResources().getString(R.string.ProfileName)));
             MainProfileTel.setText(prefs.getString("proftel",this.getResources().getString(R.string.ProfilePhone)));
