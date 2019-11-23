@@ -6,6 +6,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
+import com.androidha.mashinheart.views.application.MachinHeartApplication;
+
 import java.util.Calendar;
 
 public class LunchAlarmReceiver extends BroadcastReceiver {
@@ -20,9 +22,13 @@ public class LunchAlarmReceiver extends BroadcastReceiver {
 
     private void SetAlarmNotification() {//__________________________________________________________ Start SetAlarmNotification
 
+        MachinHeartApplication.getMachinHeartApplication(context)
+                .getApplicationUtilityComponent()
+                .getApplicationUtility().CustomToastShow(context,"Alarm");
+
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 16);
-        calendar.set(Calendar.MINUTE, 10);
+        calendar.set(Calendar.HOUR_OF_DAY, 18);
+        calendar.set(Calendar.MINUTE, 15);
         calendar.set(Calendar.SECOND, 0);
 
         Calendar now = Calendar.getInstance();

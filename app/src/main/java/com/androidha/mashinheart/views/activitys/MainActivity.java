@@ -1,14 +1,18 @@
 package com.androidha.mashinheart.views.activitys;
 
+import android.annotation.TargetApi;
 import android.app.AlarmManager;
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -197,24 +201,11 @@ public class MainActivity extends AppCompatActivity {
         ShowFragmentYouCar();
         FragmentObserver();
 
-
-//        long when = System.currentTimeMillis();
-//        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-//
-//        NotificationManager notificationManager = (NotificationManager) this
-//                .getSystemService(Context.NOTIFICATION_SERVICE);
-//
-//        NotificationCompat.Builder mNotifyBuilder = new NotificationCompat.Builder(
-//                this)
-//                .setSmallIcon(R.drawable.logo)
-//                .setContentTitle(this.getResources().getString(R.string.app_name))
-////                .setStyle(new NotificationCompat.BigTextStyle().bigText("khooobiiiiiii??"))
-//                .setContentText("salaaaaaaaaammm");
-////                .setSound(alarmSound)
-////                .setAutoCancel(true)
-////                .setWhen(when)
-////                .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000});
-//        notificationManager.notify("meri",1, mNotifyBuilder.build());
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            createChannels();
+//            String notifis = "mehrdad" + "\n" + "latifi" + "\n" + "sara";
+//            getManager().notify(7126, getNotification1(notifis).build());
+//        }
 
 
         SetProfile();
@@ -230,6 +221,70 @@ public class MainActivity extends AppCompatActivity {
 
 
     }//_____________________________________________________________________________________________ End onCreate
+
+    NotificationManager notifManager;
+    String CHANNEL_ONE_NAME = "Channel One";
+    String CHANNEL_ONE_ID = "novindokht.com.novindokht.ONE";
+
+    @TargetApi(Build.VERSION_CODES.O)
+    public void createChannels() {
+        NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ONE_ID,
+                CHANNEL_ONE_NAME, notifManager.IMPORTANCE_HIGH);
+        notificationChannel.enableLights(true);
+        notificationChannel.setLightColor(Color.RED);
+        notificationChannel.setShowBadge(true);
+        notificationChannel.enableVibration(true);
+        notificationChannel.setVibrationPattern(new long[]{1000, 1000, 1000, 1000, 1000});
+        notificationChannel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
+        getManager().createNotificationChannel(notificationChannel);
+
+    }
+
+    private NotificationManager getManager() {
+        if (notifManager == null) {
+            notifManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        }
+        return notifManager;
+    }
+
+
+    @TargetApi(Build.VERSION_CODES.O)
+    public Notification.Builder getNotification1(String title) {
+
+        return new Notification.Builder(getApplicationContext(), CHANNEL_ONE_ID)
+                .setContentText(title)
+                .setSmallIcon(R.drawable.logo)
+                .setAutoCancel(true);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     private void SetProfile() {//____________________________________________________________________ Start SetProfile
