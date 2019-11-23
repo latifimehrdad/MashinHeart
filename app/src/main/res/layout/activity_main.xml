@@ -69,6 +69,7 @@
             </RelativeLayout>
 
             <LinearLayout
+                android:id="@+id/MainProfileEdit"
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/_33sdp"
                 android:layout_alignLeft="@id/MainProfile"
@@ -118,7 +119,8 @@
                     android:gravity="center|right"
                     android:text="@string/ProfilePhone"
                     android:textColor="@color/MainWhite"
-                    android:textSize="@dimen/_8sdp" />
+                    android:textSize="@dimen/_8sdp"
+                    />
 
                 <LinearLayout
                     android:layout_width="fill_parent"
@@ -460,7 +462,7 @@
                             </LinearLayout>
                         </LinearLayout>
 
-                        //Other car
+                        //Advertise
 
                         <LinearLayout
                             android:id="@+id/MainAdvertise"
@@ -534,7 +536,9 @@
                             android:layout_height="@dimen/_80sdp"
                             android:background="@color/MainRight"
                             android:gravity="center"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:visibility="gone"
+                            >
 
                             <LinearLayout
                                 android:id="@+id/MainChangeCarLeft"
@@ -599,7 +603,9 @@
                             android:layout_height="@dimen/_80sdp"
                             android:background="@color/MainRight"
                             android:gravity="center"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:visibility="gone"
+                            >
 
                             <LinearLayout
                                 android:id="@+id/MainCarSaleLeft"
@@ -665,6 +671,7 @@
                             android:layout_height="@dimen/_80sdp"
                             android:background="@color/MainRight"
                             android:gravity="center"
+                            android:visibility="gone"
                             android:orientation="horizontal">
 
                             <LinearLayout
@@ -723,10 +730,10 @@
                             </LinearLayout>
                         </LinearLayout>
 
-                        //Agaring
+                        //About
 
                         <LinearLayout
-                            android:id="@+id/MainAgaring"
+                            android:id="@+id/MainAbout"
                             android:layout_width="fill_parent"
                             android:layout_height="@dimen/_95sdp"
                             android:background="@color/MainRight"
@@ -734,7 +741,7 @@
                             android:orientation="horizontal">
 
                             <LinearLayout
-                                android:id="@+id/MainAgaringLeft"
+                                android:id="@+id/MainAboutLeft"
                                 android:layout_width="@dimen/_3sdp"
                                 android:layout_height="fill_parent"
                                 android:background="@color/MainShadowDown"
@@ -747,7 +754,7 @@
                                 android:orientation="vertical">
 
                                 <LinearLayout
-                                    android:id="@+id/MainAgaringUpShadow"
+                                    android:id="@+id/MainAboutUpShadow"
                                     android:layout_width="fill_parent"
                                     android:layout_height="@dimen/_3sdp"
                                     android:background="@color/MainShadowUp"
@@ -770,6 +777,7 @@
                                     android:textSize="@dimen/_9sdp"
                                     android:visibility="invisible" />
                             </LinearLayout>
+
                         </LinearLayout>
 
 
@@ -793,7 +801,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_marginBottom="@dimen/_65sdp"
-                    android:padding="@dimen/_5sdp" />
+                    android:padding="@dimen/_3sdp" />
 
                 <LinearLayout
                     android:layout_width="fill_parent"
@@ -823,8 +831,82 @@
                     app:civ_border_width="@dimen/_5sdp" />
             </RelativeLayout>
             //fragment
+
+
+            <LinearLayout
+                android:id="@+id/MainDialogProfile"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/MainBlackTrans"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="@dimen/_50sdp"
+                >
+
+                <EditText
+                    android:id="@+id/MainDialogProfileName"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@color/MainWhite"
+                    android:hint="@string/ProfileName"
+                    android:inputType="textPersonName"
+                    android:padding="@dimen/_2sdp"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_12sdp" />
+
+                <EditText
+                    android:id="@+id/MainDialogProfileTel"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/FragmentConsumableTitle"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@color/MainWhite"
+                    android:hint="@string/ProfilePhone"
+                    android:inputType="phone"
+                    android:maxLength="12"
+                    android:padding="@dimen/_2sdp"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_12sdp" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/FragmentConsumableDate"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/MainDialogProfileIgnor"
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/layoutborderblack"
+                        android:text="@string/Ignor"
+                        android:textColor="@color/MainShadowDown"
+                        android:textSize="@dimen/_13sdp" />
+
+                    <Button
+                        android:id="@+id/MainDialogProfileSave"
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_weight="1.0"
+                        android:background="@drawable/save_info_button"
+                        android:text="@string/SaveInfo"
+                        android:textColor="@color/MainYellow"
+                        android:textSize="@dimen/_13sdp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
         </RelativeLayout>
         //main
+
+
     </LinearLayout>
 
 </layout>

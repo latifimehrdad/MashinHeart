@@ -215,7 +215,7 @@ public class DialogNewAdvertise extends DialogFragment {
         final String appName = "org.telegram.messenger";
         if (isAppAvailable(getContext(), appName)) {
             Intent telegram = new Intent(Intent.ACTION_VIEW);
-            telegram.setData(Uri.parse("https://telegram.me/iranlandcruiser"));
+            telegram.setData(Uri.parse(context.getResources().getString(R.string.TelegramLink)));
             telegram.setPackage("org.telegram.messenger");
             startActivity(Intent.createChooser(telegram, ""));
         } else {
@@ -229,14 +229,14 @@ public class DialogNewAdvertise extends DialogFragment {
 
 
     private void OpenInstagram() {//_________________________________________________________________ Start OpenInstagram
-        Uri uri = Uri.parse("http://instagram.com/_u/iranlandcruiser");
+        Uri uri = Uri.parse("http://instagram.com/_u/"+context.getResources().getString(R.string.InstagramLink));
         Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
         likeIng.setPackage("com.instagram.android");
         try {
             startActivity(likeIng);
         } catch (ActivityNotFoundException e) {
             startActivity(new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("http://instagram.com/iranlandcruiser")));
+                    Uri.parse("http://instagram.com/"+context.getResources().getString(R.string.InstagramLink))));
 
         }
     }//_____________________________________________________________________________________________ End OpenInstagram

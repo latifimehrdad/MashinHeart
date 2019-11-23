@@ -15,11 +15,6 @@ public class LunchAlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         this.context = context;
-//        MachinHeartApplication
-//                .getMachinHeartApplication(context)
-//                .getApplicationUtilityComponent()
-//                .getApplicationUtility()
-//                .CustomToastShow(context, "AlarmOn");
         SetAlarmNotification();
     }
 

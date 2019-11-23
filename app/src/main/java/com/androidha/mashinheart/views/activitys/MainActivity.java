@@ -1,16 +1,22 @@
 package com.androidha.mashinheart.views.activitys;
 
 import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -24,6 +30,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
 import android.content.SharedPreferences.Editor;
 
 import com.androidha.mashinheart.R;
@@ -33,6 +40,7 @@ import com.androidha.mashinheart.jobservice.AlarmReceiver;
 import com.androidha.mashinheart.viewmodels.ActivityMainViewModel;
 import com.androidha.mashinheart.views.application.MachinHeartApplication;
 import com.androidha.mashinheart.views.dialogs.DialogNewAdvertise;
+import com.androidha.mashinheart.views.fragments.FragmentAbout;
 import com.androidha.mashinheart.views.fragments.FragmentAddCar;
 import com.androidha.mashinheart.views.fragments.FragmentAdvertise;
 import com.androidha.mashinheart.views.fragments.FragmentCarEvent;
@@ -69,12 +77,12 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout MainAddCarLine;
     @BindView(R.id.MainAddCarUpShadow)
     LinearLayout MainAddCarUpShadow;
-    @BindView(R.id.MainAgaring)
-    LinearLayout MainAgaring;
-    @BindView(R.id.MainAgaringLeft)
-    LinearLayout MainAgaringLeft;
-    @BindView(R.id.MainAgaringUpShadow)
-    LinearLayout MainAgaringUpShadow;
+    @BindView(R.id.MainAbout)
+    LinearLayout MainAbout;
+    @BindView(R.id.MainAboutLeft)
+    LinearLayout MainAboutLeft;
+    @BindView(R.id.MainAboutUpShadow)
+    LinearLayout MainAboutUpShadow;
     @BindView(R.id.MainCarSale)
     LinearLayout MainCarSale;
     @BindView(R.id.MainCarSaleDownShadow)
@@ -155,6 +163,19 @@ public class MainActivity extends AppCompatActivity {
     TextView MainProfileName;
     @BindView(R.id.MainProfileTel)
     TextView MainProfileTel;
+    @BindView(R.id.MainDialogProfileName)
+    EditText MainDialogProfileName;
+    @BindView(R.id.MainDialogProfileTel)
+    EditText MainDialogProfileTel;
+    @BindView(R.id.MainDialogProfileIgnor)
+    Button MainDialogProfileIgnor;
+    @BindView(R.id.MainDialogProfileSave)
+    Button MainDialogProfileSave;
+    @BindView(R.id.MainDialogProfile)
+    LinearLayout MainDialogProfile;
+    @BindView(R.id.MainProfileEdit)
+    LinearLayout MainProfileEdit;
+
 
     FragmentManager fm;
     FragmentTransaction ft;
@@ -167,6 +188,7 @@ public class MainActivity extends AppCompatActivity {
         activityMainBinding.setMain(this.viewModel);
         PersianPickerModul.context = this;
         ButterKnife.bind(this);
+        MainDialogProfile.setVisibility(View.GONE);
         FragmentMessage = PublishSubject.create();
         ChooseCar = PublishSubject.create();
         ResetRightMenu();
@@ -175,18 +197,25 @@ public class MainActivity extends AppCompatActivity {
         ShowFragmentYouCar();
         FragmentObserver();
 
-//        Integer notId = 0;
-//        SharedPreferences prefs = getSharedPreferences("mehrdad", 0);
-//        if (prefs == null) {
-//            notId = Integer.valueOf(1);
-//        } else {
-//            notId = Integer.valueOf(prefs.getInt("noti", 1));
-//        }
+
+//        long when = System.currentTimeMillis();
+//        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 //
-//        notId++;
-//        Editor editor = getApplicationContext().getSharedPreferences("mehrdad", 0).edit();
-//        editor.putInt("noti", notId);
-//        editor.apply();
+//        NotificationManager notificationManager = (NotificationManager) this
+//                .getSystemService(Context.NOTIFICATION_SERVICE);
+//
+//        NotificationCompat.Builder mNotifyBuilder = new NotificationCompat.Builder(
+//                this)
+//                .setSmallIcon(R.drawable.logo)
+//                .setContentTitle(this.getResources().getString(R.string.app_name))
+////                .setStyle(new NotificationCompat.BigTextStyle().bigText("khooobiiiiiii??"))
+//                .setContentText("salaaaaaaaaammm");
+////                .setSound(alarmSound)
+////                .setAutoCancel(true)
+////                .setWhen(when)
+////                .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000});
+//        notificationManager.notify("meri",1, mNotifyBuilder.build());
+
 
         SetProfile();
         Handler handler = new Handler();
@@ -197,19 +226,26 @@ public class MainActivity extends AppCompatActivity {
                 sendBroadcast(i);
             }
         }, 1000);
-        //SetAlarmNotification();
+        SetAlarmNotification();
 
 
     }//_____________________________________________________________________________________________ End onCreate
 
 
-
-
-    private void SetProfile(){//____________________________________________________________________ Start SetProfile
+    private void SetProfile() {//____________________________________________________________________ Start SetProfile
         SharedPreferences prefs = getSharedPreferences("mehrdad", 0);
         if (prefs != null) {
-            MainProfileName.setText(prefs.getString("profname",this.getResources().getString(R.string.ProfileName)));
-            MainProfileTel.setText(prefs.getString("proftel",this.getResources().getString(R.string.ProfilePhone)));
+            String name = prefs.getString("profname", this.getResources().getString(R.string.ProfileName));
+            String Tel = prefs.getString("proftel", this.getResources().getString(R.string.ProfilePhone));
+            if ((name == null) || (name.length() == 0))
+                MainProfileName.setText(this.getResources().getString(R.string.ProfileName));
+            else
+                MainProfileName.setText(prefs.getString("profname", this.getResources().getString(R.string.ProfileName)));
+
+            if ((Tel == null) || (Tel.length() == 0))
+                MainProfileTel.setText(this.getResources().getString(R.string.ProfilePhone));
+            else
+                MainProfileTel.setText(prefs.getString("proftel", this.getResources().getString(R.string.ProfilePhone)));
         }
     }//_____________________________________________________________________________________________ End SetProfile
 
@@ -234,6 +270,57 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void ClickItems() {//_______________________________________________________________ Start ClickItems
+
+
+        MainProfileEdit.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(MainDialogProfile.getVisibility() == View.GONE)
+                    MainDialogProfile.setVisibility(View.VISIBLE);
+                else
+                    MainDialogProfile.setVisibility(View.GONE);
+            }
+        });
+
+        MainDialogProfileIgnor.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainDialogProfile.setVisibility(View.GONE);
+            }
+        });
+        MainDialogProfile.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainDialogProfile.setVisibility(View.GONE);
+            }
+        });
+
+        MainDialogProfileSave.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (MainDialogProfileName.getText().toString().trim().length() == 0) {
+                    MachinHeartApplication
+                            .getMachinHeartApplication(MainActivity.this)
+                            .getApplicationUtilityComponent()
+                            .getApplicationUtility()
+                            .CustomToastShow(MainActivity.this, getResources().getString(R.string.EmptyProfileName));
+                    MainDialogProfileName.requestFocus();
+                    return;
+                }
+
+                SharedPreferences.Editor editor = MainActivity.this
+                        .getApplicationContext()
+                        .getSharedPreferences("mehrdad", 0)
+                        .edit();
+                editor.putString("profname", MainDialogProfileName.getText().toString());
+                editor.putString("proftel", MainDialogProfileTel.getText().toString());
+                editor.apply();
+                SetProfile();
+                MainDialogProfile.setVisibility(View.GONE);
+
+            }
+        });
+
 
         MainYouCar.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
@@ -354,13 +441,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        MainAgaring.setOnClickListener(new OnClickListener() {
+        MainAbout.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
                 ResetRightMenu();
-                MainAgaring.setBackgroundColor(MainActivity.this.getResources().getColor(R.color.MainFragment));
-                MainAgaringLeft.setVisibility(View.GONE);
-                MainAgaringUpShadow.setVisibility(View.VISIBLE);
-                MainUpdateInfoLine.setVisibility(View.GONE);
+                MainAbout.setBackgroundColor(MainActivity.this.getResources().getColor(R.color.MainFragment));
+                MainAboutLeft.setVisibility(View.GONE);
+                MainAboutUpShadow.setVisibility(View.VISIBLE);
+                MainAdvertiseLine.setVisibility(View.GONE);
+                fm = null;
+                ft = null;
+                fm = getSupportFragmentManager();
+                ft = fm.beginTransaction();
+                ft.replace(R.id.MainFragment, new FragmentAbout(MainActivity.this));
+                ft.commit();
             }
         });
 
@@ -418,9 +511,9 @@ public class MainActivity extends AppCompatActivity {
         MainUpdateInfoUpShadow.setVisibility(View.GONE);
         MainUpdateInfoDownShadow.setVisibility(View.GONE);
         MainUpdateInfoLine.setVisibility(View.VISIBLE);
-        MainAgaring.setBackgroundColor(getApplicationContext().getResources().getColor(R.color.MainRight));
-        MainAgaringLeft.setVisibility(View.VISIBLE);
-        MainAgaringUpShadow.setVisibility(View.GONE);
+        MainAbout.setBackgroundColor(getApplicationContext().getResources().getColor(R.color.MainRight));
+        MainAboutLeft.setVisibility(View.VISIBLE);
+        MainAboutUpShadow.setVisibility(View.GONE);
     }//_____________________________________________________________________________________________ End ClickRightMenu
 
 
@@ -542,10 +635,9 @@ public class MainActivity extends AppCompatActivity {
     }//_____________________________________________________________________________________________ End SetAnimationYouCar
 
 
-
     private void ShowDialogNew() {//________________________________________________________________ Start ShowDialogNew
         dialogNewAdvertise = new DialogNewAdvertise(this);
-        dialogNewAdvertise.show(getSupportFragmentManager(),NotificationCompat.CATEGORY_PROGRESS);
+        dialogNewAdvertise.show(getSupportFragmentManager(), NotificationCompat.CATEGORY_PROGRESS);
     }//_____________________________________________________________________________________________ End ShowDialogNew
 
 

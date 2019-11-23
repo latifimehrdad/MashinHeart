@@ -55,8 +55,8 @@ public class FragmentAdvertise extends Fragment {
     @BindView(R.id.FragmentAdvertiseCity)
     Spinner FragmentAdvertiseCity;
 
-    @BindView(R.id.FragmentAdvertiseExpandable)
-    ExpandableLayout FragmentAdvertiseExpandable;
+//    @BindView(R.id.FragmentAdvertiseExpandable)
+//    ExpandableLayout FragmentAdvertiseExpandable;
 
     @BindView(R.id.FragmentAdvertiseSearch)
     ImageView FragmentAdvertiseSearch;
@@ -96,7 +96,7 @@ public class FragmentAdvertise extends Fragment {
         SpinnerAdabter();
         SetClick();
         MessageControler();
-        FragmentAdvertiseExpandable.collapse();
+        //FragmentAdvertiseExpandable.collapse();
     }//_____________________________________________________________________________________________ End onStart
 
 
@@ -122,7 +122,7 @@ public class FragmentAdvertise extends Fragment {
                     ShowToast(context.getResources().getString(R.string.AdvertiseCityEmpty));
                     return;
                 } else {
-                    FragmentAdvertiseExpandable.expand();
+                    //FragmentAdvertiseExpandable.expand();
                 }
             }
         });
@@ -131,10 +131,22 @@ public class FragmentAdvertise extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 CityId = i;
                 if (CityId == 0) {
-                    FragmentAdvertiseExpandable.collapse();
+//                    FragmentAdvertiseExpandable.collapse();
                     return;
                 }
-                FragmentAdvertiseExpandable.expand();
+//                FragmentAdvertiseExpandable.expand();
+                double[] latlong = MachinHeartApplication
+                        .getMachinHeartApplication(context)
+                        .getApplicationUtilityComponent()
+                        .getApplicationUtility()
+                        .getLatLong(CityId);
+                ShowProgressDialog();
+                fragmentAdvertiseViewModel.setCancel(false);
+                fragmentAdvertiseViewModel
+                        .GetAdvertise(
+                                latlong[0],
+                                latlong[1],
+                                FragmentAdvertiseText.getText().toString());
             }
 
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -166,7 +178,6 @@ public class FragmentAdvertise extends Fragment {
         });
 
     }//_____________________________________________________________________________________________ End SetClick
-
 
 
     public void ShowToast(String Message) {//_______________________________________________________ Start ShowToast
@@ -210,7 +221,7 @@ public class FragmentAdvertise extends Fragment {
                                                 if (progress != null) {
                                                     progress.dismiss();
                                                 }
-                                                FragmentAdvertiseExpandable.collapse();
+                                                //FragmentAdvertiseExpandable.collapse();
                                                 FragmentAdvertiseCity.setSelection(0);
                                                 SetAdabter();
                                                 break;
@@ -244,15 +255,13 @@ public class FragmentAdvertise extends Fragment {
     }//_____________________________________________________________________________________________ End MessageControler
 
 
-
-    private void SetAdabter(){//____________________________________________________________________ Start SetAdabter
+    private void SetAdabter() {//____________________________________________________________________ Start SetAdabter
         modelAdvertiseLists = fragmentAdvertiseViewModel.getModelAdvertiseLists();
         adabterAdvertise = new AdabterAdvertise(context, modelAdvertiseLists, FragmentAdvertise.this);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context,RecyclerView.VERTICAL,false);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context, RecyclerView.VERTICAL, false);
         FragmentAdvertises.setLayoutManager(layoutManager);
         FragmentAdvertises.setAdapter(adabterAdvertise);
     }//_____________________________________________________________________________________________ End SetAdabter
-
 
 
     @Override
@@ -264,14 +273,12 @@ public class FragmentAdvertise extends Fragment {
     }//_____________________________________________________________________________________________ End onDestroy
 
 
-
-
     public void ItemClick(int position) {//_________________________________________________________ Start ItemClick
         DialogAdvertiseDetail dialogAdvertiseDetail = new DialogAdvertiseDetail(
                 context,
                 fragmentAdvertiseViewModel.getModelAdvertiseLists().get(position)
         );
-        dialogAdvertiseDetail.show(getFragmentManager(),"DialogAdvertiseDetail");
+        dialogAdvertiseDetail.show(getFragmentManager(), "DialogAdvertiseDetail");
 
     }//_____________________________________________________________________________________________ End ItemClick
 

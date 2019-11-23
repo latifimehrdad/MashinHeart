@@ -54,6 +54,7 @@
             android:layout_marginTop="@dimen/_5sdp"
             app:el_duration="1000"
             app:el_expanded="true"
+            android:visibility="gone"
             app:el_parallax="0.5">
 
             <LinearLayout

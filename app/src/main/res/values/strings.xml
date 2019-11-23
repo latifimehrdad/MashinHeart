@@ -122,11 +122,11 @@
 
 
      <string name="agaring">"درخواست آنلاین n\ لوازم یدکی"</string>
-    <string name="app_name">قلب ماشین</string>
+    <string name="app_name">کلینیک ماشین</string>
 
     <string name="AddCar">اضافه کردن خودرو</string>
     <string name="AreYouSure">آیا برای حذف این مورد مطمئن هستید؟</string>
-    <string name="Brand_Prompt">برند انتخابی</string>
+    <string name="Brand_Prompt">انتخاب برند</string>
     <string name="CarBodyInsurance">آیا بیمه بدنه دارید؟</string>
     <string name="CarBrand">برند خودرو</string>
     <string name="CarChassisNumber">شماره شاسی خودرو</string>
@@ -275,6 +275,13 @@
     <string name="SendTelegram">ارسال پیام به تلگرام ما</string>
     <string name="SendInstagram">ارسال پیام به اینستاگرام ما</string>
     <string name="SendWhatsapp">ارسال پیام به واتس اپ ما</string>
-    <string name="NotInstallTelegram">نرم افزار تلگرام روی دستگاه نصب نیست</string>
+    <string name="NotInstallTelegram">نرم افزار تلگرام روی دستگاه شما نصب نیست</string>
+    <string name="EmptyProfileName">لطفا نام خودرا وارد نمایید</string>
+    <string name="Version">نسخه</string>
+    <string name="CallUs">راههای ارتباط با ما</string>
+    <string name="Website">وبسایت کلینیک ماشین</string>
+    <string name="WebSiteLink">http://www.clinicemashin.ir</string>
+    <string name="TelegramLink">https://telegram.me/iranlandcruiser</string>
+    <string name="InstagramLink">iranlandcruiser</string>
 
 </resources>

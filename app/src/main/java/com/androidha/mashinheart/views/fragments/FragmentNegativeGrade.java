@@ -185,7 +185,7 @@ public class FragmentNegativeGrade extends Fragment {
                                                 if (progress != null) {
                                                     progress.dismiss();
                                                 }
-                                                ShowToast(s);
+                                                ShowToast("ارتباط با پلیس راهور برقرار نشد");
                                                 FragmentNegativeGradeCaptcha.setImageBitmap(fragmentNegativeGradeViewModel.getCaptchaBitmap());
                                                 FragmentNegativeGradeExpandable.expand();
                                                 break;

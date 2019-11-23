@@ -12,6 +12,8 @@
     <color name="MainShadowUp">#5047a5</color>
     <color name="MainWhite">#ffffff</color>
     <color name="MainYellow">#ffdd00</color>
+    <color name="MainBlackTrans">#B3000000</color>
+    <color name="MainWhiteTranse">#80FFFFFF</color>
 
 
 </resources>
