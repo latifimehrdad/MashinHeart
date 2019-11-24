@@ -1,5 +1,6 @@
 package com.androidha.mashinheart.models;
 
+import android.graphics.Bitmap;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -7,7 +8,11 @@ import android.widget.TextView;
 import androidx.databinding.BindingAdapter;
 
 import com.androidha.mashinheart.R;
+import com.androidha.mashinheart.views.application.MachinHeartApplication;
 import com.google.gson.annotations.SerializedName;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 public class ModelAdvertiseList {
 
@@ -76,6 +81,41 @@ public class ModelAdvertiseList {
             imageView.setImageResource(R.drawable.ic_do_not_disturb_alt_black_24dp);
 
     }
+
+
+
+    @BindingAdapter(value = {"Image"})
+    public static void SetImageAdvertise(ImageView imageView, String Url){
+        if((Url != null) && (!Url.equalsIgnoreCase(""))){
+            Url = imageView.getContext().getResources().getString(R.string.AgaringLink) + Url;
+            ImageLoader imageLoader = MachinHeartApplication
+                    .getMachinHeartApplication(imageView.getContext())
+                    .getImageLoaderComponent()
+                    .getImageLoader();
+
+            imageLoader.displayImage(Url, imageView, new ImageLoadingListener() {
+                @Override
+                public void onLoadingStarted(String imageUri, View view) {
+                }
+
+                @Override
+                public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+                    //holder.spin_kit.setVisibility(View.GONE);
+                }
+
+                @Override
+                public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                    //holder.spin_kit.setVisibility(View.GONE);
+                }
+
+                @Override
+                public void onLoadingCancelled(String imageUri, View view) {
+                    //holder.spin_kit.setVisibility(View.GONE);
+                }
+            });
+        }
+    }
+
 
     public int getId() {
         return Id;

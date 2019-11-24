@@ -97,6 +97,7 @@
                 android:layout_height="@dimen/_45sdp"
                 android:src="@drawable/logo"
                 android:layout_marginLeft="@dimen/_5sdp"
+                app:Image="@{advertise.img}"
                 />
 
         </LinearLayout>

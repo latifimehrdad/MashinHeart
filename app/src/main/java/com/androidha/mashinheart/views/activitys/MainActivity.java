@@ -41,6 +41,7 @@ import com.androidha.mashinheart.R;
 import com.androidha.mashinheart.dagger.persianpicker.PersianPickerModul;
 import com.androidha.mashinheart.databinding.ActivityMainBinding;
 import com.androidha.mashinheart.jobservice.AlarmReceiver;
+import com.androidha.mashinheart.jobservice.LunchAlarmReceiver;
 import com.androidha.mashinheart.viewmodels.ActivityMainViewModel;
 import com.androidha.mashinheart.views.application.MachinHeartApplication;
 import com.androidha.mashinheart.views.dialogs.DialogNewAdvertise;
@@ -213,8 +214,16 @@ public class MainActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i = new Intent("ir.MachinHeart.Lunch");
-                sendBroadcast(i);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    sendBroadcast(new Intent(MainActivity.this, LunchAlarmReceiver.class).setAction("ir.MachinHeart.Lunch"));
+                }
+                else{
+                    Intent i = new Intent("ir.MachinHeart.Lunch");
+                    sendBroadcast(i);
+                }
+
+
+
             }
         }, 1000);
         SetAlarmNotification();
@@ -222,67 +231,40 @@ public class MainActivity extends AppCompatActivity {
 
     }//_____________________________________________________________________________________________ End onCreate
 
-    NotificationManager notifManager;
-    String CHANNEL_ONE_NAME = "Channel One";
-    String CHANNEL_ONE_ID = "novindokht.com.novindokht.ONE";
-
-    @TargetApi(Build.VERSION_CODES.O)
-    public void createChannels() {
-        NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ONE_ID,
-                CHANNEL_ONE_NAME, notifManager.IMPORTANCE_HIGH);
-        notificationChannel.enableLights(true);
-        notificationChannel.setLightColor(Color.RED);
-        notificationChannel.setShowBadge(true);
-        notificationChannel.enableVibration(true);
-        notificationChannel.setVibrationPattern(new long[]{1000, 1000, 1000, 1000, 1000});
-        notificationChannel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
-        getManager().createNotificationChannel(notificationChannel);
-
-    }
-
-    private NotificationManager getManager() {
-        if (notifManager == null) {
-            notifManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        }
-        return notifManager;
-    }
-
-
-    @TargetApi(Build.VERSION_CODES.O)
-    public Notification.Builder getNotification1(String title) {
-
-        return new Notification.Builder(getApplicationContext(), CHANNEL_ONE_ID)
-                .setContentText(title)
-                .setSmallIcon(R.drawable.logo)
-                .setAutoCancel(true);
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//    NotificationManager notifManager;
+//    String CHANNEL_ONE_NAME = "Channel One";
+//    String CHANNEL_ONE_ID = "novindokht.com.novindokht.ONE";
+//
+//    @TargetApi(Build.VERSION_CODES.O)
+//    public void createChannels() {
+//        NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ONE_ID,
+//                CHANNEL_ONE_NAME, notifManager.IMPORTANCE_HIGH);
+//        notificationChannel.enableLights(true);
+//        notificationChannel.setLightColor(Color.RED);
+//        notificationChannel.setShowBadge(true);
+//        notificationChannel.enableVibration(true);
+//        notificationChannel.setVibrationPattern(new long[]{1000, 1000, 1000, 1000, 1000});
+//        notificationChannel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
+//        getManager().createNotificationChannel(notificationChannel);
+//
+//    }
+//
+//    private NotificationManager getManager() {
+//        if (notifManager == null) {
+//            notifManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//        }
+//        return notifManager;
+//    }
+//
+//
+//    @TargetApi(Build.VERSION_CODES.O)
+//    public Notification.Builder getNotification1(String title) {
+//
+//        return new Notification.Builder(getApplicationContext(), CHANNEL_ONE_ID)
+//                .setContentText(title)
+//                .setSmallIcon(R.drawable.logo)
+//                .setAutoCancel(true);
+//    }
 
 
 
