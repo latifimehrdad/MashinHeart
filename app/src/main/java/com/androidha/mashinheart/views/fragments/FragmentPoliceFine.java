@@ -276,7 +276,7 @@ public class FragmentPoliceFine extends Fragment {
         try {
             Document document = Jsoup.parse(html);
             String pelak_p1 = document.select("div[id=p1]").first().text().replaceAll("ــ", "");
-            FragmentPoliceFinePela.setText(document.select("div[id=p2]").first().text());
+            FragmentPoliceFinePela.setText("ا" + "  " + document.select("div[id=p2]").first().text() + "  " + "ا");
             FragmentPoliceFinePelakIran.setText(pelak_p1);
             Elements elems = document.select("table[id=t1] tbody").select("tr");
             if (elems.size() > 0) {
@@ -295,6 +295,7 @@ public class FragmentPoliceFine extends Fragment {
                             (tdelem.get(7)).text(),
                             (tdelem.get(10)).text(),
                             (tdelem.get(11)).text());
+
                     modelPoliceFinesArray.add(modelPoliceFine);
                     price += Long.parseLong((tdelem.get(3)).text());
                     counter++;

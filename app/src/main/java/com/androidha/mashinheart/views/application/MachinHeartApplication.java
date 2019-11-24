@@ -30,10 +30,11 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
 import java.lang.ref.Reference;
 
+import io.github.inflationx.calligraphy3.CalligraphyConfig;
+import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
+import io.github.inflationx.viewpump.ViewPump;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig.Builder;
 
 public class MachinHeartApplication extends Application {
 
@@ -122,7 +123,17 @@ public class MachinHeartApplication extends Application {
     }
 
     private void ConfigurationCalligraphy() {
-        CalligraphyConfig.initDefault(new Builder().setDefaultFontPath("font/iransanslight.ttf").setFontAttrId(R.attr.fontPath).build());
+        ViewPump.init(ViewPump.builder()
+                .addInterceptor(new CalligraphyInterceptor(
+                        new CalligraphyConfig.Builder()
+                                .setDefaultFontPath("font/iransanslight.ttf")
+                                .setFontAttrId(R.attr.fontPath)
+                                .build()))
+                .build());
+
+//        CalligraphyConfig
+//                .initDefault(new Builder()
+//                        .setDefaultFontPath("font/iransanslight.ttf").setFontAttrId(R.attr.fontPath).build());
     }
 
     private void ConfigurationRealm() {

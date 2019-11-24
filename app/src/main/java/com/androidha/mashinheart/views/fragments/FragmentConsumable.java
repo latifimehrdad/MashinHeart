@@ -140,7 +140,7 @@ public class FragmentConsumable extends Fragment {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode != 4) {
-                    return true;
+                    return false;
                 }
                 keyCode = 0;
                 event = null;

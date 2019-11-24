@@ -284,5 +284,7 @@
     <string name="TelegramLink">https://telegram.me/iranlandcruiser</string>
     <string name="InstagramLink">iranlandcruiser</string>
     <string name="AgaringLink">http://www.agaring.ir</string>
+    <string name="NotificationSee">برای مشاهده کامل کلیک کنید</string>
+
 
 </resources>

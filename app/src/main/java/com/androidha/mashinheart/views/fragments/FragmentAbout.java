@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -158,7 +157,10 @@ public class FragmentAbout extends Fragment {
 
 
     private void OpenWhatsApp() {//__________________________________________________________________ Start OpenWhatsApp
-
+        String url = "https://api.whatsapp.com/send?phone="+"+989039124662";
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        startActivity(i);
     }//_____________________________________________________________________________________________ End OpenWhatsApp
 
 

@@ -497,7 +497,7 @@
                                     android:layout_width="@dimen/_35sdp"
                                     android:layout_height="@dimen/_35sdp"
                                     android:layout_marginTop="@dimen/_10sdp"
-                                    android:src="@drawable/other_car" />
+                                    android:src="@drawable/advertise" />
 
                                 <TextView
                                     android:layout_width="fill_parent"
@@ -826,7 +826,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="@dimen/_20sdp"
-                    android:src="@color/MainYellow"
+                    android:src="@drawable/newadvertise"
                     app:civ_border_color="@color/MainFragment"
                     app:civ_border_width="@dimen/_5sdp" />
             </RelativeLayout>

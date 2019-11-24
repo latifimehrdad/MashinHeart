@@ -243,7 +243,10 @@ public class DialogNewAdvertise extends DialogFragment {
 
 
     private void OpenWhatsApp() {//__________________________________________________________________ Start OpenWhatsApp
-
+        String url = "https://api.whatsapp.com/send?phone="+"+989039124662";
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        startActivity(i);
     }//_____________________________________________________________________________________________ End OpenWhatsApp
 
 

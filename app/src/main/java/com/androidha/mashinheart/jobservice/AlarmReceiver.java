@@ -8,6 +8,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -20,11 +22,10 @@ import com.androidha.mashinheart.R;
 import com.androidha.mashinheart.databases.DataBaseCars;
 import com.androidha.mashinheart.databases.DataBaseConsumable;
 import com.androidha.mashinheart.databases.DataBaseInsurance;
+import com.androidha.mashinheart.views.activitys.MainActivity;
 import com.androidha.mashinheart.views.application.MachinHeartApplication;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -42,15 +43,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         this.context = context;
         notifis = "";
-        GetNotiId();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CreateChannels();
-            ShowNotificationNew(notifis);
-        } else {
-            ShowNotificationOld(notifis);
-        }
-        //CheckItems();
-        //ShowNotification(notifis);
+        CheckItems();
 
     }//_____________________________________________________________________________________________ End onReceive
 
@@ -62,22 +55,23 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .getRealmComponent()
                 .getRealm();
 
-        String CurrentDate = MachinHeartApplication
-                .getMachinHeartApplication(context)
-                .getApplicationUtilityComponent()
-                .getApplicationUtility()
-                .MiladiToJalali(Calendar.getInstance().getTime(), "FullJalaliNumber");
-
-        if (CurrentDate != null)
-            CurrentDate = CurrentDate.replaceAll("/", "");
-        else
-            return;
-
         RealmResults<DataBaseCars> Cars = realm
                 .where(DataBaseCars.class)
                 .findAll();
 
         for (DataBaseCars car : Cars) {
+
+            String CurrentDate = MachinHeartApplication
+                    .getMachinHeartApplication(context)
+                    .getApplicationUtilityComponent()
+                    .getApplicationUtility()
+                    .MiladiToJalali(Calendar.getInstance().getTime(), "FullJalaliNumber");
+
+            if (CurrentDate != null)
+                CurrentDate = CurrentDate.replaceAll("/", "");
+            else
+                return;
+
             RealmResults<DataBaseConsumable> consumables = realm
                     .where(DataBaseConsumable.class)
                     .notEqualTo("notification", 2)
@@ -142,24 +136,30 @@ public class AlarmReceiver extends BroadcastReceiver {
                     .findAll();
 
             for (DataBaseInsurance item : insurances) {
-                AddNotificationItem(
-                        context.getResources().getStringArray(R.array.CarBrand)[car.getCarBrand()]
-                        , car.getCarColor()
-                        , context.getResources().getStringArray(R.array.InsuranceType)[item.getInsuranceType()]
-                        , false);
+                //if ((Integer.valueOf(CurrentDate) > item.getInsuranceDate()) || ((Integer.valueOf(CurrentDate) <= item.getInsuranceDate()) && (Integer.valueOf(date) >= item.getInsuranceDate()))) {
+                    AddNotificationItem(
+                            context.getResources().getStringArray(R.array.CarBrand)[car.getCarBrand()]
+                            , car.getCarColor()
+                            , context.getResources().getStringArray(R.array.InsuranceType)[item.getInsuranceType()]
+                            , false);
+                //}
+
             }
+
+            if (!notifis.equalsIgnoreCase("")) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    CreateChannels();
+                    ShowNotificationNew(notifis,car.getCarBrand());
+                } else {
+                    ShowNotificationOld(notifis,car.getCarBrand());
+                }
+            }
+
+            notifis = "";
 
         }
 
-        if (!notifis.equalsIgnoreCase("")) {
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                CreateChannels();
-                ShowNotificationNew(notifis);
-            } else {
-                ShowNotificationOld(notifis);
-            }
-        }
 
 
     }//_____________________________________________________________________________________________ End CheckItems
@@ -177,34 +177,43 @@ public class AlarmReceiver extends BroadcastReceiver {
     }//_____________________________________________________________________________________________ End AddNotificationItem
 
 
-    private void ShowNotificationOld(String Text) {//_______________________________________________ Start ShowNotificationOld
+    private void ShowNotificationOld(String Text, Integer Brand) {//________________________________ Start ShowNotificationOld
 
-        Text = "Notification : " + notId;
+        //Text = "Notification : " + notId;
         long when = System.currentTimeMillis();
+        Bitmap icon = BitmapFactory.decodeResource(context.getResources(),
+                context.getResources().obtainTypedArray(R.array.CarLogo).getResourceId(Brand, 0));
         NotificationCompat.Builder mNotifyBuilder = new NotificationCompat.Builder(
                 context)
-                .setSmallIcon(R.drawable.logo)
+                .setSmallIcon(R.drawable.logomini)
+                .setLargeIcon(Bitmap.createScaledBitmap(icon, 80, 80, false))
                 .setContentTitle(context.getResources().getString(R.string.app_name))
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(Text))
-                .setContentText(Text)
                 .setSound(getSound())
                 .setAutoCancel(true)
                 .setWhen(when)
                 .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000});
+        mNotifyBuilder.setColor(context.getResources().getColor(R.color.MainYellow));
         getManager().notify(GetNotiId(), mNotifyBuilder.build());
 
     }//_____________________________________________________________________________________________ End ShowNotificationOld
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void ShowNotificationNew(String Text) {//________________________________________________ Start ShowNotificationNew
-        Text = "Notification : " + notId;
+    public void ShowNotificationNew(String Text, Integer Brand) {//________________________________________________ Start ShowNotificationNew
+        //Text = "Notification : " + notId;
+        Bitmap icon = BitmapFactory.decodeResource(context.getResources(),
+                context.getResources().obtainTypedArray(R.array.CarLogo).getResourceId(Brand, 0));
         Notification.Builder builder = new Notification.Builder(context, CHANNEL_ONE_ID)
+                .setSmallIcon(R.drawable.logomini)
                 .setContentText(Text)
-                .setSound(getSound())
-                .setSmallIcon(R.drawable.logo)
+                .setLargeIcon(icon)
+                .setSubText(context.getResources().getString(R.string.NotificationSee))
+                .setStyle(new Notification.BigTextStyle()
+                        .bigText(Text))
                 .setAutoCancel(true);
-        getManager().notify(notId, builder.build());
+        builder.setColor(context.getResources().getColor(R.color.MainYellow));
+        getManager().notify(GetNotiId(), builder.build());
     }//_____________________________________________________________________________________________ End ShowNotificationNew
 
 
@@ -225,7 +234,7 @@ public class AlarmReceiver extends BroadcastReceiver {
             notId = Integer.valueOf(prefs.getInt("noti", 1));
         }
 
-        notIdOld = notId++;
+        notIdOld = notId + 1;
         SharedPreferences.Editor editor = context.getApplicationContext().getSharedPreferences("mehrdad", 0).edit();
         editor.putInt("noti", notIdOld);
         editor.apply();
@@ -247,7 +256,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ONE_ID,
                 CHANNEL_ONE_NAME, notifManager.IMPORTANCE_HIGH);
         notificationChannel.enableLights(true);
-        notificationChannel.setLightColor(Color.RED);
+        notificationChannel.setLightColor(context.getResources().getColor(R.color.MainYellow));
         notificationChannel.setShowBadge(true);
         notificationChannel.enableVibration(true);
         notificationChannel.setVibrationPattern(new long[]{1000, 1000, 1000, 1000, 1000});

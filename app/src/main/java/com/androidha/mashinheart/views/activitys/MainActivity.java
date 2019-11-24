@@ -1,17 +1,15 @@
 package com.androidha.mashinheart.views.activitys;
 
+
 import android.annotation.TargetApi;
-import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.media.RingtoneManager;
-import android.net.Uri;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.databinding.DataBindingUtil;
@@ -35,12 +34,9 @@ import androidx.fragment.app.FragmentTransaction;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import android.content.SharedPreferences.Editor;
-
 import com.androidha.mashinheart.R;
 import com.androidha.mashinheart.dagger.persianpicker.PersianPickerModul;
 import com.androidha.mashinheart.databinding.ActivityMainBinding;
-import com.androidha.mashinheart.jobservice.AlarmReceiver;
 import com.androidha.mashinheart.jobservice.LunchAlarmReceiver;
 import com.androidha.mashinheart.viewmodels.ActivityMainViewModel;
 import com.androidha.mashinheart.views.application.MachinHeartApplication;
@@ -54,15 +50,11 @@ import com.androidha.mashinheart.views.fragments.FragmentPoliceFine;
 import com.androidha.mashinheart.views.fragments.FragmentYouCar;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
-
-import java.util.Calendar;
-import java.util.Date;
-
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -186,6 +178,8 @@ public class MainActivity extends AppCompatActivity {
     FragmentTransaction ft;
     ActivityMainViewModel viewModel;
 
+
+
     public void onCreate(Bundle savedInstanceState) {//_____________________________________________ Start onCreate
         super.onCreate(savedInstanceState);
         ActivityMainBinding activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
@@ -202,13 +196,6 @@ public class MainActivity extends AppCompatActivity {
         ShowFragmentYouCar();
         FragmentObserver();
 
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            createChannels();
-//            String notifis = "mehrdad" + "\n" + "latifi" + "\n" + "sara";
-//            getManager().notify(7126, getNotification1(notifis).build());
-//        }
-
-
         SetProfile();
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -216,56 +203,16 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     sendBroadcast(new Intent(MainActivity.this, LunchAlarmReceiver.class).setAction("ir.MachinHeart.Lunch"));
-                }
-                else{
+                } else {
                     Intent i = new Intent("ir.MachinHeart.Lunch");
                     sendBroadcast(i);
                 }
 
 
-
             }
         }, 1000);
-        SetAlarmNotification();
-
 
     }//_____________________________________________________________________________________________ End onCreate
-
-//    NotificationManager notifManager;
-//    String CHANNEL_ONE_NAME = "Channel One";
-//    String CHANNEL_ONE_ID = "novindokht.com.novindokht.ONE";
-//
-//    @TargetApi(Build.VERSION_CODES.O)
-//    public void createChannels() {
-//        NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ONE_ID,
-//                CHANNEL_ONE_NAME, notifManager.IMPORTANCE_HIGH);
-//        notificationChannel.enableLights(true);
-//        notificationChannel.setLightColor(Color.RED);
-//        notificationChannel.setShowBadge(true);
-//        notificationChannel.enableVibration(true);
-//        notificationChannel.setVibrationPattern(new long[]{1000, 1000, 1000, 1000, 1000});
-//        notificationChannel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
-//        getManager().createNotificationChannel(notificationChannel);
-//
-//    }
-//
-//    private NotificationManager getManager() {
-//        if (notifManager == null) {
-//            notifManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-//        }
-//        return notifManager;
-//    }
-//
-//
-//    @TargetApi(Build.VERSION_CODES.O)
-//    public Notification.Builder getNotification1(String title) {
-//
-//        return new Notification.Builder(getApplicationContext(), CHANNEL_ONE_ID)
-//                .setContentText(title)
-//                .setSmallIcon(R.drawable.logo)
-//                .setAutoCancel(true);
-//    }
-
 
 
 
@@ -287,32 +234,13 @@ public class MainActivity extends AppCompatActivity {
     }//_____________________________________________________________________________________________ End SetProfile
 
 
-    private void SetAlarmNotification() {//__________________________________________________________ Start SetAlarmNotification
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 15);
-        calendar.set(Calendar.MINUTE, 13);
-        calendar.set(Calendar.SECOND, 0);
-
-        Calendar now = Calendar.getInstance();
-        if (!now.before(calendar))
-            calendar.add(Calendar.DATE, 1);
-        Intent intent1 = new Intent(MainActivity.this, AlarmReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager am = (AlarmManager) MainActivity.this.getSystemService(MainActivity.this.ALARM_SERVICE);
-        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
-
-
-    }//_____________________________________________________________________________________________ End SetAlarmNotification
-
-
     private void ClickItems() {//_______________________________________________________________ Start ClickItems
 
 
         MainProfileEdit.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(MainDialogProfile.getVisibility() == View.GONE)
+                if (MainDialogProfile.getVisibility() == View.GONE)
                     MainDialogProfile.setVisibility(View.VISIBLE);
                 else
                     MainDialogProfile.setVisibility(View.GONE);
@@ -661,7 +589,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void attachBaseContext(Context newBase) {//______________________________________________ Start attachBaseContext
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
     }//_____________________________________________________________________________________________ End attachBaseContext
 
 

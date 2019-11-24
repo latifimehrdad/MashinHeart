@@ -27,8 +27,8 @@ public class LunchAlarmReceiver extends BroadcastReceiver {
                 .getApplicationUtility().CustomToastShow(context,"Alarm");
 
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 18);
-        calendar.set(Calendar.MINUTE, 15);
+        calendar.set(Calendar.HOUR_OF_DAY, 1);
+        calendar.set(Calendar.MINUTE, 10);
         calendar.set(Calendar.SECOND, 0);
 
         Calendar now = Calendar.getInstance();
