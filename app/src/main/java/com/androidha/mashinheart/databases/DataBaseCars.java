@@ -1,16 +1,9 @@
 package com.androidha.mashinheart.databases;
 
-import android.widget.TextView;
-
-import androidx.databinding.BindingAdapter;
-
-import com.androidha.mashinheart.R;
 import com.androidha.mashinheart.models.ModelAddCar;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
-import io.realm.internal.RealmObjectProxy;
 
 public class DataBaseCars extends RealmObject {
 
@@ -49,78 +42,6 @@ public class DataBaseCars extends RealmObject {
         setCarChassisNumber(modelAddCar.getCarChassisNumber());
         setCarTagLetter(modelAddCar.getCarTagLetter());
         setCarKm(modelAddCar.getCarKm());
-    }
-
-    @BindingAdapter(value = {"CarBrand"})
-    public static void setImageBrand(CircleImageView view, int CarBrand) {
-        view.setImageResource(view.getResources().obtainTypedArray(R.array.CarLogo).getResourceId(CarBrand, 0));
-    }
-
-
-    @BindingAdapter(value = {"CarBrand","CarType","CarColor"})
-    public static void setNameCar(TextView view, int CarBrand, String CarType, String CarColor) {
-        String brand = view.getContext().getResources().getStringArray(R.array.CarBrand)[CarBrand];
-        StringBuilder sb = new StringBuilder();
-        sb.append(brand);
-        sb.append(" ");
-        sb.append(CarType);
-        sb.append(" ");
-        sb.append(CarColor);
-        view.setText(sb.toString());
-    }
-
-    @BindingAdapter(value = {"ChangeDate"})
-    public static void setChandeDate(TextView view, Integer ChangeDate) {
-        if (String.valueOf(ChangeDate).length() < 8) {
-            view.setText(view.getContext().getResources().getString(R.string.NotSaveEnything));
-            return;
-        }
-        String m = String.valueOf(ChangeDate).substring(4, 6);
-        switch (Integer.valueOf(m).intValue()) {
-            case 1:
-                m = "فروردين";
-                break;
-            case 2:
-                m = "ارديبهشت";
-                break;
-            case 3:
-                m = "خرداد";
-                break;
-            case 4:
-                m = "تير";
-                break;
-            case 5:
-                m = "مرداد";
-                break;
-            case 6:
-                m = "شهريور";
-                break;
-            case 7:
-                m = "مهر";
-                break;
-            case 8:
-                m = "آبان";
-                break;
-            case 9:
-                m = "آذر";
-                break;
-            case 10:
-                m = "دي";
-                break;
-            case 11:
-                m = "بهمن";
-                break;
-            case 12:
-                m = "اسفند";
-                break;
-        }
-        StringBuilder sb = new StringBuilder();
-        sb.append(String.valueOf(ChangeDate).substring(6, 8));
-        sb.append(" ");
-        sb.append(m);
-        sb.append(" ");
-        sb.append(String.valueOf(ChangeDate).substring(0, 4));
-        view.setText(sb.toString());
     }
 
 

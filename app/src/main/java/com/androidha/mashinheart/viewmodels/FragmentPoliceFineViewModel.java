@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 
 import com.android.volley.NetworkResponse;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;

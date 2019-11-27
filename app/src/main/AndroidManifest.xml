@@ -68,6 +68,8 @@
             </intent-filter>
         </receiver>
 
+        <service android:name=".jobservice.EventService"/>
+
     </application>
 
 </manifest>

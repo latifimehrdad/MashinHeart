@@ -14,6 +14,7 @@ import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Handler;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
@@ -43,7 +44,22 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         this.context = context;
         notifis = "";
-        CheckItems();
+        //CheckItems();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CreateChannels();
+            ShowNotificationNew("تست",1);
+        } else {
+            ShowNotificationOld("تست",1);
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            context.sendBroadcast(new Intent(context, LunchAlarmReceiver.class).setAction("ir.MachinHeart.Lunch"));
+        } else {
+            Intent i = new Intent("ir.MachinHeart.Lunch");
+            context.sendBroadcast(i);
+        }
+
+
 
     }//_____________________________________________________________________________________________ End onReceive
 
@@ -161,7 +177,6 @@ public class AlarmReceiver extends BroadcastReceiver {
 
 
 
-
     }//_____________________________________________________________________________________________ End CheckItems
 
 
@@ -179,7 +194,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     private void ShowNotificationOld(String Text, Integer Brand) {//________________________________ Start ShowNotificationOld
 
-        //Text = "Notification : " + notId;
+        Text = "تست : " + GetNotiId();
         long when = System.currentTimeMillis();
         Bitmap icon = BitmapFactory.decodeResource(context.getResources(),
                 context.getResources().obtainTypedArray(R.array.CarLogo).getResourceId(Brand, 0));
@@ -201,7 +216,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void ShowNotificationNew(String Text, Integer Brand) {//________________________________________________ Start ShowNotificationNew
-        //Text = "Notification : " + notId;
+        Text = "تست : " + GetNotiId();
         Bitmap icon = BitmapFactory.decodeResource(context.getResources(),
                 context.getResources().obtainTypedArray(R.array.CarLogo).getResourceId(Brand, 0));
         Notification.Builder builder = new Notification.Builder(context, CHANNEL_ONE_ID)

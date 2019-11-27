@@ -1,7 +1,6 @@
 package com.androidha.mashinheart.viewmodels;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.androidha.mashinheart.R;
 import com.androidha.mashinheart.databases.DataBaseInsurance;
