@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
+    <uses-permission android:name= "android.permission.WAKE_LOCK" />
 
 <!--    <uses-permission android:name="android.permission.CAMERA" />-->
 <!--    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />-->
@@ -53,14 +54,20 @@
 
 
 
-        <receiver android:name=".jobservice.AlarmReceiver">
+        <receiver android:name=".jobservice.AlarmReceiver"
+            android:enabled="true"
+            android:process="com.androidha.mashinheart"
+            >
             <intent-filter>
                 <action android:name="accept"/>
                 <action android:name="disapprove"/>
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".jobservice.LunchAlarmReceiver">
+        <receiver android:name=".jobservice.LunchAlarmReceiver"
+            android:enabled="true"
+            android:process="com.androidha.mashinheart"
+            >
             <intent-filter >
                 <action android:name="android.intent.action.NEW_OUTGOING_CALL"/>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
@@ -68,7 +75,10 @@
             </intent-filter>
         </receiver>
 
-        <service android:name=".jobservice.EventService"/>
+        <service android:name=".jobservice.EventService"
+            android:enabled="true"
+            android:process="com.androidha.mashinheart"
+            />
 
     </application>
 

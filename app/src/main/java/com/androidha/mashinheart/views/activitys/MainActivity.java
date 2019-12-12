@@ -10,9 +10,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
@@ -195,7 +197,6 @@ public class MainActivity extends AppCompatActivity {
         SetAnimationViews();
         ShowFragmentYouCar();
         FragmentObserver();
-
         SetProfile();
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {

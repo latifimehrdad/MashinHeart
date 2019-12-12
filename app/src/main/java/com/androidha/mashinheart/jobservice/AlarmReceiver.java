@@ -44,23 +44,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         this.context = context;
         notifis = "";
-        //CheckItems();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CreateChannels();
-            ShowNotificationNew("تست",1);
-        } else {
-            ShowNotificationOld("تست",1);
-        }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            context.sendBroadcast(new Intent(context, LunchAlarmReceiver.class).setAction("ir.MachinHeart.Lunch"));
-        } else {
-            Intent i = new Intent("ir.MachinHeart.Lunch");
-            context.sendBroadcast(i);
-        }
-
-
-
+        CheckItems();
     }//_____________________________________________________________________________________________ End onReceive
 
 
