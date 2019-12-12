@@ -6,7 +6,7 @@
 
         <variable
             name="advertise"
-            type="com.androidha.mashinheart.models.ModelAdvertiseList" />
+            type="ir.clinicemashin.clinicemashin.models.ModelAdvertiseList" />
     </data>
 
     <LinearLayout

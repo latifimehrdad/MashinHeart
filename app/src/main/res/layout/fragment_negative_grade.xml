@@ -3,7 +3,7 @@
     <data>
         <variable
             name="Negative"
-            type="com.androidha.mashinheart.viewmodels.FragmentNegativeGradeViewModel" />
+            type="ir.clinicemashin.clinicemashin.viewmodels.FragmentNegativeGradeViewModel" />
     </data>
 
     <LinearLayout
@@ -100,10 +100,10 @@
 
                             <ImageView
                                 android:id="@+id/FragmentNegativeGradeCaptcha"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/_15sdp"
-                                android:maxHeight="@dimen/_50sdp" />
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="@dimen/_80sdp"
+                                android:layout_marginLeft="@dimen/_15sdp" />
                         </LinearLayout>
 
                         <EditText

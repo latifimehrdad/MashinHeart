@@ -3,7 +3,7 @@
     <data>
         <variable
             name="Youcar"
-            type="com.androidha.mashinheart.viewmodels.FragmentYouCarViewModel" />
+            type="ir.clinicemashin.clinicemashin.viewmodels.FragmentYouCarViewModel" />
     </data>
 
     <LinearLayout

@@ -3,7 +3,7 @@
     <data>
         <variable
             name="PoliceFine"
-            type="com.androidha.mashinheart.viewmodels.FragmentPoliceFineViewModel" />
+            type="ir.clinicemashin.clinicemashin.viewmodels.FragmentPoliceFineViewModel" />
     </data>
 
     <LinearLayout
@@ -75,7 +75,7 @@
 
                             <LinearLayout
                                 android:layout_width="0.0dip"
-                                android:layout_height="@dimen/_80sdp"
+                                android:layout_height="@dimen/_60sdp"
                                 android:layout_weight="1.0"
                                 android:orientation="vertical"
                                 android:paddingRight="@dimen/_5sdp">
@@ -97,7 +97,7 @@
 
                             <LinearLayout
                                 android:layout_width="0.0dip"
-                                android:layout_height="@dimen/_80sdp"
+                                android:layout_height="@dimen/_60sdp"
                                 android:layout_weight="1.0"
                                 android:orientation="vertical"
                                 android:paddingLeft="@dimen/_5sdp">
@@ -145,10 +145,11 @@
 
                             <ImageView
                                 android:id="@+id/FragmentPoliceFineCaptcha"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="@dimen/_80sdp"
                                 android:layout_marginLeft="@dimen/_15sdp"
-                                android:maxHeight="@dimen/_50sdp" />
+                                />
                         </LinearLayout>
 
                         <EditText

@@ -3,7 +3,7 @@
     <data>
         <variable
             name="Repair"
-            type="com.androidha.mashinheart.viewmodels.FragmentRepairViewModel" />
+            type="ir.clinicemashin.clinicemashin.viewmodels.FragmentRepairViewModel" />
     </data>
 
     <LinearLayout

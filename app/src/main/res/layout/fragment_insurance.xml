@@ -3,7 +3,7 @@
     <data>
         <variable
             name="Insurance"
-            type="com.androidha.mashinheart.viewmodels.FragmentInsuranceViewModel" />
+            type="ir.clinicemashin.clinicemashin.viewmodels.FragmentInsuranceViewModel" />
     </data>
 
     <LinearLayout

@@ -4,7 +4,7 @@
     <data>
         <variable
             name="Event"
-            type="com.androidha.mashinheart.viewmodels.FragmentCarEventViewModel" />
+            type="ir.clinicemashin.clinicemashin.viewmodels.FragmentCarEventViewModel" />
     </data>
 
     <RelativeLayout

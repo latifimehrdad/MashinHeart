@@ -3,7 +3,7 @@
     <data>
         <variable
             name="PoliceFines"
-            type="com.androidha.mashinheart.models.ModelPoliceFine" />
+            type="ir.clinicemashin.clinicemashin.models.ModelPoliceFine" />
     </data>
 
     <LinearLayout

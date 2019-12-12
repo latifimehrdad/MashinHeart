@@ -3,7 +3,7 @@
     <data>
         <variable
             name="Consumable"
-            type="com.androidha.mashinheart.databases.DataBaseConsumable" />
+            type="ir.clinicemashin.clinicemashin.databases.DataBaseConsumable" />
     </data>
 
     <LinearLayout

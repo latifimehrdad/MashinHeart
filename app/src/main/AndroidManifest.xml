@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.androidha.mashinheart">
+    package="ir.clinicemashin.clinicemashin">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -56,7 +56,7 @@
 
         <receiver android:name=".jobservice.AlarmReceiver"
             android:enabled="true"
-            android:process="com.androidha.mashinheart"
+            android:process="ir.clinicemashin.clinicemashin"
             >
             <intent-filter>
                 <action android:name="accept"/>
@@ -66,7 +66,7 @@
 
         <receiver android:name=".jobservice.LunchAlarmReceiver"
             android:enabled="true"
-            android:process="com.androidha.mashinheart"
+            android:process="ir.clinicemashin.clinicemashin"
             >
             <intent-filter >
                 <action android:name="android.intent.action.NEW_OUTGOING_CALL"/>
@@ -77,7 +77,7 @@
 
         <service android:name=".jobservice.EventService"
             android:enabled="true"
-            android:process="com.androidha.mashinheart"
+            android:process="ir.clinicemashin.clinicemashin"
             />
 
     </application>

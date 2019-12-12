@@ -3,7 +3,7 @@
     <data>
         <variable
             name="Insurance"
-            type="com.androidha.mashinheart.databases.DataBaseInsurance" />
+            type="ir.clinicemashin.clinicemashin.databases.DataBaseInsurance" />
     </data>
 
     <LinearLayout

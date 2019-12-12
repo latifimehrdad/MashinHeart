@@ -5,7 +5,7 @@
     <data>
         <variable
             name="about"
-            type="com.androidha.mashinheart.viewmodels.FragmentAboutViewModel" />
+            type="ir.clinicemashin.clinicemashin.viewmodels.FragmentAboutViewModel" />
     </data>
 
     <LinearLayout

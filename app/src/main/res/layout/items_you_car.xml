@@ -5,7 +5,7 @@
 
         <variable
             name="Cars"
-            type="com.androidha.mashinheart.databases.DataBaseCars" />
+            type="ir.clinicemashin.clinicemashin.databases.DataBaseCars" />
     </data>
 
     <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"

@@ -3,7 +3,7 @@
     <data>
         <variable
             name="NewAdvertise"
-            type="com.androidha.mashinheart.viewmodels.DialogNewAdvertiseViewModel" />
+            type="ir.clinicemashin.clinicemashin.viewmodels.DialogNewAdvertiseViewModel" />
     </data>
 
     <LinearLayout

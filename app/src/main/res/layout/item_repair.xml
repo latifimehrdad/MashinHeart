@@ -3,7 +3,7 @@
     <data>
         <variable
             name="Repair"
-            type="com.androidha.mashinheart.databases.DataBaseRepair" />
+            type="ir.clinicemashin.clinicemashin.databases.DataBaseRepair" />
     </data>
 
     <LinearLayout

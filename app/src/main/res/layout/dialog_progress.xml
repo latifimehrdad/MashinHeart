@@ -3,14 +3,14 @@
     <data>
         <variable
             name="PoliceFine"
-            type="com.androidha.mashinheart.viewmodels.FragmentPoliceFineViewModel" />
+            type="ir.clinicemashin.clinicemashin.viewmodels.FragmentPoliceFineViewModel" />
 
         <variable
             name="NegativeGrade"
-            type="com.androidha.mashinheart.viewmodels.FragmentNegativeGradeViewModel" />
+            type="ir.clinicemashin.clinicemashin.viewmodels.FragmentNegativeGradeViewModel" />
         <variable
             name="Advertise"
-            type="com.androidha.mashinheart.viewmodels.FragmentAdvertiseViewModel" />
+            type="ir.clinicemashin.clinicemashin.viewmodels.FragmentAdvertiseViewModel" />
     </data>
 
     <LinearLayout
