@@ -113,6 +113,8 @@ public class FragmentPoliceFine extends Fragment {
         textView.setText(sb.toString());
         SetClick();
         MessageControler();
+        ShowDialog();
+        fragmentPoliceFineViewModel.GetImageCaptcha(false);
     }//_____________________________________________________________________________________________ End onStart
 
 

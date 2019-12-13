@@ -106,7 +106,7 @@ public class FragmentRepair extends Fragment {
         SetClick();
         BackClick();
         SetTextChange();
-        FragmentRepairExpandable.collapse();
+        FragmentRepairExpandable.expand();
         FragmentRepairSuggestion.setVisibility(View.GONE);
         SetCurrentDate();
         MessageControler();

@@ -93,6 +93,8 @@ public class FragmentNegativeGrade extends Fragment {
         FragmentNegativeGradeCaptchaTxt.setText("");
         FragmentNegativeGradeGrade.setText("");
         FragmentNegativeGradeCount.setText("");
+        ShowDialog();
+        fragmentNegativeGradeViewModel.GetImageCaptcha(false, false);
     }//_____________________________________________________________________________________________ End onStart
 
 

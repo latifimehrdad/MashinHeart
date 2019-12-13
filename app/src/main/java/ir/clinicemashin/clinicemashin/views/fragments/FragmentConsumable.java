@@ -106,7 +106,7 @@ public class FragmentConsumable extends Fragment {
         SetClick();
         BackClick();
         SetTextChange();
-        FragmentConsumableexpandable.collapse();
+        FragmentConsumableexpandable.expand();
         FragmentConsumableSuggestion.setVisibility(View.GONE);
         SetCurrentDate();
         MessageControler();

@@ -99,7 +99,7 @@ public class FragmentInsurance extends Fragment {
         SetClick();
         BackClick();
         SetTextChange();
-        FragmentInsuranceExpandable.collapse();
+        FragmentInsuranceExpandable.expand();
         SetCurrentDate();
         MessageControler();
         GetCarInsuranceFromDB();
