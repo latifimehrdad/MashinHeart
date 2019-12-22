@@ -148,6 +148,7 @@
                 android:gravity="center"
                 android:text="@string/Website"
                 android:layout_marginTop="@dimen/_10sdp"
+                android:visibility="gone"
                 />
 
 

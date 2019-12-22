@@ -218,12 +218,12 @@ public class FragmentRepairViewModel {
                     .where(DataBaseRepair.class)
                     .equalTo("CarId", MainActivity.CarId)
                     .and()
-                    .equalTo("CarId", getTitle())
+                    .equalTo("Title", getTitle())
                     .and()
-                    .greaterThanOrEqualTo("Title", getRepairDate().intValue())
+                    .greaterThanOrEqualTo("RepairDate", getRepairDate().intValue())
                     .and()
                     .notEqualTo("ID", ID2)
-                    .sort("Title", Sort.ASCENDING)
+                    .sort("RepairDate", Sort.ASCENDING)
                     .findAll();
 
             if (checkDate.size() > 0) {
