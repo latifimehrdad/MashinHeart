@@ -19,7 +19,7 @@ public class FragmentAdvertiseViewModel {
 
     private Context context;
     private Boolean isCancel;
-    public PublishSubject<String> MessageType = PublishSubject.create();
+    private PublishSubject<String> MessageType = PublishSubject.create();
     private ArrayList<ModelAdvertiseList> modelAdvertiseLists;
 
     public FragmentAdvertiseViewModel(Context context) {//__________________________________________ Start FragmentAdvertiseViewModel
@@ -100,5 +100,9 @@ public class FragmentAdvertiseViewModel {
 
     public void setModelAdvertiseLists(ArrayList<ModelAdvertiseList> modelAdvertiseLists) {
         this.modelAdvertiseLists = modelAdvertiseLists;
+    }
+
+    public PublishSubject<String> getMessageType() {
+        return MessageType;
     }
 }

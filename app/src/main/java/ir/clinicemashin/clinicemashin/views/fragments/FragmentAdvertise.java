@@ -45,6 +45,7 @@ public class FragmentAdvertise extends Fragment {
     private DialogProgress progress;
     private AdabterAdvertise adabterAdvertise;
     private ArrayList<ModelAdvertiseList> modelAdvertiseLists;
+    private DisposableObserver<String> observer;
 
     @BindView(R.id.FragmentAdvertiseCity)
     Spinner FragmentAdvertiseCity;
@@ -64,14 +65,16 @@ public class FragmentAdvertise extends Fragment {
     @BindView(R.id.FragmentAdvertises)
     RecyclerView FragmentAdvertises;
 
-    public FragmentAdvertise(Context context) {//___________________________________________________ Start FragmentAdvertise
-        this.context = context;
+    public FragmentAdvertise() {//__________________________________________________________________ Start FragmentAdvertise
+
     }//_____________________________________________________________________________________________ End FragmentAdvertise
+
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        context = getActivity();
         FragmentAdvertiseBinding binding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_advertise, container, false
         );
@@ -89,6 +92,9 @@ public class FragmentAdvertise extends Fragment {
         super.onStart();
         SpinnerAdabter();
         SetClick();
+        if(observer != null)
+            observer.dispose();
+        observer = null;
         MessageControler();
         //FragmentAdvertiseExpandable.collapse();
     }//_____________________________________________________________________________________________ End onStart
@@ -199,53 +205,55 @@ public class FragmentAdvertise extends Fragment {
 
     private void MessageControler() {//_____________________________________________________________ Start MessageControler
 
+        observer = new DisposableObserver<String>() {
+            @Override
+            public void onNext(String s) {
+                getActivity()
+                        .runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                switch (s) {
+                                    case "GetOk":
+                                        if (progress != null) {
+                                            progress.dismiss();
+                                        }
+                                        //FragmentAdvertiseExpandable.collapse();
+                                        FragmentAdvertiseCity.setSelection(0);
+                                        SetAdabter();
+                                        break;
+                                    case "CancelByUser":
+                                        if (progress != null) {
+                                            progress.dismiss();
+                                        }
+                                        fragmentAdvertiseViewModel.setCancel(true);
+                                        break;
+                                    default:
+                                        if (progress != null) {
+                                            progress.dismiss();
+                                        }
+                                        ShowToast(s);
+                                        break;
+                                }
+                            }
+                        });
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
+
         fragmentAdvertiseViewModel
-                .MessageType
+                .getMessageType()
                 .observeOn(Schedulers.io())
                 .subscribeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DisposableObserver<String>() {
-                    @Override
-                    public void onNext(String s) {
-                        getActivity()
-                                .runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        switch (s) {
-                                            case "GetOk":
-                                                if (progress != null) {
-                                                    progress.dismiss();
-                                                }
-                                                //FragmentAdvertiseExpandable.collapse();
-                                                FragmentAdvertiseCity.setSelection(0);
-                                                SetAdabter();
-                                                break;
-                                            case "CancelByUser":
-                                                if (progress != null) {
-                                                    progress.dismiss();
-                                                }
-                                                fragmentAdvertiseViewModel.setCancel(true);
-                                                break;
-                                            default:
-                                                if (progress != null) {
-                                                    progress.dismiss();
-                                                }
-                                                ShowToast(s);
-                                                break;
-                                        }
-                                    }
-                                });
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
+                .subscribe(observer);
     }//_____________________________________________________________________________________________ End MessageControler
 
 
@@ -263,6 +271,7 @@ public class FragmentAdvertise extends Fragment {
 
         super.onDestroy();
         fragmentAdvertiseViewModel.setCancel(true);
+        observer.dispose();
 
     }//_____________________________________________________________________________________________ End onDestroy
 

@@ -22,7 +22,7 @@ public class FragmentRepairViewModel {
     private String Brand;
     private Integer CarId;
     private Integer ID;
-    public PublishSubject<String> MessageType = PublishSubject.create();
+    private PublishSubject<String> MessageType = PublishSubject.create();
     private Integer Money;
     private Integer RepairDate;
     private Integer RepairKm;
@@ -329,5 +329,9 @@ public class FragmentRepairViewModel {
 
     public void setRepairDate(Integer repairDate) {
         this.RepairDate = repairDate;
+    }
+
+    public PublishSubject<String> getMessageType() {
+        return MessageType;
     }
 }

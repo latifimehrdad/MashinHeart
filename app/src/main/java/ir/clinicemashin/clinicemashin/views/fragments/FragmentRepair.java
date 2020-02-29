@@ -54,8 +54,8 @@ public class FragmentRepair extends Fragment {
     public Context context;
     private Integer editable;
     private FragmentRepairViewModel fragmentRepairViewModel;
-    private FragmentCarEvent fragmentCarEvent;
     private View view;
+    private DisposableObserver<String> observer;
 
     @BindView(R.id.FragmentRepairAddClick)
     LinearLayout FragmentRepairAddClick;
@@ -85,13 +85,14 @@ public class FragmentRepair extends Fragment {
     RecyclerView FragmentRepairs;
 
 
-    public FragmentRepair(Context context, FragmentCarEvent fragmentCarEvent) {//_____________________________________________________ Start FragmentRepair
-        this.context = context;
-        this.fragmentCarEvent = fragmentCarEvent;
+    public FragmentRepair() {//_____________________________________________________________________ Start FragmentRepair
+
     }//_____________________________________________________________________________________________ End FragmentRepair
 
 
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        context = getActivity();
         FragmentRepairBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_repair, container, false);
         fragmentRepairViewModel = new FragmentRepairViewModel(context);
         binding.setRepair(fragmentRepairViewModel);
@@ -104,56 +105,16 @@ public class FragmentRepair extends Fragment {
     public void onStart() {//_____________________________________________________ Start FragmentRepair
         super.onStart();
         SetClick();
-        BackClick();
         SetTextChange();
-        FragmentRepairExpandable.expand();
+        FragmentRepairExpandable.collapse();
         FragmentRepairSuggestion.setVisibility(View.GONE);
         SetCurrentDate();
+        if(observer != null)
+            observer.dispose();
+        observer = null;
         MessageControler();
         GetCarRepairFromDB();
     }//_____________________________________________________________________________________________ End onCreateView
-
-
-
-
-    private void BackClick() {//____________________________________________________________________ Start BackClick
-        view.setFocusableInTouchMode(true);
-        view.requestFocus();
-
-        view.setOnKeyListener(SetKey(view));
-        FragmentRepairSave.setOnKeyListener(SetKey(FragmentRepairSave));
-        FragmentRepairAddClick.setOnKeyListener(SetKey(FragmentRepairAddClick));
-        FragmentRepairTitle.setOnKeyListener(SetKey(FragmentRepairTitle));
-        FragmentRepairKm.setOnKeyListener(SetKey(FragmentRepairKm));
-        FragmentRepairWhy.setOnKeyListener(SetKey(FragmentRepairWhy));
-        FragmentRepairBrand.setOnKeyListener(SetKey(FragmentRepairBrand));
-        FragmentRepairMoney.setOnKeyListener(SetKey(FragmentRepairMoney));
-        FragmentRepairDate.setOnKeyListener(SetKey(FragmentRepairDate));
-        FragmentRepairIgnor.setOnKeyListener(SetKey(FragmentRepairIgnor));
-    }//_____________________________________________________________________________________________ End BackClick
-
-
-
-
-    private View.OnKeyListener SetKey(View view){//_________________________________________________ Start SetKey
-        return new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-
-                if (event.getAction() != KeyEvent.ACTION_DOWN)
-                    return true;
-
-                if (keyCode != 4) {
-                    return false;
-                }
-                keyCode = 0;
-                event = null;
-                fragmentCarEvent.MessageType.onNext("close");
-                return true;
-            }
-        };
-    }//_____________________________________________________________________________________________ End SetKey
-
 
 
 
@@ -301,35 +262,37 @@ public class FragmentRepair extends Fragment {
 
     private void MessageControler() {//_______________________________________________________________ Start MessageControler
 
+        observer = new DisposableObserver<String>() {
+            @Override
+            public void onNext(String s) {
+                getActivity()
+                        .runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                ShowToast(s);
+                                SetCurrentDate();
+                                FragmentRepairExpandable.collapse();
+                                GetCarRepairFromDB();
+                            }
+                        });
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
+
         fragmentRepairViewModel
-                .MessageType
+                .getMessageType()
                 .observeOn(Schedulers.io())
                 .subscribeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DisposableObserver<String>() {
-                    @Override
-                    public void onNext(String s) {
-                        getActivity()
-                                .runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        ShowToast(s);
-                                        SetCurrentDate();
-                                        FragmentRepairExpandable.collapse();
-                                        GetCarRepairFromDB();
-                                    }
-                                });
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
+                .subscribe(observer);
     }//_____________________________________________________________________________________________ End MessageControler
 
 
@@ -448,6 +411,14 @@ public class FragmentRepair extends Fragment {
                     }
                 }).setNegativeButton(this.context.getResources().getString(R.string.No), null).show();
     }//_____________________________________________________________________________________________ End ItemClickDelete
+
+
+    @Override
+    public void onDestroy() {//_____________________________________________________________________ Start onDestroy
+        super.onDestroy();
+        observer.dispose();
+    }//_____________________________________________________________________________________________ End onDestroy
+
 
 
 }

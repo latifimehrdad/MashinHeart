@@ -16,11 +16,27 @@ import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class BindingAdabters {
 
+
+    @BindingAdapter(value = {"PositionDate"})
+    public static void setPositionDate(TextView textView, Date positionDate){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss", Locale.US);
+        String date = MachinHeartApplication
+                .getMachinHeartApplication(textView.getContext())
+                .getApplicationUtilityComponent()
+                .getApplicationUtility()
+                .MiladiToJalali(positionDate , "FullJalaliString");
+
+        date = date + " ساعت : " + simpleDateFormat.format(positionDate);
+        textView.setText(date);
+    }
 
     //_________________________________ Start Car Adabter __________________________________________
     //______________________________________________________________________________________________

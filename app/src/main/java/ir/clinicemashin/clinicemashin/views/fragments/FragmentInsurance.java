@@ -49,7 +49,7 @@ public class FragmentInsurance extends Fragment {
     public Context context;
     private Integer editable;
     private FragmentInsuranceViewModel fragmentInsuranceViewModel;
-    private FragmentCarEvent fragmentCarEvent;
+    private DisposableObserver<String> observer;
     private View view;
 
 
@@ -75,15 +75,15 @@ public class FragmentInsurance extends Fragment {
     RecyclerView FragmentInsurances;
 
 
-    public FragmentInsurance(Context context, FragmentCarEvent fragmentCarEvent) {//__________________________________________________ Star FragmentInsurance
-        this.context = context;
-        this.fragmentCarEvent = fragmentCarEvent;
+    public FragmentInsurance() {//__________________________________________________________________ Star FragmentInsurance
+
     }//_____________________________________________________________________________________________ End FragmentInsurance
 
 
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        context = getActivity();
         FragmentInsuranceBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_insurance, container, false);
         fragmentInsuranceViewModel = new FragmentInsuranceViewModel(context);
         binding.setInsurance(fragmentInsuranceViewModel);
@@ -97,52 +97,15 @@ public class FragmentInsurance extends Fragment {
     public void onStart() {//________________________________________________________________________ Star onStart
         super.onStart();
         SetClick();
-        BackClick();
         SetTextChange();
-        FragmentInsuranceExpandable.expand();
+        FragmentInsuranceExpandable.collapse();
         SetCurrentDate();
+        if(observer != null)
+            observer.dispose();
+        observer = null;
         MessageControler();
         GetCarInsuranceFromDB();
     }//_____________________________________________________________________________________________ End onStart
-
-
-
-
-    private void BackClick() {//____________________________________________________________________ Start BackClick
-        view.setFocusableInTouchMode(true);
-        view.requestFocus();
-
-        view.setOnKeyListener(SetKey(view));
-        FragmentInsuranceSave.setOnKeyListener(SetKey(FragmentInsuranceSave));
-        FragmentInsuranceAddClick.setOnKeyListener(SetKey(FragmentInsuranceAddClick));
-        FragmentInsuranceType.setOnKeyListener(SetKey(FragmentInsuranceType));
-        FragmentInsuranceBrand.setOnKeyListener(SetKey(FragmentInsuranceBrand));
-        FragmentInsuranceMoney.setOnKeyListener(SetKey(FragmentInsuranceMoney));
-        FragmentInsuranceDate.setOnKeyListener(SetKey(FragmentInsuranceDate));
-        FragmentInsuranceIgnor.setOnKeyListener(SetKey(FragmentInsuranceIgnor));
-    }//_____________________________________________________________________________________________ End BackClick
-
-
-
-
-    private View.OnKeyListener SetKey(View view){//_________________________________________________ Start SetKey
-        return new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-
-                if (event.getAction() != KeyEvent.ACTION_DOWN)
-                    return true;
-
-                if (keyCode != 4) {
-                    return false;
-                }
-                keyCode = 0;
-                event = null;
-                fragmentCarEvent.MessageType.onNext("close");
-                return true;
-            }
-        };
-    }//_____________________________________________________________________________________________ End SetKey
 
 
 
@@ -321,35 +284,38 @@ public class FragmentInsurance extends Fragment {
 
 
     private void MessageControler() {//_____________________________________________________________ Star MessageControler
+
+        observer = new DisposableObserver<String>() {
+            @Override
+            public void onNext(String s) {
+                getActivity()
+                        .runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                ShowToast(s);
+                                SetCurrentDate();
+                                FragmentInsuranceExpandable.collapse();
+                                GetCarInsuranceFromDB();
+                            }
+                        });
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
+
         fragmentInsuranceViewModel
-                .MessageType
+                .getMessageType()
                 .observeOn(Schedulers.io())
                 .subscribeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DisposableObserver<String>() {
-                    @Override
-                    public void onNext(String s) {
-                        getActivity()
-                                .runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        ShowToast(s);
-                                        SetCurrentDate();
-                                        FragmentInsuranceExpandable.collapse();
-                                        GetCarInsuranceFromDB();
-                                    }
-                                });
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
+                .subscribe(observer);
 
     }//_____________________________________________________________________________________________ End MessageControler
 
@@ -384,16 +350,24 @@ public class FragmentInsurance extends Fragment {
         new Builder(context)
                 .setMessage(this.context.getResources().getString(R.string.AreYouSure))
                 .setPositiveButton( this.context.getResources().getString(R.string.Yes), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialogInterface, int i) {
-                if (editable.intValue() == -1) {
-                    fragmentInsuranceViewModel.DeleteDataBase(CarInsurance.get(position));
-                    return;
-                }
-                ShowToast(context.getResources().getString(R.string.ErrorDeleteWhenEdit));
-            }
-        }).setNegativeButton(this.context.getResources().getString(R.string.No), null).show();
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if (editable.intValue() == -1) {
+                            fragmentInsuranceViewModel.DeleteDataBase(CarInsurance.get(position));
+                            return;
+                        }
+                        ShowToast(context.getResources().getString(R.string.ErrorDeleteWhenEdit));
+                    }
+                }).setNegativeButton(this.context.getResources().getString(R.string.No), null).show();
 
     }//_____________________________________________________________________________________________ End ItemClickDelete
+
+
+    @Override
+    public void onDestroy() {//_____________________________________________________________________ Start onDestroy
+        super.onDestroy();
+        observer.dispose();
+    }//_____________________________________________________________________________________________ End onDestroy
+
 
 
 }

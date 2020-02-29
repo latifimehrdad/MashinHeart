@@ -40,6 +40,7 @@ public class FragmentNegativeGrade extends Fragment {
     private Context context;
     private FragmentNegativeGradeViewModel fragmentNegativeGradeViewModel;
     private DialogProgress progress;
+    private DisposableObserver<String> observer;
 
 
     @BindView(R.id.FragmentNegativeGradeBarcode)
@@ -66,14 +67,15 @@ public class FragmentNegativeGrade extends Fragment {
     Button FragmentNegativeGradeSend;
 
 
-    public FragmentNegativeGrade(Context context) {//____________________ Start FragmentNegativeGrade
-        this.context = context;
+
+    public FragmentNegativeGrade() {//______________________________________________________________ Start FragmentNegativeGrade
+
     }//_____________________________________________________________________________________________ End FragmentNegativeGrade
 
 
 
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        context =getActivity();
         FragmentNegativeGradeBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_negative_grade, container, false);
         fragmentNegativeGradeViewModel = new FragmentNegativeGradeViewModel(context);
         binding.setNegative(fragmentNegativeGradeViewModel);
@@ -87,6 +89,9 @@ public class FragmentNegativeGrade extends Fragment {
     public void onStart() {//_______________________________________________________________________ Start onStart
         super.onStart();
         SetClick();
+        if(observer != null)
+            observer.dispose();
+        observer = null;
         MessageControler();
         FragmentNegativeGradeExpandable.collapse();
         FragmentNegativeGradeBarcode.setText("");
@@ -150,65 +155,67 @@ public class FragmentNegativeGrade extends Fragment {
 
     private void MessageControler() {//_____________________________________________________________ Start MessageControler
 
+        observer = new DisposableObserver<String>() {
+            @Override
+            public void onNext(String s) {
+                getActivity()
+                        .runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                switch (s) {
+                                    case "CancelByUser":
+                                        FragmentNegativeGradeExpandable.collapse();
+                                        if (progress != null) {
+                                            progress.dismiss();
+                                        }
+                                        break;
+                                    case "ارتباط با پلیس راهور برقرار نشد":
+                                        if (progress != null) {
+                                            progress.dismiss();
+                                        }
+                                        FragmentNegativeGradeExpandable.collapse();
+                                        ShowToast(s);
+                                        break;
+                                    case "CaptchaOk":
+                                        if (progress != null) {
+                                            progress.dismiss();
+                                        }
+                                        FragmentNegativeGradeCaptcha.setImageBitmap(fragmentNegativeGradeViewModel.getCaptchaBitmap());
+                                        FragmentNegativeGradeExpandable.expand();
+                                        break;
+                                    case "متن امنیتی را اشتباه وارد کرده اید":
+                                        if (progress != null) {
+                                            progress.dismiss();
+                                        }
+                                        ShowToast("ارتباط با پلیس راهور برقرار نشد");
+                                        FragmentNegativeGradeCaptcha.setImageBitmap(fragmentNegativeGradeViewModel.getCaptchaBitmap());
+                                        FragmentNegativeGradeExpandable.expand();
+                                        break;
+                                    case "PoliceFineOk":
+                                        FragmentNegativeGradeExpandable.collapse();
+                                        ShowPoliceFine(fragmentNegativeGradeViewModel.getHtml());
+                                        break;
+                                }
+                            }
+                        });
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
+
         fragmentNegativeGradeViewModel
-                .MessageType
+                .getMessageType()
                 .observeOn(Schedulers.io())
                 .subscribeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DisposableObserver<String>() {
-                    @Override
-                    public void onNext(String s) {
-                        getActivity()
-                                .runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        switch (s) {
-                                            case "CancelByUser":
-                                                FragmentNegativeGradeExpandable.collapse();
-                                                if (progress != null) {
-                                                    progress.dismiss();
-                                                }
-                                                break;
-                                            case "ارتباط با پلیس راهور برقرار نشد":
-                                                if (progress != null) {
-                                                    progress.dismiss();
-                                                }
-                                                FragmentNegativeGradeExpandable.collapse();
-                                                ShowToast(s);
-                                                break;
-                                            case "CaptchaOk":
-                                                if (progress != null) {
-                                                    progress.dismiss();
-                                                }
-                                                FragmentNegativeGradeCaptcha.setImageBitmap(fragmentNegativeGradeViewModel.getCaptchaBitmap());
-                                                FragmentNegativeGradeExpandable.expand();
-                                                break;
-                                            case "متن امنیتی را اشتباه وارد کرده اید":
-                                                if (progress != null) {
-                                                    progress.dismiss();
-                                                }
-                                                ShowToast("ارتباط با پلیس راهور برقرار نشد");
-                                                FragmentNegativeGradeCaptcha.setImageBitmap(fragmentNegativeGradeViewModel.getCaptchaBitmap());
-                                                FragmentNegativeGradeExpandable.expand();
-                                                break;
-                                            case "PoliceFineOk":
-                                                FragmentNegativeGradeExpandable.collapse();
-                                                ShowPoliceFine(fragmentNegativeGradeViewModel.getHtml());
-                                                break;
-                                        }
-                                    }
-                                });
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
+                .subscribe(observer);
     }//_____________________________________________________________________________________________ End MessageControler
 
 
@@ -318,6 +325,13 @@ public class FragmentNegativeGrade extends Fragment {
             progress.dismiss();
         }
     }//_____________________________________________________________________________________________ End ShowPoliceFine
+
+
+    @Override
+    public void onDestroy() {//_____________________________________________________________________ Start onDestroy
+        super.onDestroy();
+        observer.dispose();
+    }//_____________________________________________________________________________________________ End onDestroy
 
 
 }

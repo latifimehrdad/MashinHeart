@@ -18,7 +18,7 @@ public class FragmentInsuranceViewModel {
     private Integer ID;
     private Integer InsuranceDate;
     private int InsuranceType;
-    public PublishSubject<String> MessageType = PublishSubject.create();
+    private PublishSubject<String> MessageType = PublishSubject.create();
     private Integer Money;
     private String Title;
     private Context context;
@@ -317,5 +317,9 @@ public class FragmentInsuranceViewModel {
 
     public void setCarId(Integer carId) {
         this.CarId = carId;
+    }
+
+    public PublishSubject<String> getMessageType() {
+        return MessageType;
     }
 }

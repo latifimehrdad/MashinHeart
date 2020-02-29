@@ -52,8 +52,8 @@ public class FragmentConsumable extends Fragment {
     public Context context;
     private Integer editable;
     private FragmentConsumablesViewModel fragmentConsumablesViewModel;
-    private FragmentCarEvent fragmentCarEvent;
     private View view;
+    private DisposableObserver<String> observer;
 
     @BindView(R.id.FragmentConsumableAddClick)
     LinearLayout FragmentConsumableAddClick;
@@ -83,14 +83,13 @@ public class FragmentConsumable extends Fragment {
     RecyclerView FragmentConsumables;
 
 
-    public FragmentConsumable(Context context, FragmentCarEvent fragmentCarEvent) {//_________________________________________________ Start FragmentConsumable
-        this.context = context;
-        this.fragmentCarEvent = fragmentCarEvent;
+    public FragmentConsumable() {//_________________________________________________________________ Start FragmentConsumable
     }//_____________________________________________________________________________________________ End FragmentConsumable
 
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        context = getActivity();
         FragmentConsumablesBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_consumables, container, false);
         fragmentConsumablesViewModel = new FragmentConsumablesViewModel(context);
         binding.setConsumables(fragmentConsumablesViewModel);
@@ -104,53 +103,17 @@ public class FragmentConsumable extends Fragment {
     public void onStart() {//_______________________________________________________________________ Start onStart
         super.onStart();
         SetClick();
-        BackClick();
         SetTextChange();
-        FragmentConsumableexpandable.expand();
+        FragmentConsumableexpandable.collapse();
         FragmentConsumableSuggestion.setVisibility(View.GONE);
         SetCurrentDate();
+        if(observer != null)
+            observer.dispose();
+        observer = null;
         MessageControler();
         GetCarConsumableFromDB();
     }//_____________________________________________________________________________________________ End onStart
 
-
-
-    private void BackClick() {//____________________________________________________________________ Start BackClick
-        view.setFocusableInTouchMode(true);
-        view.requestFocus();
-
-        view.setOnKeyListener(SetKey(view));
-        FragmentConsumableSave.setOnKeyListener(SetKey(FragmentConsumableSave));
-        FragmentConsumableAddClick.setOnKeyListener(SetKey(FragmentConsumableAddClick));
-        FragmentConsumableTitle.setOnKeyListener(SetKey(FragmentConsumableTitle));
-        FragmentConsumableKm.setOnKeyListener(SetKey(FragmentConsumableKm));
-        FragmentConsumableNextKm.setOnKeyListener(SetKey(FragmentConsumableNextKm));
-        FragmentConsumableBrand.setOnKeyListener(SetKey(FragmentConsumableBrand));
-        FragmentConsumableMoney.setOnKeyListener(SetKey(FragmentConsumableMoney));
-        FragmentConsumableDate.setOnKeyListener(SetKey(FragmentConsumableDate));
-        FragmentConsumableIgnor.setOnKeyListener(SetKey(FragmentConsumableIgnor));
-    }//_____________________________________________________________________________________________ End BackClick
-
-
-
-    private View.OnKeyListener SetKey(View view){//_________________________________________________ Start SetKey
-        return new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-
-                if (event.getAction() != KeyEvent.ACTION_DOWN)
-                    return true;
-
-                if (keyCode != 4) {
-                    return false;
-                }
-                keyCode = 0;
-                event = null;
-                fragmentCarEvent.MessageType.onNext("close");
-                return true;
-            }
-        };
-    }//_____________________________________________________________________________________________ End SetKey
 
 
     private void SetCurrentDate() {//_______________________________________________________________ Start SetCurrentDate
@@ -395,35 +358,37 @@ public class FragmentConsumable extends Fragment {
 
     private void MessageControler() {//_____________________________________________________________ Start MessageControler
 
+        observer = new DisposableObserver<String>() {
+            @Override
+            public void onNext(String s) {
+                getActivity()
+                        .runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                ShowToast(s);
+                                SetCurrentDate();
+                                FragmentConsumableexpandable.collapse();
+                                GetCarConsumableFromDB();
+                            }
+                        });
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
+
         fragmentConsumablesViewModel
-                .MessageType
+                .getMessageType()
                 .observeOn(Schedulers.io())
                 .subscribeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DisposableObserver<String>() {
-                    @Override
-                    public void onNext(String s) {
-                        getActivity()
-                                .runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        ShowToast(s);
-                                        SetCurrentDate();
-                                        FragmentConsumableexpandable.collapse();
-                                        GetCarConsumableFromDB();
-                                    }
-                                });
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
+                .subscribe(observer);
 
     }//_____________________________________________________________________________________________ End MessageControler
 
@@ -461,16 +426,23 @@ public class FragmentConsumable extends Fragment {
         new Builder(context)
                 .setMessage(this.context.getResources().getString(R.string.AreYouSure))
                 .setPositiveButton(this.context.getResources().getString(R.string.Yes), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialogInterface, int i) {
-                if (editable == -1) {
-                    fragmentConsumablesViewModel.DeleteDataBase(CarConsumable.get(position));
-                    return;
-                }
-                ShowToast(context.getResources().getString(R.string.ErrorDeleteWhenEdit));
-            }
-        }).setNegativeButton( this.context.getResources().getString(R.string.No), null).show();
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if (editable == -1) {
+                            fragmentConsumablesViewModel.DeleteDataBase(CarConsumable.get(position));
+                            return;
+                        }
+                        ShowToast(context.getResources().getString(R.string.ErrorDeleteWhenEdit));
+                    }
+                }).setNegativeButton( this.context.getResources().getString(R.string.No), null).show();
 
     }//_____________________________________________________________________________________________ End ItemClickDelete
+
+
+    @Override
+    public void onDestroy() {//_____________________________________________________________________ Start onDestroy
+        super.onDestroy();
+        observer.dispose();
+    }//_____________________________________________________________________________________________ End onDestroy
 
 
 }

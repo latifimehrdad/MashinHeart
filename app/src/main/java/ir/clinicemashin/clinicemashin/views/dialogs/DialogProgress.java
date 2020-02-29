@@ -53,6 +53,7 @@ public class DialogProgress extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = null;
         if (fragmentPoliceFineViewModel != null) {
+
             DialogProgressBinding binding = DataBindingUtil.inflate(LayoutInflater.from(this.context), R.layout.dialog_progress, null, false);
             binding.setPoliceFine(this.fragmentPoliceFineViewModel);
             view = binding.getRoot();
@@ -73,13 +74,13 @@ public class DialogProgress extends DialogFragment {
             public void onClick(View view) {
                 String str = "CancelByUser";
                 if (fragmentPoliceFineViewModel != null) {
-                    fragmentPoliceFineViewModel.MessageType.onNext(str);
+                    fragmentPoliceFineViewModel.getMessageType().onNext(str);
                 }
                 if (fragmentNegativeGradeViewModel != null) {
-                    fragmentNegativeGradeViewModel.MessageType.onNext(str);
+                    fragmentNegativeGradeViewModel.getMessageType().onNext(str);
                 }
                 if (fragmentAdvertiseViewModel != null) {
-                    fragmentAdvertiseViewModel.MessageType.onNext(str);
+                    fragmentAdvertiseViewModel.getMessageType().onNext(str);
                 }
             }
         });

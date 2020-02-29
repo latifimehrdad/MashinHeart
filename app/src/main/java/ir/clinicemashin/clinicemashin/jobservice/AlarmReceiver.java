@@ -174,8 +174,6 @@ public class AlarmReceiver extends BroadcastReceiver {
 
 
     private void ShowNotificationOld(String Text, Integer Brand) {//________________________________ Start ShowNotificationOld
-
-        Text = "تست : " + GetNotiId();
         long when = System.currentTimeMillis();
         Bitmap icon = BitmapFactory.decodeResource(context.getResources(),
                 context.getResources().obtainTypedArray(R.array.CarLogo).getResourceId(Brand, 0));
@@ -197,7 +195,6 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void ShowNotificationNew(String Text, Integer Brand) {//________________________________________________ Start ShowNotificationNew
-        Text = "تست : " + GetNotiId();
         Bitmap icon = BitmapFactory.decodeResource(context.getResources(),
                 context.getResources().obtainTypedArray(R.array.CarLogo).getResourceId(Brand, 0));
         Notification.Builder builder = new Notification.Builder(context, CHANNEL_ONE_ID)

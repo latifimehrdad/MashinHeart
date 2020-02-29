@@ -191,10 +191,6 @@
                 android:layout_height="@dimen/_15sdp" />
         </LinearLayout>
 
-        <FrameLayout
-            android:id="@+id/FragmentCarEventFragment"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent" />
     </RelativeLayout>
 
 

@@ -26,7 +26,7 @@ public class FragmentConsumablesViewModel {
     private Integer ChangeKm;
     private Integer ChangeNextKm;
     private Integer ID;
-    public PublishSubject<String> MessageType = PublishSubject.create();
+    private PublishSubject<String> MessageType = PublishSubject.create();
     private Integer Money;
     private Integer OldChangeDate;
     private Integer OldChangeKm;
@@ -464,5 +464,9 @@ public class FragmentConsumablesViewModel {
 
     public void setOldChangeDate(Integer oldChangeDate) {
         this.OldChangeDate = oldChangeDate;
+    }
+
+    public PublishSubject<String> getMessageType() {
+        return MessageType;
     }
 }

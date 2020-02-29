@@ -36,10 +36,11 @@ public class FragmentAddCar extends Fragment {
     private int BrandSelected;
     private Integer CarBodyInsurance;
     private Integer CarPersonInsurance;
-    private Boolean EditCat;
+    private Boolean EditCat = false;
     private Boolean GearBox;
     private Context context;
     private FragmentAddCarViewModel fragmentAddCarViewModel;
+    private DisposableObserver<String> observer;
 
     @BindView(R.id.FragmentAddCarAuto)
     AppCompatCheckBox FragmentAddCarAuto;
@@ -79,16 +80,13 @@ public class FragmentAddCar extends Fragment {
     EditText FragmentAddCarYear;
 
 
-
-
-    public FragmentAddCar(Context context, Boolean EditCat) {//_____________________________________ Start FragmentAddCar
-        this.context = context;
-        this.EditCat = EditCat;
+    public FragmentAddCar() {//_____________________________________________________________________ Start FragmentAddCar
     }//_____________________________________________________________________________________________ End FragmentAddCar
 
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        context = getContext();
         FragmentAddCarBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_car, container, false);
         fragmentAddCarViewModel = new FragmentAddCarViewModel(context);
         binding.setAddcar(fragmentAddCarViewModel);
@@ -103,6 +101,9 @@ public class FragmentAddCar extends Fragment {
         super.onStart();
         BrandSelected = 0;
         ItemClick();
+        if(observer != null)
+            observer.dispose();
+        observer = null;
         MessageControler();
         SetTextChange();
     }//_____________________________________________________________________________________________ End onStart
@@ -110,33 +111,36 @@ public class FragmentAddCar extends Fragment {
 
 
     private void MessageControler() {//_____________________________________________________________ Start MessageControler
+
+        observer = new DisposableObserver<String>() {
+            @Override
+            public void onNext(String s) {
+                getActivity()
+                        .runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                FragmentAddCar.this.ShowToast(s);
+                                MainActivity.FragmentMessage.onNext("CommitAdd");
+                            }
+                        });
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
+
         fragmentAddCarViewModel
-                .MessageType
+                .getMessageType()
                 .observeOn(Schedulers.io())
                 .subscribeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DisposableObserver<String>() {
-                    @Override
-                    public void onNext(String s) {
-                        getActivity()
-                                .runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        FragmentAddCar.this.ShowToast(s);
-                                        MainActivity.FragmentMessage.onNext("CommitAdd");
-                                    }
-                                });
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
+                .subscribe(observer);
     }//_____________________________________________________________________________________________ End MessageControler
 
 
@@ -357,4 +361,13 @@ public class FragmentAddCar extends Fragment {
 
     }//_____________________________________________________________________________________________ End SetTextChange
 
+
+    @Override
+    public void onDestroy() {//_____________________________________________________________________ Start onDestroy
+        super.onDestroy();
+        observer.dispose();
+    }//_____________________________________________________________________________________________ End onDestroy
+
+
 }
+

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/fragmentYouCar">
+    <fragment
+        android:id="@+id/fragmentYouCar"
+        android:name="ir.clinicemashin.clinicemashin.views.fragments.FragmentYouCar"
+        android:label="fragment_you_car"
+        tools:layout="@layout/fragment_you_car" >
+
+        <action
+            android:id="@+id/action_fragmentYouCar_to_fragmentCarEvent"
+            app:destination="@id/fragmentCarEvent"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentAddCar"
+        android:name="ir.clinicemashin.clinicemashin.views.fragments.FragmentAddCar"
+        android:label="fragment_add_car"
+        tools:layout="@layout/fragment_add_car" />
+
+    <fragment
+        android:id="@+id/fragmentPoliceFine"
+        android:name="ir.clinicemashin.clinicemashin.views.fragments.FragmentPoliceFine"
+        android:label="fragment_police_fine"
+        tools:layout="@layout/fragment_police_fine" />
+
+    <fragment
+        android:id="@+id/fragmentNegativeGrade"
+        android:name="ir.clinicemashin.clinicemashin.views.fragments.FragmentNegativeGrade"
+        android:label="fragment_negative_grade"
+        tools:layout="@layout/fragment_negative_grade" />
+
+    <fragment
+        android:id="@+id/fragmentAdvertise"
+        android:name="ir.clinicemashin.clinicemashin.views.fragments.FragmentAdvertise"
+        android:label="fragment_advertise"
+        tools:layout="@layout/fragment_advertise" />
+
+    <fragment
+        android:id="@+id/fragmentCarEvent"
+        android:name="ir.clinicemashin.clinicemashin.views.fragments.FragmentCarEvent"
+        android:label="fragment_car_event"
+        tools:layout="@layout/fragment_car_event" >
+
+        <action
+            android:id="@+id/action_fragmentCarEvent_to_fragmentConsumable"
+            app:destination="@id/fragmentConsumable"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            />
+
+        <action
+            android:id="@+id/action_fragmentCarEvent_to_fragmentRepair"
+            app:destination="@id/fragmentRepair"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            />
+
+        <action
+            android:id="@+id/action_fragmentCarEvent_to_fragmentInsurance"
+            app:destination="@id/fragmentInsurance"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            />
+
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentConsumable"
+        android:name="ir.clinicemashin.clinicemashin.views.fragments.FragmentConsumable"
+        android:label="fragment_consumables"
+        tools:layout="@layout/fragment_consumables" />
+
+    <fragment
+        android:id="@+id/fragmentRepair"
+        android:name="ir.clinicemashin.clinicemashin.views.fragments.FragmentRepair"
+        android:label="fragment_repair"
+        tools:layout="@layout/fragment_repair" />
+
+    <fragment
+        android:id="@+id/fragmentInsurance"
+        android:name="ir.clinicemashin.clinicemashin.views.fragments.FragmentInsurance"
+        android:label="fragment_insurance"
+        tools:layout="@layout/fragment_insurance" />
+
+    <fragment
+        android:id="@+id/fragmentAbout"
+        android:name="ir.clinicemashin.clinicemashin.views.fragments.FragmentAbout"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
+
+    <fragment
+        android:id="@+id/fragmentPosition"
+        android:name="ir.clinicemashin.clinicemashin.views.fragments.FragmentPosition"
+        android:label="fragment_position"
+        tools:layout="@layout/fragment_position" >
+
+        <argument
+            android:name="FindLat"
+            android:defaultValue="null" />
+
+        <argument
+            android:name="FindLong"
+            android:defaultValue="null" />
+
+        <action
+            android:id="@+id/action_fragmentPosition_to_mapFragment"
+            app:destination="@id/mapFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            />
+
+        <action
+            android:id="@+id/action_fragmentPosition_to_fragmentFindPosition"
+            app:destination="@id/fragmentFindPosition"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="ir.clinicemashin.clinicemashin.views.fragments.MapFragment"
+        android:label="fragment_map"
+        tools:layout="@layout/fragment_map" />
+    <fragment
+        android:id="@+id/fragmentFindPosition"
+        android:name="ir.clinicemashin.clinicemashin.views.fragments.FragmentFindPosition"
+        android:label="fragment_find_location"
+        tools:layout="@layout/fragment_find_location" />
+
+
+</navigation>

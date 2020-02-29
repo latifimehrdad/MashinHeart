@@ -27,7 +27,7 @@ import org.jsoup.nodes.Document;
 public class FragmentPoliceFineViewModel {
 
     private Bitmap CaptchaBitmap;
-    public PublishSubject<String> MessageType = PublishSubject.create();
+    private PublishSubject<String> MessageType = PublishSubject.create();
     private String captId;
     private Context context;
     private String cookie;
@@ -221,5 +221,9 @@ public class FragmentPoliceFineViewModel {
 
     public void setHtml(String html2) {
         this.html = html2;
+    }
+
+    public PublishSubject<String> getMessageType() {
+        return MessageType;
     }
 }

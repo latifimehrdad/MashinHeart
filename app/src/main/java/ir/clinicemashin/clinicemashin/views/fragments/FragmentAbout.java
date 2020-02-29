@@ -46,6 +46,12 @@ public class FragmentAbout extends Fragment {
     @BindView(R.id.FragmentAboutWeb)
     TextView FragmentAboutWeb;
 
+
+    public FragmentAbout() {//_____________________________________________________________________ Start SignUpFragment
+
+    }//_____________________________________________________________________________________________ End SignUpFragment
+
+
     public FragmentAbout(Context context) {//_______________________________________________________ Start FragmentAbout
         this.context = context;
     }//_____________________________________________________________________________________________ End FragmentAbout
@@ -55,8 +61,9 @@ public class FragmentAbout extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentAboutBinding binding = DataBindingUtil.inflate(
-                inflater, R.layout.fragment_about,container,false
+                inflater, R.layout.fragment_about, container, false
         );
+        context = getContext();
         fragmentAboutViewModel = new FragmentAboutViewModel(context);
         binding.setAbout(fragmentAboutViewModel);
         View view = binding.getRoot();
@@ -77,13 +84,13 @@ public class FragmentAbout extends Fragment {
                             pInfo.versionName
             );
         } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();FragmentAboutVersion.setText(
+            e.printStackTrace();
+            FragmentAboutVersion.setText(
                     context.getResources().getString(R.string.Version)
             );
         }
 
     }//_____________________________________________________________________________________________ End onStart
-
 
 
     private void SetClick() {//_____________________________________________________________________ Start SetClick
@@ -118,10 +125,7 @@ public class FragmentAbout extends Fragment {
         });
 
 
-
     }//_____________________________________________________________________________________________ End SetClick
-
-
 
 
     private void OpenTelegram() {//__________________________________________________________________ Start OpenTelegram
@@ -142,33 +146,31 @@ public class FragmentAbout extends Fragment {
 
 
     private void OpenInstagram() {//_________________________________________________________________ Start OpenInstagram
-        Uri uri = Uri.parse("http://instagram.com/_u/"+context.getResources().getString(R.string.InstagramLink));
+        Uri uri = Uri.parse("http://instagram.com/_u/" + context.getResources().getString(R.string.InstagramLink));
         Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
         likeIng.setPackage("com.instagram.android");
         try {
             startActivity(likeIng);
         } catch (ActivityNotFoundException e) {
             startActivity(new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("http://instagram.com/"+context.getResources().getString(R.string.InstagramLink))));
+                    Uri.parse("http://instagram.com/" + context.getResources().getString(R.string.InstagramLink))));
 
         }
     }//_____________________________________________________________________________________________ End OpenInstagram
 
 
     private void OpenWhatsApp() {//__________________________________________________________________ Start OpenWhatsApp
-        String url = "https://api.whatsapp.com/send?phone="+"+989039124662";
+        String url = "https://api.whatsapp.com/send?phone=" + "+989039124662";
         Intent i = new Intent(Intent.ACTION_VIEW);
         i.setData(Uri.parse(url));
         startActivity(i);
     }//_____________________________________________________________________________________________ End OpenWhatsApp
 
 
-
     private void OpenWeb() {//______________________________________________________________________ Start OpenWeb
         startActivity(new Intent(Intent.ACTION_VIEW,
                 Uri.parse(context.getResources().getString(R.string.WebSiteLink))));
     }//_____________________________________________________________________________________________ End OpenWeb
-
 
 
     public static boolean isAppAvailable(Context context, String appName) {//_______________________ Start isAppAvailable
@@ -182,7 +184,5 @@ public class FragmentAbout extends Fragment {
     }//_____________________________________________________________________________________________ End isAppAvailable
 
 
-
-
-
 }
+

@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,6 +30,8 @@ public class FragmentYouCar extends Fragment {
     private Context context;
     private RealmResults<DataBaseCars> dataBaseCars;
     private FragmentYouCarViewModel fragmentYouCarViewModel;
+    private NavController navController;
+    private View view;
 
     @BindView(R.id.FragmentYouCarEmpty)
     LinearLayout FragmentYouCarEmpty;
@@ -35,16 +39,17 @@ public class FragmentYouCar extends Fragment {
     RecyclerView FragmentYouCarRecyclerList;
 
 
-    public FragmentYouCar(Context context) {//______________________________________________________ Start FragmentYouCar
-        this.context = context;
+    public FragmentYouCar() {//_____________________________________________________________________ Start FragmentYouCar
+
     }//_____________________________________________________________________________________________ End FragmentYouCar
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        context = getContext();
         FragmentYouCarBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_you_car, container, false);
         fragmentYouCarViewModel = new FragmentYouCarViewModel(context);
         binding.setYoucar(fragmentYouCarViewModel);
-        View view = binding.getRoot();
+        view = binding.getRoot();
         ButterKnife.bind(this, view);
         return view;
     }//_____________________________________________________________________________________________ End onCreateView
@@ -52,7 +57,9 @@ public class FragmentYouCar extends Fragment {
 
     public void onStart() {//_______________________________________________________________________ Start onStart
         super.onStart();
+        navController = Navigation.findNavController(view);
         GetCarFromDB();
+        MainActivity.ChooseCar.onNext(-1);
     }//_____________________________________________________________________________________________ End onStart
 
 
@@ -80,6 +87,7 @@ public class FragmentYouCar extends Fragment {
     public void ItemClick(int position) {//_________________________________________________________ Start ItemClick
         MainActivity.CarId = (dataBaseCars.get(position)).getID();
         MainActivity.ChooseCar.onNext((dataBaseCars.get(position)).getCarBrand());
+        navController.navigate(R.id.action_fragmentYouCar_to_fragmentCarEvent);
     }//_____________________________________________________________________________________________ End ItemClick
 
 

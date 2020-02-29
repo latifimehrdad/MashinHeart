@@ -49,6 +49,7 @@ public class FragmentPoliceFine extends Fragment {
     private FragmentPoliceFineViewModel fragmentPoliceFineViewModel;
     private ArrayList<ModelPoliceFine> modelPoliceFinesArray;
     private DialogProgress progress;
+    private DisposableObserver<String> observer;
 
     @BindView(R.id.FragmentPoliceFineBarcode)
     EditText FragmentPoliceFineBarcode;
@@ -80,12 +81,13 @@ public class FragmentPoliceFine extends Fragment {
     RecyclerView FragmentPoliceFines;
 
 
-    public FragmentPoliceFine(Context context2) {//_____________________ Start FragmentPoliceFine
-        this.context = context2;
+    public FragmentPoliceFine() {//_________________________________________________________________ Start FragmentPoliceFine
+
     }//_____________________________________________________________________________________________ End FragmentPoliceFine
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        context = getActivity();
         fragmentPoliceFineViewModel = new FragmentPoliceFineViewModel(context);
         FragmentPoliceFineBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_police_fine, container, false);
         binding.setPoliceFine(fragmentPoliceFineViewModel);
@@ -105,13 +107,16 @@ public class FragmentPoliceFine extends Fragment {
         FragmentPoliceFinePrice.setVisibility(View.GONE);
         TextView textView = FragmentPoliceFinePrice;
         StringBuilder sb = new StringBuilder();
-        sb.append(this.context.getResources().getString(R.string.TotalPoliceFine));
+        sb.append(context.getResources().getString(R.string.TotalPoliceFine));
         sb.append(" ");
         sb.append(String.valueOf(0));
         sb.append(" ");
         sb.append(this.context.getResources().getString(R.string.Rial));
         textView.setText(sb.toString());
         SetClick();
+        if(observer != null)
+            observer.dispose();
+        observer = null;
         MessageControler();
         ShowDialog();
         fragmentPoliceFineViewModel.GetImageCaptcha(false);
@@ -177,65 +182,67 @@ public class FragmentPoliceFine extends Fragment {
 
     private void MessageControler() {//_____________________________________________________________ Start MessageControler
 
+        observer = new DisposableObserver<String>() {
+            @Override
+            public void onNext(String s) {
+                getActivity()
+                        .runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                switch (s) {
+                                    case "CancelByUser":
+                                        FragmentPoliceFineExpandable.collapse();
+                                        if (progress != null) {
+                                            progress.dismiss();
+                                        }
+                                        break;
+                                    case "ارتباط با پلیس راهور برقرار نشد":
+                                        if (progress != null) {
+                                            progress.dismiss();
+                                        }
+                                        FragmentPoliceFineExpandable.collapse();
+                                        ShowToast(s);
+                                        break;
+                                    case "CaptchaOk":
+                                        if (progress != null) {
+                                            progress.dismiss();
+                                        }
+                                        FragmentPoliceFineCaptcha.setImageBitmap(fragmentPoliceFineViewModel.getCaptchaBitmap());
+                                        FragmentPoliceFineExpandable.expand();
+                                        break;
+                                    case "متن امنیتی را اشتباه وارد کرده اید":
+                                        if (progress != null) {
+                                            progress.dismiss();
+                                        }
+                                        ShowToast(s);
+                                        FragmentPoliceFineCaptcha.setImageBitmap(fragmentPoliceFineViewModel.getCaptchaBitmap());
+                                        FragmentPoliceFineExpandable.expand();
+                                        break;
+                                    case "PoliceFineOk":
+                                        FragmentPoliceFineExpandable.collapse();
+                                        ShowPoliceFine(fragmentPoliceFineViewModel.getHtml());
+                                        break;
+                                }
+                            }
+                        });
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
+
         fragmentPoliceFineViewModel
-                .MessageType
+                .getMessageType()
                 .observeOn(Schedulers.io())
                 .subscribeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DisposableObserver<String>() {
-                    @Override
-                    public void onNext(String s) {
-                        getActivity()
-                                .runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        switch (s) {
-                                            case "CancelByUser":
-                                                FragmentPoliceFineExpandable.collapse();
-                                                if (progress != null) {
-                                                    progress.dismiss();
-                                                }
-                                                break;
-                                            case "ارتباط با پلیس راهور برقرار نشد":
-                                                if (progress != null) {
-                                                    progress.dismiss();
-                                                }
-                                                FragmentPoliceFineExpandable.collapse();
-                                                ShowToast(s);
-                                                break;
-                                            case "CaptchaOk":
-                                                if (progress != null) {
-                                                    progress.dismiss();
-                                                }
-                                                FragmentPoliceFineCaptcha.setImageBitmap(fragmentPoliceFineViewModel.getCaptchaBitmap());
-                                                FragmentPoliceFineExpandable.expand();
-                                                break;
-                                            case "متن امنیتی را اشتباه وارد کرده اید":
-                                                if (progress != null) {
-                                                    progress.dismiss();
-                                                }
-                                                ShowToast(s);
-                                                FragmentPoliceFineCaptcha.setImageBitmap(fragmentPoliceFineViewModel.getCaptchaBitmap());
-                                                FragmentPoliceFineExpandable.expand();
-                                                break;
-                                            case "PoliceFineOk":
-                                                FragmentPoliceFineExpandable.collapse();
-                                                ShowPoliceFine(fragmentPoliceFineViewModel.getHtml());
-                                                break;
-                                        }
-                                    }
-                                });
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
+                .subscribe(observer);
     }//_____________________________________________________________________________________________ End MessageControler
 
 
@@ -351,4 +358,11 @@ public class FragmentPoliceFine extends Fragment {
     public void setContext(Context context2) {
         this.context = context2;
     }
+
+    @Override
+    public void onDestroy() {//_____________________________________________________________________ Start onDestroy
+        super.onDestroy();
+        observer.dispose();
+    }//_____________________________________________________________________________________________ End onDestroy
+
 }

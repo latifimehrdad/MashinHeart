@@ -28,7 +28,7 @@ import org.jsoup.nodes.Document;
 public class FragmentNegativeGradeViewModel {
 
     private Bitmap CaptchaBitmap;
-    public PublishSubject<String> MessageType = PublishSubject.create();
+    private PublishSubject<String> MessageType = PublishSubject.create();
     private String captId;
     public Context context;
     private String cookie;
@@ -213,5 +213,9 @@ public class FragmentNegativeGradeViewModel {
 
     public void setHtml(String html2) {
         this.html = html2;
+    }
+
+    public PublishSubject<String> getMessageType() {
+        return MessageType;
     }
 }

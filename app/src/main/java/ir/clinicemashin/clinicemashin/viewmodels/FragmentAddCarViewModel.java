@@ -29,7 +29,7 @@ public class FragmentAddCarViewModel extends BaseObservable {
     private Boolean Gearbox;
     private Integer ID;
     private Integer LastChangeDate;
-    public PublishSubject<String> MessageType = PublishSubject.create();
+    private PublishSubject<String> MessageType = PublishSubject.create();
     private Context context;
 
 
@@ -200,5 +200,9 @@ public class FragmentAddCarViewModel extends BaseObservable {
 
     public void setLastChangeDate(Integer lastChangeDate) {
         this.LastChangeDate = lastChangeDate;
+    }
+
+    public PublishSubject<String> getMessageType() {
+        return MessageType;
     }
 }

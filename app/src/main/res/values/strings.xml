@@ -1,5 +1,6 @@
 <resources>
 
+    <string name="google_maps_key">AIzaSyC2jxWJzCJIzfptnapht6BcoRy5f7mXHAQ</string>
 
    <string-array name="CarBrand">
       <item>@string/Brand_Prompt</item>
@@ -285,6 +286,9 @@
     <string name="InstagramLink">iranlandcruiser</string>
     <string name="AgaringLink">http://www.agaring.ir</string>
     <string name="NotificationSee">برای مشاهده کامل کلیک کنید</string>
-
+    <string name="Choose">انتخاب</string>
+    <string name="NewLocation">ثبت مکان پارک جدید</string>
+    <string name="ShowOnMap">نمایش محل پارک روی نقشه</string>
+    <string name="WaitingFindLocation">در حال یافتن موقعیت شما، لطفا شکیبا باشید</string>
 
 </resources>

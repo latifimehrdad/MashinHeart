@@ -23,6 +23,9 @@ import androidx.core.app.NotificationCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
+import androidx.navigation.Navigation;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,13 +37,7 @@ import ir.clinicemashin.clinicemashin.jobservice.LunchAlarmReceiver;
 import ir.clinicemashin.clinicemashin.viewmodels.ActivityMainViewModel;
 import ir.clinicemashin.clinicemashin.views.application.MachinHeartApplication;
 import ir.clinicemashin.clinicemashin.views.dialogs.DialogNewAdvertise;
-import ir.clinicemashin.clinicemashin.views.fragments.FragmentAbout;
-import ir.clinicemashin.clinicemashin.views.fragments.FragmentAddCar;
-import ir.clinicemashin.clinicemashin.views.fragments.FragmentAdvertise;
-import ir.clinicemashin.clinicemashin.views.fragments.FragmentCarEvent;
-import ir.clinicemashin.clinicemashin.views.fragments.FragmentNegativeGrade;
-import ir.clinicemashin.clinicemashin.views.fragments.FragmentPoliceFine;
-import ir.clinicemashin.clinicemashin.views.fragments.FragmentYouCar;
+
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.github.inflationx.viewpump.ViewPumpContextWrapper;
@@ -49,6 +46,7 @@ import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
 
+
 public class MainActivity extends AppCompatActivity {
 
     public static Integer CarId = null;
@@ -56,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     public static PublishSubject<String> FragmentMessage = null;
     public static final String workTag = "notificationWork";
     private DialogNewAdvertise dialogNewAdvertise;
+    private NavController navController;
 
     @BindView(R.id.MainAddCar)
     LinearLayout MainAddCar;
@@ -83,16 +82,16 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout MainCarSaleLine;
     @BindView(R.id.MainCarSaleUpShadow)
     LinearLayout MainCarSaleUpShadow;
-    @BindView(R.id.MainChangeCar)
-    LinearLayout MainChangeCar;
-    @BindView(R.id.MainChangeCarDownShadow)
-    LinearLayout MainChangeCarDownShadow;
-    @BindView(R.id.MainChangeCarLeft)
-    LinearLayout MainChangeCarLeft;
-    @BindView(R.id.MainChangeCarLine)
-    LinearLayout MainChangeCarLine;
-    @BindView(R.id.MainChangeCarUpShadow)
-    LinearLayout MainChangeCarUpShadow;
+    @BindView(R.id.MainPositionCar)
+    LinearLayout MainPositionCar;
+    @BindView(R.id.MainPositionCarDownShadow)
+    LinearLayout MainPositionCarDownShadow;
+    @BindView(R.id.MainPositionCarLeft)
+    LinearLayout MainPositionCarLeft;
+    @BindView(R.id.MainPositionCarLine)
+    LinearLayout MainPositionCarLine;
+    @BindView(R.id.MainPositionCarUpShadow)
+    LinearLayout MainPositionCarUpShadow;
     @BindView(R.id.MainImgCircleAdvertise)
     CircleImageView MainImgCircleAdvertise;
     @BindView(R.id.MainNegativeGrade)
@@ -166,9 +165,6 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.MainProfileEdit)
     LinearLayout MainProfileEdit;
 
-
-    FragmentManager fm;
-    FragmentTransaction ft;
     ActivityMainViewModel viewModel;
 
 
@@ -183,11 +179,17 @@ public class MainActivity extends AppCompatActivity {
         MainDialogProfile.setVisibility(View.GONE);
         FragmentMessage = PublishSubject.create();
         ChooseCar = PublishSubject.create();
+        navController = Navigation.findNavController(this, R.id.MainFragment);
         ResetRightMenu();
         ClickItems();
         SetAnimationViews();
-        ShowFragmentYouCar();
+        MainYouCar.setBackgroundColor(getApplicationContext().getResources().getColor(R.color.MainFragment));
+        MainYouCarLeft.setVisibility(View.GONE);
+        MainYouCarUpShadow.setVisibility(View.VISIBLE);
+        MainYouCarDownShadow.setVisibility(View.VISIBLE);
+        MainYouCarLine.setVisibility(View.GONE);
         FragmentObserver();
+
         SetProfile();
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -294,14 +296,38 @@ public class MainActivity extends AppCompatActivity {
                 MainAddCarDownShadow.setVisibility(View.VISIBLE);
                 MainAddCarLine.setVisibility(View.GONE);
                 MainYouCarLine.setVisibility(View.GONE);
-                fm = null;
-                ft = null;
-                fm = getSupportFragmentManager();
-                ft = fm.beginTransaction();
-                ft.replace(R.id.MainFragment, new FragmentAddCar(MainActivity.this, false));
-                ft.commit();
+                NavDestination navDestination = navController.getCurrentDestination();
+                String fragment = navDestination.getLabel().toString();
+                if (fragment.equalsIgnoreCase("fragment_add_car")) {
+                    return;
+                } else {
+                    navController.navigate(R.id.fragmentAddCar);
+                }
             }
         });
+
+
+        MainPositionCar.setOnClickListener(new OnClickListener() {
+            public void onClick(View view) {
+                ResetRightMenu();
+                MainPositionCar.setBackgroundColor(MainActivity.this.getResources().getColor(R.color.MainFragment));
+                MainPositionCarLeft.setVisibility(View.GONE);
+                MainPositionCarUpShadow.setVisibility(View.VISIBLE);
+                MainPositionCarDownShadow.setVisibility(View.VISIBLE);
+                MainPositionCarLine.setVisibility(View.GONE);
+                MainAddCarLine.setVisibility(View.GONE);
+                NavDestination navDestination = navController.getCurrentDestination();
+                String fragment = navDestination.getLabel().toString();
+                if (fragment.equalsIgnoreCase("fragment_position") ||
+                        fragment.equalsIgnoreCase("fragment_map") ||
+                        fragment.equalsIgnoreCase("fragment_find_location")) {
+                    return;
+                } else {
+                    navController.navigate(R.id.fragmentPosition);
+                }
+            }
+        });
+
 
         MainPoliceFine.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
@@ -311,13 +337,20 @@ public class MainActivity extends AppCompatActivity {
                 MainPoliceFineUpShadow.setVisibility(View.VISIBLE);
                 MainPoliceFineDownShadow.setVisibility(View.VISIBLE);
                 MainPoliceFineLine.setVisibility(View.GONE);
-                MainAddCarLine.setVisibility(View.GONE);
-                fm = null;
-                ft = null;
-                fm = getSupportFragmentManager();
-                ft = fm.beginTransaction();
-                ft.replace(R.id.MainFragment, new FragmentPoliceFine(MainActivity.this));
-                ft.commit();
+                MainPositionCarLine.setVisibility(View.GONE);
+                NavDestination navDestination = navController.getCurrentDestination();
+                String fragment = navDestination.getLabel().toString();
+                if (fragment.equalsIgnoreCase("fragment_police_fine")) {
+                    return;
+                } else {
+                    navController.navigate(R.id.fragmentPoliceFine);
+                }
+//                fm = null;
+//                ft = null;
+//                fm = getSupportFragmentManager();
+//                ft = fm.beginTransaction();
+//                ft.replace(R.id.MainFragment, new FragmentPoliceFine(MainActivity.this));
+//                ft.commit();
             }
         });
 
@@ -331,12 +364,19 @@ public class MainActivity extends AppCompatActivity {
                 MainNegativeGradeDownShadow.setVisibility(View.VISIBLE);
                 MainNegativeGradeLine.setVisibility(View.GONE);
                 MainPoliceFineLine.setVisibility(View.GONE);
-                fm = null;
-                ft = null;
-                fm = getSupportFragmentManager();
-                ft = fm.beginTransaction();
-                ft.replace(R.id.MainFragment, new FragmentNegativeGrade(MainActivity.this));
-                ft.commit();
+                NavDestination navDestination = navController.getCurrentDestination();
+                String fragment = navDestination.getLabel().toString();
+                if (fragment.equalsIgnoreCase("fragment_negative_grade")) {
+                    return;
+                } else {
+                    navController.navigate(R.id.fragmentNegativeGrade);
+                }
+//                fm = null;
+//                ft = null;
+//                fm = getSupportFragmentManager();
+//                ft = fm.beginTransaction();
+//                ft.replace(R.id.MainFragment, new FragmentNegativeGrade(MainActivity.this));
+//                ft.commit();
             }
         });
 
@@ -350,28 +390,24 @@ public class MainActivity extends AppCompatActivity {
                 MainAdvertiseDownShadow.setVisibility(View.VISIBLE);
                 MainAdvertiseLine.setVisibility(View.GONE);
                 MainNegativeGradeLine.setVisibility(View.GONE);
-                fm = null;
-                ft = null;
-                fm = getSupportFragmentManager();
-                ft = fm.beginTransaction();
-                ft.replace(R.id.MainFragment, new FragmentAdvertise(MainActivity.this));
-                ft.commit();
+                NavDestination navDestination = navController.getCurrentDestination();
+                String fragment = navDestination.getLabel().toString();
+                if (fragment.equalsIgnoreCase("fragment_advertise")) {
+                    return;
+                } else {
+                    navController.navigate(R.id.fragmentAdvertise);
+                }
+//                fm = null;
+//                ft = null;
+//                fm = getSupportFragmentManager();
+//                ft = fm.beginTransaction();
+//                ft.replace(R.id.MainFragment, new FragmentAdvertise(MainActivity.this));
+//                ft.commit();
 
             }
         });
 
 
-        MainChangeCar.setOnClickListener(new OnClickListener() {
-            public void onClick(View view) {
-                ResetRightMenu();
-                MainChangeCar.setBackgroundColor(MainActivity.this.getResources().getColor(R.color.MainFragment));
-                MainChangeCarLeft.setVisibility(View.GONE);
-                MainChangeCarUpShadow.setVisibility(View.VISIBLE);
-                MainChangeCarDownShadow.setVisibility(View.VISIBLE);
-                MainChangeCarLine.setVisibility(View.GONE);
-                MainAdvertiseLine.setVisibility(View.GONE);
-            }
-        });
 
         MainCarSale.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
@@ -381,7 +417,7 @@ public class MainActivity extends AppCompatActivity {
                 MainCarSaleUpShadow.setVisibility(View.VISIBLE);
                 MainCarSaleDownShadow.setVisibility(View.VISIBLE);
                 MainCarSaleLine.setVisibility(View.GONE);
-                MainChangeCarLine.setVisibility(View.GONE);
+                MainPositionCarLine.setVisibility(View.GONE);
             }
         });
 
@@ -405,12 +441,13 @@ public class MainActivity extends AppCompatActivity {
                 MainAboutLeft.setVisibility(View.GONE);
                 MainAboutUpShadow.setVisibility(View.VISIBLE);
                 MainAdvertiseLine.setVisibility(View.GONE);
-                fm = null;
-                ft = null;
-                fm = getSupportFragmentManager();
-                ft = fm.beginTransaction();
-                ft.replace(R.id.MainFragment, new FragmentAbout(MainActivity.this));
-                ft.commit();
+                NavDestination navDestination = navController.getCurrentDestination();
+                String fragment = navDestination.getLabel().toString();
+                if (fragment.equalsIgnoreCase("fragment_about")) {
+                    return;
+                } else {
+                    navController.navigate(R.id.fragmentAbout);
+                }
             }
         });
 
@@ -453,11 +490,11 @@ public class MainActivity extends AppCompatActivity {
         MainAdvertiseUpShadow.setVisibility(View.GONE);
         MainAdvertiseDownShadow.setVisibility(View.GONE);
         MainAdvertiseLine.setVisibility(View.VISIBLE);
-        MainChangeCar.setBackgroundColor(getApplicationContext().getResources().getColor(R.color.MainRight));
-        MainChangeCarLeft.setVisibility(View.VISIBLE);
-        MainChangeCarUpShadow.setVisibility(View.GONE);
-        MainChangeCarDownShadow.setVisibility(View.GONE);
-        MainChangeCarLine.setVisibility(View.VISIBLE);
+        MainPositionCar.setBackgroundColor(getApplicationContext().getResources().getColor(R.color.MainRight));
+        MainPositionCarLeft.setVisibility(View.VISIBLE);
+        MainPositionCarUpShadow.setVisibility(View.GONE);
+        MainPositionCarDownShadow.setVisibility(View.GONE);
+        MainPositionCarLine.setVisibility(View.VISIBLE);
         MainCarSale.setBackgroundColor(getApplicationContext().getResources().getColor(R.color.MainRight));
         MainCarSaleLeft.setVisibility(View.VISIBLE);
         MainCarSaleUpShadow.setVisibility(View.GONE);
@@ -482,28 +519,21 @@ public class MainActivity extends AppCompatActivity {
         MainYouCarUpShadow.setVisibility(View.VISIBLE);
         MainYouCarDownShadow.setVisibility(View.VISIBLE);
         MainYouCarLine.setVisibility(View.GONE);
-        fm = null;
-        ft = null;
-        fm = getSupportFragmentManager();
-        ft = fm.beginTransaction();
-        FragmentYouCar fragmentYouCar = new FragmentYouCar(this);
-        ft.replace(R.id.MainFragment, fragmentYouCar);
-        ft.commit();
+        navController.navigate(R.id.fragmentYouCar);
+
 
     }//_____________________________________________________________________________________________ End ShowFragmentYouCar
 
 
     private void ShowFragmentCarEvent(Integer Brand) {//___________________________________________________________ Start ShowFragmentCarEvent
 
-        MainYouCarImg.setImageResource(getResources().obtainTypedArray(R.array.CarLogo).getResourceId(Brand, R.drawable.logo));
-        MainYouCarText.setText(getResources().getStringArray(R.array.CarBrand)[Brand]);
-        fm = null;
-        ft = null;
-        fm = getSupportFragmentManager();
-        ft = fm.beginTransaction();
-        FragmentCarEvent fragmentCarEvent = new FragmentCarEvent(CarId, this);
-        ft.replace(R.id.MainFragment, fragmentCarEvent);
-        ft.commit();
+        if(Brand > -1) {
+            MainYouCarImg.setImageResource(getResources().obtainTypedArray(R.array.CarLogo).getResourceId(Brand, R.drawable.logo));
+            MainYouCarText.setText(getResources().getStringArray(R.array.CarBrand)[Brand]);
+        } else {
+            MainYouCarImg.setImageResource(R.drawable.you_car);
+            MainYouCarText.setText(getResources().getString(R.string.YouCar));
+        }
         SetAnimationYouCar();
     }//_____________________________________________________________________________________________ End ShowFragmentCarEvent
 
@@ -520,7 +550,7 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 if (s.equalsIgnoreCase("CommitAdd")) {
-                                    MainActivity.this.ShowFragmentYouCar();
+                                    ShowFragmentYouCar();
                                 }
                             }
                         });
@@ -546,7 +576,7 @@ public class MainActivity extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                MainActivity.this.ShowFragmentCarEvent(brand);
+                                ShowFragmentCarEvent(brand);
                             }
                         });
                     }

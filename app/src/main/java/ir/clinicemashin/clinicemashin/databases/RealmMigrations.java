@@ -1,14 +1,21 @@
 package ir.clinicemashin.clinicemashin.databases;
 
-//public class RealmMigrations implements RealmMigration {
-//    public void migrate(DynamicRealm realm, long oldVersion, long newVersion) {
-//        RealmSchema schema = realm.getSchema();
-//        if (oldVersion == 1) {
-//            schema.get(ClassNameHelper.INTERNAL_CLASS_NAME).addField("test", Boolean.class, new FieldAttribute[0]).transform(new Function() {
-//                public void apply(DynamicRealmObject obj) {
-//                    obj.set("test", Boolean.valueOf(true));
-//                }
-//            });
-//        }
-//    }
-//}
+import java.util.Date;
+
+import io.realm.DynamicRealm;
+import io.realm.RealmMigration;
+import io.realm.RealmSchema;
+
+public class RealmMigrations implements RealmMigration {
+    public void migrate(DynamicRealm realm, long oldVersion, long newVersion) {
+        RealmSchema schema = realm.getSchema();
+        if (oldVersion == 1) {
+            schema.create("DataBasePositions")
+                    .addField("PositionDate", Date.class)
+                    .addField("PositonLat", Double.class)
+                    .addField("PositionLong", Double.class);
+            oldVersion++;
+        }
+    }
+
+}

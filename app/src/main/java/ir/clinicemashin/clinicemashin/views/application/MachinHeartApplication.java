@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.graphics.Bitmap;
 
+import androidx.multidex.MultiDexApplication;
+
 import ir.clinicemashin.clinicemashin.R;
 import ir.clinicemashin.clinicemashin.dagger.applicationutility.ApplicationUtilityComponent;
 import ir.clinicemashin.clinicemashin.dagger.applicationutility.ApplicationUtilityModul;
@@ -34,8 +36,9 @@ import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
 import io.github.inflationx.viewpump.ViewPump;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import ir.clinicemashin.clinicemashin.databases.RealmMigrations;
 
-public class MachinHeartApplication extends Application {
+public class MachinHeartApplication extends MultiDexApplication {
 
     Context context;
     ApplicationUtilityComponent applicationUtilityComponent;
@@ -137,7 +140,11 @@ public class MachinHeartApplication extends Application {
 
     private void ConfigurationRealm() {
         Realm.init(this);
-        Realm.setDefaultConfiguration(new RealmConfiguration.Builder().name("MachinHeartRealm").schemaVersion(1).build());
+        Realm.setDefaultConfiguration(new RealmConfiguration.Builder()
+                .name("MachinHeartRealm")
+                .schemaVersion(2)
+                .migration(new RealmMigrations())
+                .build());
     }
 
     public static MachinHeartApplication getMachinHeartApplication(Context context) {
