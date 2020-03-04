@@ -366,14 +366,14 @@
                                     android:layout_width="@dimen/_35sdp"
                                     android:layout_height="@dimen/_35sdp"
                                     android:layout_marginTop="@dimen/_10sdp"
-                                    android:src="@drawable/change_car" />
+                                    android:src="@drawable/park_car" />
 
                                 <TextView
                                     android:layout_width="fill_parent"
                                     android:layout_height="fill_parent"
                                     android:layout_marginBottom="@dimen/_3sdp"
                                     android:gravity="center"
-                                    android:text="@string/ChangeCar"
+                                    android:text="@string/ParkCar"
                                     android:textColor="@color/MainWhite"
                                     android:textSize="@dimen/_9sdp" />
 

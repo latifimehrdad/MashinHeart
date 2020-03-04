@@ -1,9 +1,11 @@
 package ir.clinicemashin.clinicemashin.views.activitys;
 
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,13 +21,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -189,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
         MainYouCarDownShadow.setVisibility(View.VISIBLE);
         MainYouCarLine.setVisibility(View.GONE);
         FragmentObserver();
-
+        CheckPermissions();
         SetProfile();
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -207,6 +214,26 @@ public class MainActivity extends AppCompatActivity {
         }, 1000);
 
     }//_____________________________________________________________________________________________ End onCreate
+
+
+
+
+    private void CheckPermissions() {//_____________________________________________________________ Start CheckPermissions
+
+        int permissionLocation = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
+        List<String> listPermissionsNeeded = new ArrayList<>();
+
+        if (permissionLocation != PackageManager.PERMISSION_GRANTED)
+            listPermissionsNeeded.add(Manifest.permission.ACCESS_FINE_LOCATION);
+
+        if (!listPermissionsNeeded.isEmpty()) {
+            ActivityCompat.requestPermissions(this,
+                    listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]),
+                    0);
+        }
+
+    }//_____________________________________________________________________________________________ End CheckPermissions
+
 
 
 

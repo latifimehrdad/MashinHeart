@@ -146,7 +146,7 @@
     <string name="CarOptionalInfo">اطلاعات اختیاری، جهت بازیابی خودرو، درصورت حذف شدن برنامه یا تغییر تلفن همراه</string>
     <string name="CarPersonInsurance">آیا بیمه شخص ثالث دارید؟</string>
     <string name="CarUsedAverage">در یک روز چند کیلومتر از خودرو استفاده میکنید؟(فقط عدد)</string>
-    <string name="ChangeCar">انتقال خودرو به دیگری</string>
+    <string name="ParkCar">محل پارک خودرو</string>
     <string name="ChooseDate">انتخاب تاریخ</string>
     <string name="ConnetToPolice">درحال برقراری ارتباط با پلیس راهور</string>
     <string name="ConsumableChange">تعوض نموده اید</string>
